@@ -71,7 +71,7 @@
     "react-text-mask": "5.0.2",
     "react-toggle-switch": "3.0.4",
     "reactstrap": "^6.4.0",
-    "recharts": "1.0.0-alpha.7",
+    "recharts": "1.4.2",
     "recompose": "0.26.0",
     "redux": "3.7.2",
     "redux-logger": "3.0.6",
