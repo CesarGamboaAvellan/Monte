@@ -3,7 +3,7 @@ import firebase from 'firebase';
 // Initialize Firebase
 const config = {
     apiKey: 'AIzaSyCXEyMlNcS3pHTfqGvVAtbFMPTEr8W0lXc ',
-    authDomain: 'launcherrocket-c3000.firebaseapp.com',
+    authDomain: 'launcherrocket-c3000.firebaseapp.com ',
     databaseURL: 'https://curious-sandbox-196209.firebaseio.com',
     projectId: 'curious-sandbox-196209',
     storageBucket: '',
