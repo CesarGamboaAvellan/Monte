@@ -1,15 +1,7 @@
-#### For change theme color
-######update app color 
-open src/style/global/_variable.scss
-update app color```$app-primary and $secondary``` variable value
+Starter App With Login for Monte Project
 
-######update sidebar color 
+To run the project
 
- open src/style/global/_variable.scss
- update following variables
-``
-$sidebar-bg, 
-$sidebar-text-color,   
-$sidebar-bg-darken, 
-$sidebar-hover-color
-``
+npm install or yarn
+npm start
+
