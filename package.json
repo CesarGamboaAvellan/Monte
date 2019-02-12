@@ -79,8 +79,7 @@
     "save": "2.3.1",
     "script-ext-html-webpack-plugin": "1.8.8",
     "style-ext-html-webpack-plugin": "3.4.7",
-    "typeface-roboto": "0.0.45",
-    "webpack-dev-server": "2.7.1"
+    "typeface-roboto": "0.0.45"
   },
   "scripts": {
     "heroku-prebuild": "npm install --production=false",
@@ -115,7 +114,8 @@
     "sass-lint": "1.11.1",
     "sass-loader": "6.0.6",
     "style-loader": "0.18.2",
-    "webpack": "3.12.0"
+    "webpack": "3.12.0",
+    "webpack-dev-server": "2.7.1"
   },
   "engines": {
     "node": "8.11.1",
