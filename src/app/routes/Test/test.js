@@ -11,7 +11,7 @@ class Test extends React.Component {
                 <div className="d-flex justify-content-center">
                    <Gallery />
                    <Gallery />
-                   <Gallery />
+                   
                 </div>
 
             </div>
