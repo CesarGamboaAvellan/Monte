@@ -208,7 +208,8 @@ class Header extends React.Component {
                                     data-toggle="dropdown">
                                     <img
                                         alt='...'
-                                        src='http://via.placeholder.com/150x150'
+                                        src={ localStorage.getItem('imageProfile') 
+                                        || 'http://via.placeholder.com/150x150'}
                                         className="pointer user-avatar size-30"/>
                                 </DropdownToggle>
 

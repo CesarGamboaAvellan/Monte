@@ -95,7 +95,7 @@ class SignIn extends React.Component {
                                     <IntlMessages
                                         id="signIn.connectWith" />
                                     <ul className="social-link">
-                                        <li>
+                                        {/* <li>
                                                 <span className="icon-btn icon"
                                                       onClick={() => {
                                                           this.props.showAuthLoader ();
@@ -103,9 +103,9 @@ class SignIn extends React.Component {
                                                       }}>
                                                     <i className="zmdi zmdi-facebook zmdi-hc-lg" />
                                                 </span>
-                                        </li>
+                                        </li> */}
 
-                                        <li>
+                                        {/* <li>
                                                 <span className="icon-btn icon"
                                                       onClick={() => {
                                                           this.props.showAuthLoader ();
@@ -113,7 +113,7 @@ class SignIn extends React.Component {
                                                       }}>
                                                     <i className="zmdi zmdi-twitter zmdi-hc-lg" />
                                                 </span>
-                                        </li>
+                                        </li> */}
 
                                         <li>
                                                 <span className="icon-btn icon"
@@ -126,7 +126,7 @@ class SignIn extends React.Component {
                                                 </span>
                                         </li>
 
-                                        <li>
+                                        {/* <li>
                                                 <span className="icon-btn icon"
                                                       onClick={() => {
                                                           this.props.showAuthLoader ();
@@ -134,7 +134,7 @@ class SignIn extends React.Component {
                                                       }}>
                                                     <i className="zmdi zmdi-github zmdi-hc-lg" />
                                                 </span>
-                                        </li>
+                                        </li> */}
                                     </ul>
                                 </div>
                             </form>

@@ -5,14 +5,28 @@ import IntlMessages from 'util/IntlMessages';
 
 class UserInfo extends React.Component {
     render() {
+        let image, name;
+        if(!this.props.state.authUser){
+            console.log('loading');
+        }else{
+            console.log('state in users', this.props.state.authUser);
+            if(this.props.state.authUser.additionalUserInfo){
+                name = this.props.state.authUser.additionalUserInfo.profile.name;
+                localStorage.setItem('userName', name);
+                image = this.props.state.authUser.additionalUserInfo.profile.picture;
+                localStorage.setItem('imageProfile', image);
+            }
+        }
         return (
             <div>
                 <div className="user-profile">
-                    <img className="user-avatar border-0 size-40" src="http://via.placeholder.com/150x150"
+                    <img className="user-avatar border-0 size-40" src={ image || localStorage
+                    .getItem('imageProfile')}
                          alt="User"/>
                         <div className="user-detail ml-2">
-                            <h4 className="user-name mb-0">Chris Harris</h4>
-                            <small>Administrator</small>
+                            <h4 className="user-name mb-0">{name || localStorage
+                                .getItem('userName')}</h4>
+                            <small>Developer</small>
                         </div>
                 </div>
                     <a className="dropdown-item text-muted" href="javascript:void(0)">
@@ -35,6 +49,11 @@ class UserInfo extends React.Component {
     }
 }
 
-export default connect(null, {userSignOut})(UserInfo);
+function mapStateToProps(state){
+    return{
+      state: state.auth, // takes the store selected as renders it as a prop
+    }
+  }
+export default connect(mapStateToProps, {userSignOut})(UserInfo);
 
 
