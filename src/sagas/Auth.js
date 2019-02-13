@@ -6,6 +6,7 @@ import {
     googleAuthProvider,
     twitterAuthProvider
 } from 'firebase/firebase';
+import http from '../services/api';
 import {
     SIGNIN_FACEBOOK_USER,
     SIGNIN_GITHUB_USER,
@@ -28,10 +29,24 @@ const createUserWithEmailPasswordRequest = async (email, password) =>
         .then (authUser => authUser)
         .catch (error => error);
 
-const signInUserWithEmailPasswordRequest = async (email, password) =>
-    await  auth.signInWithEmailAndPassword (email, password)
-        .then (authUser => authUser)
-        .catch (error => error);
+const signInUserWithEmailPasswordRequest = async (email, password) => {
+        return http.post('/api/TokenAuth/Authenticate', {
+            userNameOrEmailAddress: email,
+            password,
+            rememberClient: true,
+        })
+        .then (authUser => 
+            {
+                console.log(authUser, email, password)
+                return authUser
+            })
+        .catch (error => {
+            console.log(error);
+            return { Error: 'Authentication failed: check email and password', details :error}
+        });
+    
+}
+    
 
 const signOutRequest = async () =>
     await  auth.signOut ()
@@ -142,12 +157,14 @@ function* signInUserWithEmailPassword ({ payload }) {
     const { email, password } = payload;
     try {
         const signInUser = yield call (signInUserWithEmailPasswordRequest, email, password);
-        if (signInUser.message) {
-            yield put (showAuthMessage (signInUser.message));
-        } else {
-            localStorage.setItem ('user_id', signInUser.uid);
-            yield put (userSignInSuccess (signInUser));
-        }
+            if(signInUser.data){
+                localStorage.setItem ('user_id', signInUser.data.result.userId);
+                localStorage.setItem('accessToken', signInUser.data.result.accessToken);
+                yield put (userSignInSuccess (signInUser));
+            }
+            if(signInUser.Error){
+                yield put (showAuthMessage (signInUser.Error));
+            }
     } catch (error) {
         yield put (showAuthMessage (error));
     }

@@ -38,6 +38,7 @@ export const userSignOut = () => {
     };
 };
 export const userSignUpSuccess = (authUser) => {
+    console.log('user auth js actions', authUser);
     return {
         type: SIGNUP_USER_SUCCESS,
         payload: authUser

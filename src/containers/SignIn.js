@@ -19,8 +19,8 @@ class SignIn extends React.Component {
     constructor () {
         super ();
         this.state = {
-            email: 'demo@example.com',
-            password: 'demo#123'
+            email: '',
+            password: ''
         }
     }
 
@@ -54,16 +54,16 @@ class SignIn extends React.Component {
 
                     <div className="app-login-content">
                         <div className="app-login-header mb-4">
-                            <h1><IntlMessages id="appModule.email" /></h1>
+                            <h1>Login</h1>
                         </div>
 
                         <div className="app-login-form">
                             <form>
                                 <div className="form-group mb-3">
                                     <input
-                                        placeholder="Email"
+                                        placeholder="Email or Username"
                                         onChange={(event) => this.setState ({ email: event.target.value })}
-                                        defaultValue={email}
+                                        defaultValue={this.state.email}
                                         className="form-control form-control-lg"
                                     />
                                 </div>
@@ -92,8 +92,8 @@ class SignIn extends React.Component {
                                 </div>
 
                                 <div className="app-social-block my-1 my-sm-3">
-                                    <IntlMessages
-                                        id="signIn.connectWith" />
+                                    {/* <IntlMessages
+                                        id="signIn.connectWith" /> */}
                                     <ul className="social-link">
                                         {/* <li>
                                                 <span className="icon-btn icon"
@@ -115,7 +115,7 @@ class SignIn extends React.Component {
                                                 </span>
                                         </li> */}
 
-                                        <li>
+                                        {/* <li>
                                                 <span className="icon-btn icon"
                                                       onClick={() => {
                                                           this.props.showAuthLoader ();
@@ -124,7 +124,7 @@ class SignIn extends React.Component {
                                                       }}>
                                                     <i className="zmdi zmdi-google-plus zmdi-hc-lg" />
                                                 </span>
-                                        </li>
+                                        </li> */}
 
                                         {/* <li>
                                                 <span className="icon-btn icon"
