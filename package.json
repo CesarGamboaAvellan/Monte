@@ -85,6 +85,7 @@
     "heroku-prebuild": "npm install --production=false",
     "clean": "rimraf dist/*",
     "build": "webpack --progress --bail --env dist -p",
+    "deploy":"npm run build && firebase deploy" ,
     "start": "webpack-dev-server --hot --open"
   },
   "devDependencies": {
