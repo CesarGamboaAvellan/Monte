@@ -82,7 +82,6 @@
     "typeface-roboto": "0.0.45"
   },
   "scripts": {
-    "heroku-prebuild": "npm install --production=false",
     "clean": "rimraf dist/*",
     "build": "webpack --progress --bail --env dist -p",
     "deploy":"npm run build && firebase deploy" ,
