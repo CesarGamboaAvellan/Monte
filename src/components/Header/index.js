@@ -12,6 +12,7 @@ import IntlMessages from 'util/IntlMessages';
 import LanguageSwitcher from 'components/LanguageSwitcher/index';
 import UserInfo from 'components/UserInfo';
 import Menu from "components/Header/Menu";
+import logoIcon from '../../assets/images/pentagon.png';
 
 class Header extends React.Component {
 
@@ -208,8 +209,7 @@ class Header extends React.Component {
                                     data-toggle="dropdown">
                                     <img
                                         alt='...'
-                                        src={ localStorage.getItem('imageProfile') 
-                                        || 'http://via.placeholder.com/150x150'}
+                                        src={logoIcon}
                                         className="pointer user-avatar size-30"/>
                                 </DropdownToggle>
 

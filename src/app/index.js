@@ -3,7 +3,6 @@ import {Route, Switch, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux';
 import Header from 'components/Header/index';
 import Sidebar from 'containers/SideNav/index';
-import Test from './routes/Test/test'
 import Footer from 'components/Footer';
 
 import {
@@ -48,8 +47,6 @@ class App extends React.Component {
                             <Switch>
                                 <Route path={`${match.url}/sample-page`}
                                        component={asyncComponent(() => import('./routes/SamplePage'))}/> 
-                                <Route path={`${match.url}/extras`}
-                                       component={Test}/> 
                                 <Route
                                 component={asyncComponent(() => import('components/Error404'))}/>
                             </Switch>

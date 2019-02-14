@@ -12,20 +12,4 @@ const http = axios.create({
     });
   },
 });
-
-// http.interceptors.request.use(
-//   function(config) {
-//     if (!!abp.auth.getToken()) {
-//       config.headers.common['Authorization'] = 'Bearer ' + abp.auth.getToken();
-//     }
-
-//     config.headers.common['.AspNetCore.Culture'] = abp.utils.getCookieValue('Abp.Localization.CultureName');
-//     config.headers.common['Abp.TenantId'] = abp.multiTenancy.getTenantIdCookie();
-
-//     return config;
-//   },
-//   function(error) {
-//     return Promise.reject(error);
-//   }
-// );
 export default http;

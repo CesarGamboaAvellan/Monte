@@ -1,6 +1,5 @@
 import firebase from 'firebase';
 
-// Initialize Firebase
 const config = {
     apiKey: ' AIzaSyCXEyMlNcS3pHTfqGvVAtbFMPTEr8W0lXc',
     authDomain: 'launcherrocket-c3000.firebaseapp.com',

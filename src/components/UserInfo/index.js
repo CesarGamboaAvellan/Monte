@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import {userSignOut} from 'actions/Auth';
 import IntlMessages from 'util/IntlMessages';
+import userIcon from '../../assets/images/pentagon_1.png'
 
 class UserInfo extends React.Component {
     render() {
@@ -20,8 +21,7 @@ class UserInfo extends React.Component {
         return (
             <div>
                 <div className="user-profile">
-                    <img className="user-avatar border-0 size-40" src={ image || localStorage
-                    .getItem('imageProfile')}
+                    <img className="user-avatar border-0 size-40" src={userIcon}
                          alt="User"/>
                         <div className="user-detail ml-2">
                             <h4 className="user-name mb-0">{name || localStorage
