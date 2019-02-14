@@ -38,7 +38,6 @@ export const userSignOut = () => {
     };
 };
 export const userSignUpSuccess = (authUser) => {
-    console.log('user auth js actions', authUser);
     return {
         type: SIGNUP_USER_SUCCESS,
         payload: authUser
@@ -71,7 +70,6 @@ export const userGoogleSignIn = () => {
     };
 };
 export const userGoogleSignInSuccess = (authUser) => {
-    console.log('google payload', authUser);
     return {
         type: SIGNIN_GOOGLE_USER_SUCCESS,
         payload: authUser

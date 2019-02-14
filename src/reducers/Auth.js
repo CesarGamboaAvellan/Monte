@@ -25,7 +25,6 @@ const INIT_STATE = {
 export default (state = INIT_STATE, action) => {
     switch (action.type) {
         case SIGNUP_USER_SUCCESS: {
-            console.log(action.payload)
             return {
                 ...state,
                 loader: false,

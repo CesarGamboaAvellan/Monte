@@ -10,7 +10,6 @@ class UserInfo extends React.Component {
         if(!this.props.state.authUser){
             console.log('loading');
         }else{
-            console.log('state in users', this.props.state.authUser);
             if(this.props.state.authUser.additionalUserInfo){
                 name = this.props.state.authUser.additionalUserInfo.profile.name;
                 localStorage.setItem('userName', name);
@@ -38,7 +37,6 @@ class UserInfo extends React.Component {
                         <IntlMessages id="popup.setting"/>
                     </a>
                     <a className="dropdown-item text-muted" href="javascript:void(0)" onClick={() => {
-                        console.log("Try to logoput");
                         this.props.userSignOut()
                     }}>
                         <i className="zmdi zmdi-sign-in zmdi-hc-fw mr-1"/>
