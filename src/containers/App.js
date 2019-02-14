@@ -64,7 +64,7 @@ class App extends Component {
                 locale={currentAppLocale.locale}
                 messages={currentAppLocale.messages}
             >
-                <div className="app-main">
+                <div className="app-main" >
                     <Switch>
                         <RestrictedRoute path={`${match.url}app`} authUser={authUser}
                                          component={MainApp}/>
