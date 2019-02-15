@@ -48,7 +48,7 @@ class SignIn extends React.Component {
 
                     <div className="app-logo-content d-flex align-items-center justify-content-center">
                         <Link className="logo-lg" to="/" title="Jambo">
-                            <img src="http://via.placeholder.com/177x65" alt="jambo" title="jambo" />
+                            <img src="//launchrocket.co/wp-content/uploads/launchrocket-logo.png"  className= "login-icon"alt="jambo" title="jambo" />
                         </Link>
                     </div>
 
@@ -82,13 +82,19 @@ class SignIn extends React.Component {
                                     <Button onClick={() => {
                                         this.props.showAuthLoader ();
                                         this.props.userSignIn ({ email, password });
-                                    }} color="primary" className="text-uppercase">
+                                    }} className="text-uppercase button-link">
                                         <IntlMessages id="appModule.signIn" />
                                     </Button>
 
+                                    <div className ="secondary-login-buttons">
                                     <Link to="/signup">
-                                        <IntlMessages id="signIn.signUp" />
+                                        <IntlMessages id="signIn.signUp" className="button-link-secondary"/>
                                     </Link>
+                                    <Link to="/">
+                                        <IntlMessages id="sidebar.appModule.forgotPassword" 
+                                        className="button-link-secondary"/>
+                                    </Link>
+                                    </div>
                                 </div>
                             </form>
                         </div>

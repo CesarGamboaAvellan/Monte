@@ -78,7 +78,7 @@ class SidenavContent extends Component {
 
     render() {
         return (
-            <CustomScrollbars className="scrollbar" style={{height: 'calc(100vh - 70px)'}}>
+            <CustomScrollbars className="scrollbar nav-bar-background" style={{height: 'calc(100vh - 70px)'}}>
                 <ul className="nav-menu">
 
                     <li className="nav-header"><IntlMessages id="sidebar.main"/></li>
