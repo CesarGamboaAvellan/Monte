@@ -24,25 +24,39 @@ import {
     userTwitterSignInSuccess
 } from '../actions/Auth';
 
-const createUserWithEmailPasswordRequest = async (email, password) => {
-    Object.assign(http.defaults, { headers: { "Abp.TenantId": 1 }})
-    return http.post('/services/app/Account/Register', {
-        userNameOrEmailAddress: email,
-        password,
+const createUserWithEmailPasswordRequest = async (email, password, name) => {
+    return http.post('/TokenAuth/Authenticate', {
+        userNameOrEmailAddress: 'admin',
+        password: '123qwe',
         rememberClient: true,
-    }
-    )
-    .then (createdUser => 
+    })
+    .then (authUser => 
         {
-            console.log('user created:', createdUser, email)
-            return authUser
+            let config = {
+                headers: {
+                    "Authorization": `Bearer ${authUser.data.result.accessToken}`,
+                    "Content-Type":  "application/json"
+                }
+              }
+            console.log('Token: ', authUser.data.result.accessToken)
+            return http.post('/services/app/User/Create', {
+                    userName: name,
+                    name: "test",
+                    surname: "test",
+                    emailAddress: email,
+                    isActive: true,
+                    roleNames: [
+                      "admin"
+                    ],
+                    "password": password
+                  }, config
+            )
         })
     .catch (error => {
         console.log(error);
         return { Error: 'Authentication failed: check email and password', details :error}
     });
 }
-
 const signInUserWithEmailPasswordRequest = async (email, password) => {
         return http.post('/TokenAuth/Authenticate', {
             userNameOrEmailAddress: email,
@@ -52,6 +66,8 @@ const signInUserWithEmailPasswordRequest = async (email, password) => {
         .then (authUser => 
             {
                 console.log(authUser, email, password)
+                // make another call here to get the user with the ID
+                localStorage.setItem('user', email)
                 return authUser
             })
         .catch (error => {
@@ -69,9 +85,9 @@ const signOutRequest = async () =>
 
 
 function* createUserWithEmailPassword ({ payload }) {
-    const { email, password } = payload;
+    const { email, password, name } = payload;
     try {
-        const signUpUser = yield call (createUserWithEmailPasswordRequest, email, password);
+        const signUpUser = yield call (createUserWithEmailPasswordRequest, email, password, name);
         if (signUpUser.message) {
             yield put (showAuthMessage (signUpUser.message));
         } else {

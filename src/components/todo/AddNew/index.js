@@ -17,25 +17,24 @@ class AddNew extends React.Component {
 
         this.toggle = this.toggle.bind(this);
     }
-
     toggle() {
         this.setState({
             modal: !this.state.modal
         });
     }
-
-
     render() {
-        // const {onTodoAdd, onClose, user} = this.props;
         return (
 
-            <Modal onClose={this.props.onclose} isOpen={true}>
+            <Modal onClose={this.props.onclose} isOpen={this.state.modal}>
                 <ModalHeader>
                     <div className="header" style={{minWidth: 300}}>
                         <div className="subject">
                             Password Reset
                         </div>
                     </div>
+                    <div className="">
+                        <Button className="button-link" onClick={this.toggle}>X</Button>
+                        </div>
                 </ModalHeader>
                 <div className="add-todo" style={{minWidth: 300}}>
                     <ModalBody className="body d-flex flex-column" style={{width: '100%'}}>
@@ -45,7 +44,7 @@ class AddNew extends React.Component {
                     </ModalBody>
 
                     <ModalFooter className="footer d-flex flex-row">
-                        <Button color="primary" onClick={() => {
+                        <Button className="button-link" onClick={() => {
                         }}>{this.props.action}</Button>
                     </ModalFooter>
                 </div>

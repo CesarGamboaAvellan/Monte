@@ -25,7 +25,7 @@ class UserInfo extends React.Component {
                         <div className="user-detail ml-2">
                             <h4 className="user-name mb-0">{name || localStorage
                                 .getItem('userName')}</h4>
-                            <small>Developer</small>
+                            <small>{localStorage.getItem('user')}</small>
                         </div>
                 </div>
                     <a className="dropdown-item text-muted" href="javascript:void(0)">

@@ -100,7 +100,7 @@ class SignUp extends React.Component {
                                 <div className="mb-3 d-flex align-items-center justify-content-between">
                                     <Button onClick={() => {
                                         this.props.showAuthLoader ();
-                                        this.props.userSignUp ({ email, password });
+                                        this.props.userSignUp ({ email, password, name });
                                     }}  className="text-uppercase button-link">
                                         <IntlMessages
                                             id="appModule.regsiter" />

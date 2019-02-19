@@ -6,10 +6,8 @@ const http = axios.create({
   baseURL: apiUrl,
   crossdomain: true,
   timeout: 30000,
-  paramsSerializer: function(params) {
-    return qs.stringify(params, {
-      encode: false,
-    });
-  },
+  headers: {
+    "Abp.TenantId": 1 
+  }
 });
 export default http;
