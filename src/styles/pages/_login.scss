@@ -54,7 +54,7 @@
 .app-login-main-content {
   @include display-flex();
   background-color: $white;
-  @include box-shadow($shadow);
+  box-shadow: 2px 2px 2px 3px rgba(0, 0, 0, 0.15); // @include box-shadow($shadow);
   @include border-radius(10px);
   font-size: 14px;
   overflow: hidden;
