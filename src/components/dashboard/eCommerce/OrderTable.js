@@ -4,18 +4,18 @@ import OrderTableCell from './OrderTableCell';
 
 let counter = 0;
 
-function createData(orderId, name, image, orderDate, deliveryDate, status) {
+function createData(orderId, orderDate, deliveryDate, status) {
     counter += 1;
-    return {id: counter, orderId, name, image, orderDate, deliveryDate, status};
+    return {id: counter, orderId, orderDate, deliveryDate, status};
 }
 
 class OrderTable extends Component {
     state = {
         data: [
-            createData('23545', 'Alex Dolgove', 'http://via.placeholder.com/150x150', '25 Oct', '25 Oct', 'Completed'),
-            createData('23653', 'Domnic Brown', 'http://via.placeholder.com/150x150', '28 Oct', '1 Nov', 'On Hold'),
-            createData('24567', 'Garry Sobars', 'http://via.placeholder.com/150x150', '5 Nov', '10 Nov', 'Delayed'),
-            createData('25745', 'Stella Johnson', 'http://via.placeholder.com/150x150', '23 Nov', '26 Nov', 'Cancelled'),
+            createData('1', 'www.launcherrocket.net', 'goDaddy', 'Completed'),
+            createData('2', 'www.launch_rocket.ac.cr', 'blueHost', 'On Hold'),
+            createData('3', 'www.rocket.org',  '5 Nov', 'enum', 'Delayed'),
+            createData('4', 'www.therocketlauncher.com', 'iPage', 'Cancelled'),
         ],
     };
 
@@ -26,12 +26,11 @@ class OrderTable extends Component {
                 <table className="default-table table-unbordered table table-sm table-hover">
                     <thead className="th-border-b">
                     <tr>
-                        <th>OrderId</th>
-                        <th>Customer</th>
-                        <th>Order Date</th>
-                        <th>Delivery Date</th>
-                        <th className="status-cell text-right">Status</th>
-                        <th/>
+                        <th>#</th>
+                        <th>Domain Name</th>
+                        <th>Provider</th>
+                        <th className="status-cell text-right">Price</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>

@@ -9,7 +9,7 @@ class SamplePage extends React.Component {
     render() {
         return (
             <div className="app-wrapper">
-                <ContainerHeader match={this.props.match} title={<IntlMessages id="pages.samplePage"/>}/>
+                <ContainerHeader match={this.props.match} title={<IntlMessages id="pages.Domains"/>}/>
                 <OrderTable />
             </div>
         );

@@ -85,11 +85,11 @@ class SidenavContent extends Component {
                     <li className="menu no-arrow">
                         <NavLink to="/app/sample-page">
                             <i className="zmdi zmdi-view-dashboard zmdi-hc-fw"/>
-                            <span className="nav-text"><IntlMessages id="pages.samplePage"/> </span>
+                            <span className="nav-text secondary-color"><IntlMessages id="pages.samplePage"/> </span>
                         </NavLink>
                         <NavLink to="/app/domains">
                             <i className="zmdi zmdi-view-dashboard zmdi-hc-fw"/>
-                            <span className="nav-text"><IntlMessages id="nav.Domains"/> </span>
+                            <span className="nav-text secondary-color"><IntlMessages id="nav.Domains"/> </span>
                         </NavLink>
                     </li>
 

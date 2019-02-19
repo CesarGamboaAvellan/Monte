@@ -9,7 +9,7 @@ class SamplePage extends React.Component {
             <div className="app-wrapper">
                 <ContainerHeader match={this.props.match} title={<IntlMessages id="pages.samplePage"/>}/>
                 <div className="d-flex justify-content-center">
-                    <h1>Hello</h1>
+                    <h1>Index here</h1>
                 </div>
 
             </div>
