@@ -24,13 +24,27 @@ import {
     userTwitterSignInSuccess
 } from '../actions/Auth';
 
-const createUserWithEmailPasswordRequest = async (email, password) =>
-    await  auth.createUserWithEmailAndPassword (email, password)
-        .then (authUser => authUser)
-        .catch (error => error);
+const createUserWithEmailPasswordRequest = async (email, password) => {
+    Object.assign(http.defaults, { headers: { "Abp.TenantId": 1 }})
+    return http.post('/services/app/Account/Register', {
+        userNameOrEmailAddress: email,
+        password,
+        rememberClient: true,
+    }
+    )
+    .then (createdUser => 
+        {
+            console.log('user created:', createdUser, email)
+            return authUser
+        })
+    .catch (error => {
+        console.log(error);
+        return { Error: 'Authentication failed: check email and password', details :error}
+    });
+}
 
 const signInUserWithEmailPasswordRequest = async (email, password) => {
-        return http.post('/api/TokenAuth/Authenticate', {
+        return http.post('/TokenAuth/Authenticate', {
             userNameOrEmailAddress: email,
             password,
             rememberClient: true,

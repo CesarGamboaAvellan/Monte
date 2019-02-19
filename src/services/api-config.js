@@ -5,9 +5,9 @@ console.log('hostname', hostname);
 if (hostname === 'production url') {
   backendHost = 'production host';
 } else if (hostname === 'launcherrocket-c3000.firebaseapp.com') {
-  backendHost = 'http://launchrocket-api-dev.azurewebsites.net';
+  backendHost = 'http://api-dev.launchrocketapp.com/api';
 } else {
-  backendHost = 'http://launchrocket-api-dev.azurewebsites.net';
+  backendHost = 'http://api-dev.launchrocketapp.com/api';
 }
 
 export const apiUrl = backendHost;
