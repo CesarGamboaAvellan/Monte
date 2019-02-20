@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import {userSignOut} from 'actions/Auth';
 import IntlMessages from 'util/IntlMessages';
+import { Link } from 'react-router-dom'
 import userIcon from '../../assets/images/pentagon_1.png'
 
 class UserInfo extends React.Component {
@@ -28,10 +29,10 @@ class UserInfo extends React.Component {
                             <small>{localStorage.getItem('user')}</small>
                         </div>
                 </div>
-                    <a className="dropdown-item text-muted" href="javascript:void(0)">
+                    <Link to="/app/profile" className="dropdown-item text-muted" >
                         <i className="zmdi zmdi-face zmdi-hc-fw mr-1"/>
                         <IntlMessages id="popup.profile"/>
-                    </a>
+                    </Link>
                     <a className="dropdown-item text-muted" href="javascript:void(0)">
                         <i className="zmdi zmdi-settings zmdi-hc-fw mr-1"/>
                         <IntlMessages id="popup.setting"/>

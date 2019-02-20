@@ -4,8 +4,7 @@
 
 .button-link-secondary {
   background-color: rgb(55, 56, 84) !important;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.04)),
-    linear-gradient(45deg, rgb(73, 75, 110) 0%, rgb(100, 87, 152) 100%) !important;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.04)), linear-gradient(45deg, rgb(73, 75, 110) 0%, rgb(100, 87, 152) 100%) !important;
   background-size: auto, auto !important;
   background-position: 50% 50%, 50% 50% !important;
   background-attachment: scroll, scroll !important;
@@ -15,8 +14,7 @@
 
 .button-link {
   background-color: rgb(229, 91, 82) !important;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.04)),
-    linear-gradient(45deg, rgb(255, 101, 94) 0%, rgb(255, 202, 113) 100%) !important;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.04)), linear-gradient(45deg, rgb(255, 101, 94) 0%, rgb(255, 202, 113) 100%) !important;
   background-size: auto, auto !important;
   background-position: 50% 50%, 50% 50% !important;
   background-attachment: scroll, scroll !important;
@@ -32,6 +30,10 @@
   color: rgb(55, 56, 84) !important;
 }
 
+.third-color {
+  background-color: rgb(73, 75, 110) !important;
+}
+
 .secondary-login-buttons {
   display: grid;
 }
@@ -45,6 +47,10 @@
 .forgot-password:hover {
   background: none;
   color: #3f51b5;
+}
+
+.primary-background {
+  background-color: #e8eaf6;
 }
 
 .center-text {
