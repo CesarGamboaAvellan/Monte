@@ -51,6 +51,8 @@ class App extends React.Component {
                                        component={asyncComponent(() => import('./routes/Domains/domains'))}/> 
                                 <Route path={`${match.url}/profile`}
                                        component={asyncComponent(() => import('./routes/UserProfile/userProfile'))}/> 
+                                       <Route path={`${match.url}/timeline`}
+                                       component={asyncComponent(() => import('./routes/Timelines/timeline'))}/> 
                                 <Route
                                 component={asyncComponent(() => import('components/Error404'))}/>
                             </Switch>

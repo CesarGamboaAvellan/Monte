@@ -35,7 +35,6 @@ const createUserWithEmailPasswordRequest = async (email, password, name) => {
             let config = {
                 headers: {
                     "Authorization": `Bearer ${authUser.data.result.accessToken}`,
-                    "Content-Type":  "application/json"
                 }
               }
             console.log('Token: ', authUser.data.result.accessToken)
@@ -50,7 +49,9 @@ const createUserWithEmailPasswordRequest = async (email, password, name) => {
                     ],
                     "password": password
                   }, config
-            )
+            ).then(user => console.log('Response from creting user', user)
+            .catch(error=>console.log(error))
+            );
         })
     .catch (error => {
         console.log(error);
@@ -65,7 +66,7 @@ const signInUserWithEmailPasswordRequest = async (email, password) => {
         })
         .then (authUser => 
             {
-                console.log(authUser, email, password)
+                console.log('Created an user:,', authUser)
                 // make another call here to get the user with the ID
                 localStorage.setItem('user', email)
                 return authUser

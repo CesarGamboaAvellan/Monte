@@ -91,6 +91,10 @@ class SidenavContent extends Component {
                             <i className="zmdi zmdi-view-dashboard zmdi-hc-fw"/>
                             <span className="nav-text secondary-color"><IntlMessages id="nav.Domains"/> </span>
                         </NavLink>
+                        <NavLink to="/app/timeline">
+                            <i className="zmdi zmdi-view-dashboard zmdi-hc-fw"/>
+                            <span className="nav-text secondary-color"><IntlMessages id="nav.TimeLine"/> </span>
+                        </NavLink>
                     </li>
 
                 </ul>
