@@ -24,20 +24,51 @@ import {
     userTwitterSignInSuccess
 } from '../actions/Auth';
 
-const createUserWithEmailPasswordRequest = async (email, password) =>
-    await  auth.createUserWithEmailAndPassword (email, password)
-        .then (authUser => authUser)
-        .catch (error => error);
-
+const createUserWithEmailPasswordRequest = async (email, password, name) => {
+    return http.post('/TokenAuth/Authenticate', {
+        userNameOrEmailAddress: 'admin',
+        password: '123qwe',
+        rememberClient: true,
+    })
+    .then (authUser => 
+        {
+            let config = {
+                headers: {
+                    "Authorization": `Bearer ${authUser.data.result.accessToken}`,
+                }
+              }
+            console.log('Token: ', authUser.data.result.accessToken)
+            return http.post('/services/app/User/Create', {
+                    userName: name,
+                    name: "test",
+                    surname: "test",
+                    emailAddress: email,
+                    isActive: true,
+                    roleNames: [
+                      "admin"
+                    ],
+                    "password": password
+                  }, config
+            ).then(user => console.log('Response from creting user', user)
+            .catch(error=>console.log(error))
+            );
+        })
+    .catch (error => {
+        console.log(error);
+        return { Error: 'Authentication failed: check email and password', details :error}
+    });
+}
 const signInUserWithEmailPasswordRequest = async (email, password) => {
-        return http.post('/api/TokenAuth/Authenticate', {
+        return http.post('/TokenAuth/Authenticate', {
             userNameOrEmailAddress: email,
             password,
             rememberClient: true,
         })
         .then (authUser => 
             {
-                console.log(authUser, email, password)
+                console.log('Created an user:,', authUser)
+                // make another call here to get the user with the ID
+                localStorage.setItem('user', email)
                 return authUser
             })
         .catch (error => {
@@ -55,9 +86,9 @@ const signOutRequest = async () =>
 
 
 function* createUserWithEmailPassword ({ payload }) {
-    const { email, password } = payload;
+    const { email, password, name } = payload;
     try {
-        const signUpUser = yield call (createUserWithEmailPasswordRequest, email, password);
+        const signUpUser = yield call (createUserWithEmailPasswordRequest, email, password, name);
         if (signUpUser.message) {
             yield put (showAuthMessage (signUpUser.message));
         } else {

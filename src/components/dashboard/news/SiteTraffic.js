@@ -1,6 +1,5 @@
 import React from 'react';
 import {CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
-import {siteTrafficData} from "../../../app/routes/dashboard/routes/News/data";
 
 const SiteTraffic = () => {
     return (

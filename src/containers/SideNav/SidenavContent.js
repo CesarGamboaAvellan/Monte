@@ -78,14 +78,22 @@ class SidenavContent extends Component {
 
     render() {
         return (
-            <CustomScrollbars className="scrollbar" style={{height: 'calc(100vh - 70px)'}}>
+            <CustomScrollbars className="scrollbar nav-bar-background" style={{height: 'calc(100vh - 70px)'}}>
                 <ul className="nav-menu">
 
                     <li className="nav-header"><IntlMessages id="sidebar.main"/></li>
                     <li className="menu no-arrow">
                         <NavLink to="/app/sample-page">
                             <i className="zmdi zmdi-view-dashboard zmdi-hc-fw"/>
-                            <span className="nav-text"><IntlMessages id="pages.samplePage"/> </span>
+                            <span className="nav-text secondary-color"><IntlMessages id="pages.samplePage"/> </span>
+                        </NavLink>
+                        <NavLink to="/app/domains">
+                            <i className="zmdi zmdi-view-dashboard zmdi-hc-fw"/>
+                            <span className="nav-text secondary-color"><IntlMessages id="nav.Domains"/> </span>
+                        </NavLink>
+                        <NavLink to="/app/timeline">
+                            <i className="zmdi zmdi-view-dashboard zmdi-hc-fw"/>
+                            <span className="nav-text secondary-color"><IntlMessages id="nav.TimeLine"/> </span>
                         </NavLink>
                     </li>
 

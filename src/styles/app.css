@@ -3574,9 +3574,9 @@ a.btn-info:hover, a.btn-danger:hover, a.btn-warning:hover, a.btn-success:hover, 
     border-color: #fafafa !important;
 }
 
-.bg-grey.lighten-4 {
-    background-color: #f5f5f5 !important;
-}
+/* .bg-grey.lighten-4 {
+  background-color: #f5f5f5 !important;
+} */
 
 .text-grey.text-lighten-4 {
     color: #f5f5f5 !important;
