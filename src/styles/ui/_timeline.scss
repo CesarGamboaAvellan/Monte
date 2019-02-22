@@ -15,6 +15,7 @@
 }
 
 .timeline-section {
+  margin-top: 5%;
   margin-bottom: 25px;
 }
 
@@ -90,7 +91,10 @@
 
 .timeline-panel {
   padding: 20px 30px;
+  margin-left: 10%;
+  margin-right: 10%;
   position: relative;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.15);
   background-color: $white;
   @include border-radius($border-radius-lg);
   border: solid 1px $gray-200;

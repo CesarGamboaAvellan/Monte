@@ -1,32 +1,25 @@
 import React from 'react';
+import { Button } from 'reactstrap';
+import IntlMessages from '../../util/IntlMessages';
 
-const WithIconTimeLineItem = ({ styleName, color, timeLine, children }) => {
-    // const {time, title, description } = timeLine;
-    // const children = <i class="zdmi zdmi-android"></i>
-    const title = "First Assigment"
-    const description = "This is your first task, after completed, the next ones will be avaliable"
+const WithIconTimeLineItem = (props) => {
+    console.log(props);
+    const { time, title, description } = props.timeLine;
     return (
-        <div className={`timeline-item timeline-time-item ${styleName}`}>
-            {/* <div className="timeline-time">{time}</div> */}
-            <div className="timeline-time">20, APRIL, 2019</div>
-            {/* <div className={`timeline-badge bg-${color}`}>{children}</div> */}
-            <div className={`timeline-badge bg-pink`}><i class="zdmi zdmi-android"></i></div>
+        <div className={`timeline-item timeline-time-item ${props.styleName}`}>
+            <div className="timeline-time">{time}</div>
+            <div className={`timeline-badge bg-${props.color}`}>{props.children}</div>
             <div className="timeline-panel">
-                {/* <h4 className={`timeline-tile text-${color}`}>{title}</h4> */}
-                <h4 className={`timeline-tile text-pink`}>{title}</h4>
+                <h4 className={`timeline-tile text-${props.color}`}>{title}</h4>
                 <p>{description}</p>
+                {props.hasButton ?
+                    <Button className="text-uppercase button-link">
+                        <IntlMessages id="appModule.Start" />
+
+                    </Button> : ''}
             </div>
         </div>
     )
 };
 export default WithIconTimeLineItem;
 
-/*
-float: left;
-
-text-align: right;
-
-padding-left: 0;
-
-padding-right: 55px;
-*/

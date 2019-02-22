@@ -49,12 +49,10 @@ const createUserWithEmailPasswordRequest = async (email, password, name) => {
                     ],
                     "password": password
                   }, config
-            ).then(user => console.log('Response from creting user', user)
+            ).then(user => user)
             .catch(error=>console.log(error))
-            );
         })
     .catch (error => {
-        console.log(error);
         return { Error: 'Authentication failed: check email and password', details :error}
     });
 }
@@ -72,7 +70,6 @@ const signInUserWithEmailPasswordRequest = async (email, password) => {
                 return authUser
             })
         .catch (error => {
-            console.log(error);
             return { Error: 'Authentication failed: check email and password', details :error}
         });
     
@@ -88,15 +85,15 @@ const signOutRequest = async () =>
 function* createUserWithEmailPassword ({ payload }) {
     const { email, password, name } = payload;
     try {
-        const signUpUser = yield call (createUserWithEmailPasswordRequest, email, password, name);
-        if (signUpUser.message) {
-            yield put (showAuthMessage (signUpUser.message));
+        const signUpUserData = yield call (createUserWithEmailPasswordRequest, email, password, name);
+        if (!signUpUserData.data) {
+            yield put (showAuthMessage ('Error: Email while creating account'));
         } else {
-            localStorage.setItem ('user_id', signUpUser.uid);
-            yield put (userSignUpSuccess (signUpUser));
+            localStorage.setItem ('user', signUpUserData.data.result.userName);
+            yield put (userSignUpSuccess (signUpUserData.data));
         }
     } catch (error) {
-        yield put (showAuthMessage (error));
+        yield put (showAuthMessage ('Error creating the user, email or username may be already used, also username sould be lower case, with no spaces'));
     }
 }
 

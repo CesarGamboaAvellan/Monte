@@ -33,7 +33,9 @@
 .third-color {
   background-color: rgb(73, 75, 110) !important;
 }
-
+.orange-color{
+  color: rgb(229, 91, 82) !important;
+}
 .secondary-login-buttons {
   display: grid;
 }
@@ -42,6 +44,9 @@
   background: none;
   color: gray;
   border: none;
+}
+.primary-color {
+  color: #f2f3ff !important
 }
 
 .forgot-password:hover {
