@@ -12,11 +12,11 @@ const WithIconTimeLineItem = (props) => {
             <div className="timeline-panel">
                 <h4 className={`timeline-tile text-${props.color}`}>{title}</h4>
                 <p>{description}</p>
-                {props.hasButton ?
+                {/* {props.hasButton ?
                     <Button className="text-uppercase button-link">
                         <IntlMessages id="appModule.Start" />
 
-                    </Button> : ''}
+                    </Button> : ''} */}
             </div>
         </div>
     )

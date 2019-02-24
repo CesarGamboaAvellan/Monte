@@ -21,6 +21,11 @@
   background-repeat: no-repeat, no-repeat !important;
   box-shadow: rgba(0, 0, 0, 0.15) 6px 6px 16px 0px !important;
 }
+.button-no-styles{
+  background: none;
+  border: none;
+  margin-top: 3px;
+}
 
 .nav-bar-background {
   background-color: $launcher-rocket-login;

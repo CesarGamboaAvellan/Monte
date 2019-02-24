@@ -1,5 +1,6 @@
 import React from 'react';
 import WithIconTimeLineItem from 'components/timeline/WithIconTimeLineItem';
+import { Button } from 'reactstrap';
 const timeLineData = [
   {
       image: 'http://via.placeholder.com/150x150',
@@ -32,8 +33,14 @@ const TimeLine = ({match}) => {
     return (
         <div>
             <div className="timeline-section timeline-center clearfix animated slideInUpTiny animation-duration-3">
-                <WithIconTimeLineItem timeLine={timeLineData[0]} color="orange" hasButton={true}>
-                    <span className="d-block text-white"><i className="zmdi zmdi-play"/></span>
+                <WithIconTimeLineItem timeLine={timeLineData[0]} color="orange">
+                    <span className="d-block text-white">
+                    
+                    <Button className="button-no-styles">
+                    <i className="zmdi zmdi-play"/>
+
+                    </Button>
+                    </span>
                 </WithIconTimeLineItem>
                 <WithIconTimeLineItem 
                 styleName="timeline-inverted" 
