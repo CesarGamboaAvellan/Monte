@@ -1,6 +1,6 @@
 import React from 'react';
 import WithIconTimeLineItem from 'components/timeline/WithIconTimeLineItem';
-import { Button } from 'reactstrap';
+import ActivityModal from './activityModal';
 const timeLineData = [
   {
       image: 'http://via.placeholder.com/150x150',
@@ -10,8 +10,8 @@ const timeLineData = [
   }, {
       image: 'http://via.placeholder.com/150x150',
       time: 'Learning Marketing',
-      title: 'Completed first 50 projects',
-      description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here,',
+      title: 'First Rule of Marketing',
+      description: 'Here you will learn the fundamentals of marketing',
   }, {
       image: 'http://via.placeholder.com/150x150',
       time: 'Get a domain',
@@ -29,17 +29,37 @@ const timeLineData = [
       description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.',
   }
 ];
-const TimeLine = ({match}) => {
+class TimeLine extends React.Component {
+    constructor(props){
+        super(props);
+        this.state={
+            isOpen: false,
+            activity: '',
+        }
+    }
+    openModal=(activity)=> {
+        console.log('sad')
+        this.setState({
+            isOpen: !this.state.isOpen,
+            activity: activity
+        })
+    }
+   render(){
     return (
         <div>
+            {this.state.isOpen ? <ActivityModal 
+            title="Launcher Rocket Activity"
+            modal={this.state.isOpen}
+            handleToggle={this.openModal}
+            activity={this.state.activity}
+            />: ''}
             <div className="timeline-section timeline-center clearfix animated slideInUpTiny animation-duration-3">
-                <WithIconTimeLineItem timeLine={timeLineData[0]} color="orange">
+                <WithIconTimeLineItem timeLine={timeLineData[0]} 
+                canBeAccess={true}
+                color="orange"
+                onclick={()=> this.openModal(timeLineData[0].title)}>
                     <span className="d-block text-white">
-                    
-                    <Button className="button-no-styles">
                     <i className="zmdi zmdi-play"/>
-
-                    </Button>
                     </span>
                 </WithIconTimeLineItem>
                 <WithIconTimeLineItem 
@@ -62,6 +82,7 @@ const TimeLine = ({match}) => {
             </div>
         </div>
     )
+   }
 };
 
 export default TimeLine;

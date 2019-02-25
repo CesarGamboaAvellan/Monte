@@ -25,6 +25,19 @@
   background: none;
   border: none;
   margin-top: 3px;
+  z-index: 222;
+  position: relative;
+}
+.activity-modal{
+  min-height: 350px;
+    margin-top: 15%;
+}
+.button-no-styles:hover{
+  background:none;
+  border: none;
+  margin-top: 3px;
+  z-index: 222;
+  position: relative;
 }
 
 .nav-bar-background {
