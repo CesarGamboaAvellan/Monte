@@ -99,9 +99,6 @@ class Header extends React.Component {
                         </span>
                     }
 
-                    <SearchBox styleName="d-none d-lg-block"
-                               onChange={this.updateSearchText.bind(this)}
-                               value={this.state.searchText}/>
                     {(navigationStyle === HORIZONTAL_NAVIGATION && horizontalNavPosition === INSIDE_THE_HEADER) &&
                     <Menu/>}
 
