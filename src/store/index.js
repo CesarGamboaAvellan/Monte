@@ -9,11 +9,22 @@ import { routerMiddleware } from 'react-router-redux';
 const history = createHistory ();
 const routeMiddleware = routerMiddleware (history);
 const sagaMiddleware = createSagaMiddleware ();
-
+const loadFromLocalStorage = () => {
+    try{
+        const serializedState = localStorage.getItem('state')
+        if(serializedState === null) return undefined
+        return JSON.parse(serializedState)
+    }
+    catch(e){
+        console.log(e)
+        return undefined
+    }
+}
 const middlewares = [sagaMiddleware, routeMiddleware];
 
-export default function configureStore (initialState) {
-    const store = createStore (reducers, initialState,
+const persistedState = loadFromLocalStorage()
+export default function configureStore () {
+    const store = createStore (reducers, persistedState,
         compose (applyMiddleware (...middlewares)));
 
     sagaMiddleware.run (rootSaga);

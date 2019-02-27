@@ -64,6 +64,7 @@ const signInUserWithEmailPasswordRequest = async (email, password) => {
         .then (authUser => 
             {
                 // make another call here to get the user with the ID
+                console.log('authUser Auth js', authUser);
                 localStorage.setItem('user', email)
                 return authUser
             })
@@ -183,6 +184,7 @@ function* signInUserWithEmailPassword ({ payload }) {
     const { email, password } = payload;
     try {
         const signInUser = yield call (signInUserWithEmailPasswordRequest, email, password);
+        console.log('signInUser', signInUser);
             if(signInUser.data){
                 localStorage.setItem ('user_id', signInUser.data.result.userId);
                 localStorage.setItem('accessToken', signInUser.data.result.accessToken);

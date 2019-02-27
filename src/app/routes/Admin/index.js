@@ -1,13 +1,15 @@
 import React from 'react';
 import ContainerHeader from 'components/ContainerHeader/index';
 import IntlMessages from 'util/IntlMessages';
-class Activity extends React.Component {
+
+class SamplePage extends React.Component {
+
     render() {
         return (
             <div className="app-wrapper">
                 <ContainerHeader match={this.props.match} title={<IntlMessages id="pages.samplePage"/>}/>
                 <div className="d-flex justify-content-center">
-                    <h1>Activity page, this will receive a param id, to get the respective task</h1>
+                    <h1>Admin Zone</h1>
                 </div>
 
             </div>
@@ -15,4 +17,4 @@ class Activity extends React.Component {
     }
 }
 
-export default Activity;
+export default SamplePage;

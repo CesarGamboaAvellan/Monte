@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Header from 'components/Header/index';
 import Sidebar from 'containers/SideNav/index';
 import Footer from 'components/Footer';
-
+import * as routes from './routes/routes';
 import {
     ABOVE_THE_HEADER,
     BELOW_THE_HEADER,
@@ -18,11 +18,29 @@ import TopNav from 'components/TopNav';
 
 
 class App extends React.Component {
+    routeStructure = (routes, match) => {
+        return (
+            <Route path={`${match.url}${routes.route}`}
+                component={routes.component} />
+        )
+    }
 
     render() {
         const { match, drawerType, navigationStyle, horizontalNavPosition } = this.props;
         const drawerStyle = drawerType.includes(FIXED_DRAWER) ? 'fixed-drawer' : drawerType.includes(COLLAPSED_DRAWER) ? 'collapsible-drawer' : 'mini-drawer';
-
+        const userRoutes = [
+            { route: routes.activityRoute, component: asyncComponent(() => import('./routes/Activity/activity')) },
+            { route: routes.samplePage, component: asyncComponent(() => import('./routes/Dashboard')) },
+            { route: routes.domainsRoute, component: asyncComponent(() => import('./routes/Domains/domains')) },
+            { route: routes.timelineRoute, component: asyncComponent(() => import('./routes/Timelines/timeline')) },
+            { route: routes.profileRoute, component: asyncComponent(() => import('./routes/UserProfile/userProfile')) },
+        ]
+        const adminRoutes = [
+            ...userRoutes,
+            { route: routes.adminZone, component: asyncComponent(() => import('./routes/Admin')) }
+        ]
+        // getusertype
+        const userType = 'admin';
         //set default height and overflow for iOS mobile Safari 10+ support.
         if (isIOS && isMobile) {
             document.body.classList.add('ios-mobile-view-height')
@@ -45,16 +63,11 @@ class App extends React.Component {
                     <main className="app-main-content-wrapper">
                         <div className="app-main-content">
                             <Switch>
-                                <Route exact path={`${match.url}/activity/:id`}
-                                    component={asyncComponent(() => import('./routes/Activity/activity'))} />
-                                <Route path={`${match.url}/sample-page`}
-                                    component={asyncComponent(() => import('./routes/SamplePage'))} />
-                                <Route path={`${match.url}/domains`}
-                                    component={asyncComponent(() => import('./routes/Domains/domains'))} />
-                                <Route path={`${match.url}/profile`}
-                                    component={asyncComponent(() => import('./routes/UserProfile/userProfile'))} />
-                                <Route path={`${match.url}/timeline`}
-                                    component={asyncComponent(() => import('./routes/Timelines/timeline'))} />
+                                {userType !== 'admin' ? userRoutes
+                                    .map(routes => this
+                                        .routeStructure(routes, match)) : adminRoutes
+                                            .map(routes => this
+                                                .routeStructure(routes, match))}
                                 <Route
                                     component={asyncComponent(() => import('components/Error404'))} />
                             </Switch>

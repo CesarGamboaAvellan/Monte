@@ -75,8 +75,8 @@ class SidenavContent extends Component {
 
         return null;
     }
-
     render() {
+        const userType = 'admin';
         return (
             <CustomScrollbars className="scrollbar dashboard-primary" style={{height: 'calc(100vh - 70px)'}}>
                 <ul className="nav-menu">
@@ -95,6 +95,12 @@ class SidenavContent extends Component {
                             <i className="zmdi zmdi-time zmdi-hc-fw orange-color"/>
                             <span className="nav-text primary-color"><IntlMessages id="nav.TimeLine"/> </span>
                         </NavLink>
+                        {
+                            userType === 'admin'&&<NavLink to="/app/admin">
+                            <i className="zmdi zmdi-account zmdi-hc-fw orange-color"/>
+                            <span className="nav-text primary-color"><IntlMessages id="nav.Admin"/> </span>
+                        </NavLink>
+                        }
                     </li>
 
                 </ul>
