@@ -76,7 +76,7 @@ class SidenavContent extends Component {
         return null;
     }
     render() {
-        const userType = 'admin';
+        const userType = localStorage.getItem('user') === ('admin' || 'admin@aspnetboilerplate.com') ?'admin': 'regular';
         return (
             <CustomScrollbars className="scrollbar dashboard-primary" style={{height: 'calc(100vh - 70px)'}}>
                 <ul className="nav-menu">
