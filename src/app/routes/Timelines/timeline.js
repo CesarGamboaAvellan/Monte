@@ -58,7 +58,6 @@ class TimeLine extends React.Component {
         }
     }
     openModal = (activity) => {
-        console.log('sad')
         this.setState({
             isOpen: !this.state.isOpen,
             activity: activity
