@@ -12,6 +12,7 @@ import IntlMessages from 'util/IntlMessages';
 import LanguageSwitcher from 'components/LanguageSwitcher/index';
 import UserInfo from 'components/UserInfo';
 import Menu from "components/Header/Menu";
+import Gravatar from 'react-gravatar';
 import logoIcon from '../../assets/images/pentagon.png';
 
 class Header extends React.Component {
@@ -204,10 +205,8 @@ class Header extends React.Component {
                                     className="d-inline-block"
                                     tag="span"
                                     data-toggle="dropdown">
-                                    <img
-                                        alt='...'
-                                        src={logoIcon}
-                                        className="pointer user-avatar size-30"/>
+                                    <Gravatar email={localStorage.getItem('user')} 
+                                    className="pointer user-avatar size-30" rating="pg" default='mm' />
                                 </DropdownToggle>
 
                                 <DropdownMenu right>

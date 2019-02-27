@@ -32,6 +32,9 @@
   min-height: 350px;
     margin-top: 15%;
 }
+.border-solid-purple{
+  border: solid 1px rgb(73, 75, 110);
+}
 .button-no-styles:hover{
   background:none;
   border: none;
@@ -39,7 +42,9 @@
   z-index: 222;
   position: relative;
 }
-
+.margin-top-3{
+  margin-top: 3%
+}
 .nav-bar-background {
   background-color: $launcher-rocket-login;
 }

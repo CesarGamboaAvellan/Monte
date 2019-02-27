@@ -3,19 +3,19 @@ import React from 'react';
 class OrderTableCell extends React.Component {
 
     render() {
-        const {id, orderId, orderDate, deliveryDate, status} = this.props.data;
+        const {id, domainName, host, purchase, price} = this.props.data;
         const statusStyle = "text-white bg-success";
         return (
             <tr
                 tabIndex={-1}
                 key={id}
             >
-                <td>{orderId}</td>
-                <td>{orderDate}</td>
-                <td>{deliveryDate}</td>
+                <td>{id}</td>
+                <td>{domainName}</td>
+                <td>{host}</td>
                 <td className="text-right">
                     <span>
-                        $12</span>
+                        {price}</span>
                 </td>
                 <td className="status-cell text-right">
                     <div className={` badge text-uppercase ${statusStyle}`}>Buy</div>

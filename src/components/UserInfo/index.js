@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {userSignOut} from 'actions/Auth';
 import IntlMessages from 'util/IntlMessages';
 import { Link } from 'react-router-dom'
-import userIcon from '../../assets/images/pentagon_1.png'
+// import Gravatar from 'react-gravatar'
 
 class UserInfo extends React.Component {
     render() {
@@ -11,6 +11,7 @@ class UserInfo extends React.Component {
         if(!this.props.state.authUser){
             console.log('loading');
         }else{
+            console.log(this.props.state.authUser)
             if(this.props.state.authUser.additionalUserInfo){
                 name = this.props.state.authUser.additionalUserInfo.profile.name;
                 localStorage.setItem('userName', name);
@@ -21,8 +22,7 @@ class UserInfo extends React.Component {
         return (
             <div>
                 <div className="user-profile">
-                    <img className="user-avatar border-0 size-40" src={userIcon}
-                         alt="User"/>
+                {/* <Gravatar email="mathews.kyle@gmail.com" /> */}
                         <div className="user-detail ml-2">
                             <h4 className="user-name mb-0">{name || localStorage
                                 .getItem('userName')}</h4>

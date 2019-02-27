@@ -2,25 +2,10 @@ import React, {Component} from 'react';
 import OrderTableCell from './OrderTableCell';
 
 
-let counter = 0;
-
-function createData(orderId, orderDate, deliveryDate, status) {
-    counter += 1;
-    return {id: counter, orderId, orderDate, deliveryDate, status};
-}
 
 class OrderTable extends Component {
-    state = {
-        data: [
-            createData('1', 'www.launcherrocket.net', 'goDaddy', 'Completed'),
-            createData('2', 'www.launch_rocket.ac.cr', 'blueHost', 'On Hold'),
-            createData('3', 'www.rocket.org',  '5 Nov', 'enum', 'Delayed'),
-            createData('4', 'www.therocketlauncher.com', 'iPage', 'Cancelled'),
-        ],
-    };
-
     render() {
-        const {data} = this.state;
+        const {data} = this.props;
         return (
             <div className="table-responsive-material">
                 <table className="default-table table-unbordered table table-sm table-hover">
