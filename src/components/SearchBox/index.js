@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'reactstrap'
 
-const SearchBox = ({styleName, placeholder, onChange, value}) => {
+const SearchBox = ({styleName, placeholder, onChange, value, clickEvent}) => {
 
     return (
         <div className={`search-bar right-side-icon bg-transparent ${styleName}`}>
@@ -9,7 +9,7 @@ const SearchBox = ({styleName, placeholder, onChange, value}) => {
                 <input className="form-control border-solid-purple" type="search" placeholder={placeholder} onChange={onChange}
                        value={value}/>
                 <button className="search-icon"><i className="zmdi zmdi-search zmdi-hc-lg"/></button>
-                <Button className="button-link margin-top-3">Search</Button>
+                <Button className="button-link margin-top-3" onClick={clickEvent}>Search</Button>
             </div>
           
         </div>
