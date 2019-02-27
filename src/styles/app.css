@@ -5383,7 +5383,7 @@ ul.nav-menu li.menu .sub-menu li > a:hover:before {
     -moz-box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.15);
     -o-box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.15);
     box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.15);
-    background-color: #f8f9fa;
+    background-color: rgb(242, 243, 255) !important;
     color: #a1a1a1;
     line-height: 50px;
     min-height: 50px;
