@@ -4,7 +4,6 @@ import { NavLink, withRouter } from 'react-router-dom';
 import IntlMessages from 'util/IntlMessages';
 import CustomScrollbars from "util/CustomScrollbars";
 
-
 class SidenavContent extends Component {
 
     componentDidMount() {
@@ -76,7 +75,8 @@ class SidenavContent extends Component {
         return null;
     }
     render() {
-        const userType = localStorage.getItem('user') === ('admin' || 'admin@aspnetboilerplate.com') ? 'admin' : 'regular';
+        const userType = (localStorage.getItem('user') === ('admin@defaulttenant.com')) ? 'admin' : 'regular';
+
         return (
             <CustomScrollbars className="scrollbar dashboard-primary" style={{ height: 'calc(100vh - 70px)' }}>
                 <ul className="nav-menu">
@@ -100,7 +100,13 @@ class SidenavContent extends Component {
                                 <i className="zmdi zmdi-account zmdi-hc-fw orange-color" />
                                 <span className="nav-text secondary-color"><IntlMessages id="nav.Admin" /> </span>
                             </NavLink>
+                        }{
+                            userType === 'admin' && <NavLink to="/app/users">
+                                <i className="zmdi zmdi-account zmdi-hc-fw orange-color" />
+                                <span className="nav-text secondary-color"><IntlMessages id="nav.Users" /> </span>
+                            </NavLink>
                         }
+
                     </li>
 
                 </ul>

@@ -37,10 +37,11 @@ class App extends React.Component {
         ]
         const adminRoutes = [
             ...userRoutes,
-            { route: routes.adminZone, component: asyncComponent(() => import('./routes/Admin')) }
+            { route: routes.adminZone, component: asyncComponent(() => import('./routes/Admin')) },
+            { route: routes.userList, component: asyncComponent(() => import('./routes/todo/basic/index')) }
         ]
         // getusertype
-        const userType = localStorage.getItem('user') === ('admin' || 'admin@aspnetboilerplate.com') ? 'admin' : 'regular';
+        const userType = (localStorage.getItem('user') === ('admin@defaulttenant.com')) ? 'admin' : 'regular';
         //set default height and overflow for iOS mobile Safari 10+ support.
         if (isIOS && isMobile) {
             document.body.classList.add('ios-mobile-view-height')

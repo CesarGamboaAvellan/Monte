@@ -1,14 +1,14 @@
 import React from 'react';
-import {SortableElement, SortableHandle} from 'react-sortable-hoc';
+import { SortableElement, SortableHandle } from 'react-sortable-hoc';
 
-import labels from 'app/routes/todo/data/labels'
-import users from 'app/routes/todo/data/users'
+import labels from '../../../../app/routes/todo/data/labels'
+import users from '../../../../app/routes/todo/data/users'
 // This can be any component you want
 const DragHandle = SortableHandle(() =>
-    <i className="zmdi zmdi-menu draggable-icon d-none d-sm-flex" style={{fontSize: 25}}/>);
+    <i className="zmdi zmdi-menu draggable-icon d-none d-sm-flex" style={{ fontSize: 25 }} />);
 
 
-const ToDoItem = SortableElement(({todo, onTodoSelect, onTodoChecked, onMarkAsStart}) => {
+const ToDoItem = SortableElement(({ todo, onTodoSelect, onTodoChecked, onMarkAsStart }) => {
     let user = null;
     if (todo.user > 0)
         user = users[todo.user - 1];
@@ -16,22 +16,22 @@ const ToDoItem = SortableElement(({todo, onTodoSelect, onTodoChecked, onMarkAsSt
         <div className="module-list-item">
             <div className="module-list-icon">
                 <span className="bar-icon">
-                  <DragHandle/>
+                    <DragHandle />
                 </span>
 
                 <div className="form-control-checkbox d-flex">
                     <div className="form-checkbox">
                         <input type="checkbox"
-                               checked={todo.selected}
-                               onChange={(event) => {
-                                   event.stopPropagation();
-                                   onTodoChecked(todo);
-                               }}
-                               value="SelectTodo"
+                            checked={todo.selected}
+                            onChange={(event) => {
+                                event.stopPropagation();
+                                onTodoChecked(todo);
+                            }}
+                            value="SelectTodo"
                         />
 
                         <span className="check">
-                            <i className="zmdi zmdi-check zmdi-hc-lg"/>
+                            <i className="zmdi zmdi-check zmdi-hc-lg" />
                         </span>
                     </div>
 
@@ -40,8 +40,8 @@ const ToDoItem = SortableElement(({todo, onTodoSelect, onTodoChecked, onMarkAsSt
                         onMarkAsStart(todo);
                     }}>
                         {todo.starred ?
-                            <i className="zmdi zmdi-star zmdi-hc-lg"/> :
-                            <i className="zmdi zmdi-star-outline zmdi-hc-lg"/>
+                            <i className="zmdi zmdi-star zmdi-hc-lg" /> :
+                            <i className="zmdi zmdi-star-outline zmdi-hc-lg" />
                         }
 
                     </span>
@@ -60,7 +60,7 @@ const ToDoItem = SortableElement(({todo, onTodoSelect, onTodoChecked, onMarkAsSt
                             {labels.map((label, index) => {
                                 return (todo.labels).includes(label.id) &&
                                     <div key={index}
-                                         className={`badge text-white bg-${label.color}`}>{label.title}</div>
+                                        className={`badge text-white bg-${label.color}`}>{label.title}</div>
                             })}
                         </div>
                     </div>
@@ -70,7 +70,7 @@ const ToDoItem = SortableElement(({todo, onTodoSelect, onTodoChecked, onMarkAsSt
                                 <span
                                     className="avatar size-40 rounded-circle bg-grey d-flex align-items-center justify-content-center">U</span>
                                 : <img className="avatar size-40 rounded-circle" alt={user.name}
-                                       src={user.thumb}/>}
+                                    src={user.thumb} />}
 
                         </div>
                     </div>
