@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import Drawer from 'rc-drawer';
-import {arrayMove} from 'react-sortable-hoc';
-import {Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
-
-import toDos from '../data/todo';
+import { arrayMove } from 'react-sortable-hoc';
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
+import { getAllUsers } from '../../../../actions/getAllUsers';
+import users from '../data/todo';
 import filters from '../data/filters';
 import labels from '../data/labels';
 import options from '../data/options';
@@ -17,9 +17,18 @@ import CircularProgress from 'components/CircularProgress'
 import IntlMessages from 'util/IntlMessages';
 import CustomScrollbars from 'util/CustomScrollbars';
 
+let toDos = [];
 class ToDo extends Component {
-
-    onSortEnd = ({oldIndex, newIndex}) => {
+    componentWillMount() {
+        this.props.getAllUsers();
+    }
+    componentWillReceiveProps(nextProps) {
+        console.log('nextProps', nextProps);
+        this.setState({
+            users: nextProps.usersState,
+        })
+    }
+    onSortEnd = ({ oldIndex, newIndex }) => {
         this.setState({
             toDos: arrayMove(this.state.toDos, oldIndex, newIndex),
         });
@@ -89,9 +98,9 @@ class ToDo extends Component {
         let toDos = this.state.allToDos.map((todo) => {
             if (todo.starred) {
                 selectedToDos++;
-                return {...todo, selected: true};
+                return { ...todo, selected: true };
             }
-            return {...todo, selected: false}
+            return { ...todo, selected: false }
         });
         this.setState({
             selectedToDos: selectedToDos,
@@ -105,9 +114,9 @@ class ToDo extends Component {
         let toDos = this.state.allToDos.map((todo) => {
             if (!todo.starred) {
                 selectedToDos++;
-                return {...todo, selected: true};
+                return { ...todo, selected: true };
             }
-            return {...todo, selected: false}
+            return { ...todo, selected: false }
         });
         this.setState({
             selectedToDos: selectedToDos,
@@ -122,9 +131,9 @@ class ToDo extends Component {
         let toDos = this.state.allToDos.map((todo) => {
             if (todo.important) {
                 selectedToDos++;
-                return {...todo, selected: true};
+                return { ...todo, selected: true };
             }
-            return {...todo, selected: false}
+            return { ...todo, selected: false }
         });
         this.setState({
             selectedToDos: selectedToDos,
@@ -139,9 +148,9 @@ class ToDo extends Component {
         let toDos = this.state.allToDos.map((todo) => {
             if (!todo.important) {
                 selectedToDos++;
-                return {...todo, selected: true};
+                return { ...todo, selected: true };
             }
-            return {...todo, selected: false}
+            return { ...todo, selected: false }
         });
         this.setState({
             selectedToDos: selectedToDos,
@@ -155,16 +164,16 @@ class ToDo extends Component {
     onLabelMenuItemSelect = (label) => {
         this.handleRequestClose();
         const toDos = this.state.allToDos.map(todo => {
-                if (todo.selected) {
-                    if (todo.labels.includes(label.id)) {
-                        return {...todo, labels: this.removeLabel(todo, label.id)};
-                    } else {
-                        return {...todo, labels: this.addLabel(todo, label.id)};
-                    }
+            if (todo.selected) {
+                if (todo.labels.includes(label.id)) {
+                    return { ...todo, labels: this.removeLabel(todo, label.id) };
                 } else {
-                    return todo;
+                    return { ...todo, labels: this.addLabel(todo, label.id) };
                 }
+            } else {
+                return todo;
             }
+        }
         );
         this.setState({
             alertMessage: 'Label Updated Successfully',
@@ -174,7 +183,7 @@ class ToDo extends Component {
         });
     };
     handleRequestClose = () => {
-        this.setState({showMessage: false, addTodo: false, labelMenuState: false, optionMenuState: false,});
+        this.setState({ showMessage: false, addTodo: false, labelMenuState: false, optionMenuState: false, });
     };
     onLabelUpdate = (data, label) => {
         if (data.labels.includes(label.id)) {
@@ -184,12 +193,12 @@ class ToDo extends Component {
         }
         this.handleRequestClose();
         const toDos = this.state.allToDos.map(todo => {
-                if (todo.id === data.id) {
-                    return data;
-                } else {
-                    return todo;
-                }
+            if (todo.id === data.id) {
+                return data;
+            } else {
+                return todo;
             }
+        }
         );
 
         this.setState({
@@ -238,18 +247,18 @@ class ToDo extends Component {
     onDeleteToDo = (data) => {
         let selectedToDos = 0;
         const toDos = this.state.allToDos.map(todo => {
-                if (todo.selected) {
-                    selectedToDos++
-                }
-                if (data.id === todo.id) {
-                    if (todo.selected) {
-                        selectedToDos--
-                    }
-                    return {...todo, deleted: true};
-                } else {
-                    return todo;
-                }
+            if (todo.selected) {
+                selectedToDos++
             }
+            if (data.id === todo.id) {
+                if (todo.selected) {
+                    selectedToDos--
+                }
+                return { ...todo, deleted: true };
+            } else {
+                return todo;
+            }
+        }
         );
         this.setState({
             alertMessage: 'ToDo Deleted Successfully',
@@ -286,12 +295,12 @@ class ToDo extends Component {
                     toDos: filterMails
                 });
                 setTimeout(() => {
-                    this.setState({loader: false});
+                    this.setState({ loader: false });
                 }, 1500);
             }
             }>
                 <a href="javascript:void(0)" className={filter.id === this.state.selectedSectionId ? 'active' : ''}>
-                    <i className={`zmdi zmdi-${filter.icon}`}/>
+                    <i className={`zmdi zmdi-${filter.icon}`} />
                     <span>{filter.title}</span>
                 </a>
             </li>
@@ -307,12 +316,12 @@ class ToDo extends Component {
                     toDos: filterMails
                 });
                 setTimeout(() => {
-                    this.setState({loader: false});
+                    this.setState({ loader: false });
                 }, 1500);
             }
             }>
                 <a href="javascript:void(0)">
-                    <i className={`zmdi zmdi-circle text-${label.color}`}/>
+                    <i className={`zmdi zmdi-circle text-${label.color}`} />
                     <span>{label.title}</span>
                 </a>
             </li>
@@ -322,19 +331,19 @@ class ToDo extends Component {
         return <div className="module-side">
             <div className="module-side-header">
                 <div className="module-logo">
-                    <i className="zmdi zmdi-email mr-4"/>
-                    <span><IntlMessages id="sidebar.appModule.toDo"/></span>
+                    <i className="zmdi zmdi-email mr-4" />
+                    <span><IntlMessages id="sidebar.appModule.toDo" /></span>
                 </div>
 
             </div>
             <div className="module-side-content">
                 <CustomScrollbars className="module-side-scroll scrollbar"
-                                  style={{height: this.props.width >= 1200 ? 'calc(100vh - 200px)' : 'calc(100vh - 80px)'}}>
+                    style={{ height: this.props.width >= 1200 ? 'calc(100vh - 200px)' : 'calc(100vh - 80px)' }}>
                     <div className="module-add-task">
                         <Button color="primary" className="btn-block jr-btn"
-                                onClick={() => {
-                                    this.setState({addTodo: true})
-                                }}> <IntlMessages id="todo.addTask"/> </Button>
+                            onClick={() => {
+                                this.setState({ addTodo: true })
+                            }}> <IntlMessages id="todo.addTask" /> </Button>
                     </div>
                     <ul className="module-nav">
 
@@ -346,19 +355,19 @@ class ToDo extends Component {
                         }
                         }>
                             <a href="javascript:void(0)">
-                                <i className="zmdi zmdi-menu"/>
-                                <span><IntlMessages id="todo.all"/></span>
+                                <i className="zmdi zmdi-menu" />
+                                <span><IntlMessages id="todo.all" /></span>
                             </a>
                         </li>
 
                         <li className="module-nav-label">
-                            <IntlMessages id="todo.filters"/>
+                            <IntlMessages id="todo.filters" />
                         </li>
 
                         {this.getNavFilters()}
 
                         <li className="module-nav-label">
-                            <IntlMessages id="todo.labels"/>
+                            <IntlMessages id="todo.labels" />
                         </li>
 
                         {this.getNavLabels()}
@@ -370,7 +379,7 @@ class ToDo extends Component {
     };
     searchTodo = (searchText) => {
         if (searchText === '') {
-            this.setState({toDos: this.state.allToDos.filter((todo) => !todo.deleted)});
+            this.setState({ toDos: this.state.allToDos.filter((todo) => !todo.deleted) });
         } else {
             const searchToDos = this.state.allToDos.filter((todo) =>
                 !todo.deleted && todo.title.toLowerCase().indexOf(searchText.toLowerCase()) > -1);
@@ -379,25 +388,26 @@ class ToDo extends Component {
             });
         }
     };
-    showToDos = ({currentTodo, toDos, conversation, user}) => {
+    showToDos = ({ currentTodo, toDos, conversation, user }) => {
         return currentTodo === null ?
-            <ToDoList toDos={toDos} onSortEnd={this.onSortEnd}
-                      onMarkAsStart={this.onMarkAsStart.bind(this)}
-                      width={this.props.width}
-                      onTodoSelect={this.onTodoSelect.bind(this)}
-                      onTodoChecked={this.onTodoChecked.bind(this)} useDragHandle={true}/>
+            <ToDoList toDos={this.state.users} onSortEnd={this.onSortEnd}
+                onMarkAsStart={this.onMarkAsStart.bind(this)}
+                width={this.props.width}
+                onTodoSelect={this.onTodoSelect.bind(this)}
+                onTodoChecked={this.onTodoChecked.bind(this)} useDragHandle={true} />
             :
             <ToDoDetail todo={currentTodo} user={user}
-                        width={this.props.width}
-                        conversation={conversation}
-                        onLabelUpdate={this.onLabelUpdate.bind(this)}
-                        onToDoUpdate={this.onToDoUpdate.bind(this)}
-                        onDeleteToDo={this.onDeleteToDo.bind(this)}/>
+                width={this.props.width}
+                conversation={conversation}
+                onLabelUpdate={this.onLabelUpdate.bind(this)}
+                onToDoUpdate={this.onToDoUpdate.bind(this)}
+                onDeleteToDo={this.onDeleteToDo.bind(this)} />
     };
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
+            users: [],
             searchTodo: '',
             alertMessage: '',
             loader: false,
@@ -414,13 +424,17 @@ class ToDo extends Component {
             selectedToDos: 0,
             labelMenuState: false,
             optionMenuState: false,
-            toDos: toDos,
+            toDos: [],
             filter: -1,
             todoConversation,
             conversation: null
         }
     }
 
+    componentDidMount() {
+        // set state here
+        console.log('updated component', this.props);
+    }
     getToDoConversation(id) {
         return todoConversation.find((conversation) => conversation.id === id);
     }
@@ -429,18 +443,18 @@ class ToDo extends Component {
         data.selected = !data.selected;
         let selectedToDos = 0;
         const toDos = this.state.toDos.map(todo => {
+            if (todo.selected) {
+                selectedToDos++;
+            }
+            if (todo.id === data.id) {
                 if (todo.selected) {
                     selectedToDos++;
                 }
-                if (todo.id === data.id) {
-                    if (todo.selected) {
-                        selectedToDos++;
-                    }
-                    return data;
-                } else {
-                    return todo;
-                }
+                return data;
+            } else {
+                return todo;
             }
+        }
         );
         this.setState({
             selectedToDos: selectedToDos,
@@ -480,7 +494,7 @@ class ToDo extends Component {
             conversation: conversationList
         });
         setTimeout(() => {
-            this.setState({loader: false});
+            this.setState({ loader: false });
         }, 1500);
     }
 
@@ -508,8 +522,7 @@ class ToDo extends Component {
     }
 
     render() {
-        const {selectedToDos, loader, drawerState, currentTodo, toDos, conversation, user, alertMessage, showMessage, optionMenuState, labelMenuState} = this.state;
-
+        const { selectedToDos, loader, drawerState, currentTodo, toDos, conversation, user, alertMessage, showMessage, optionMenuState, labelMenuState } = this.state;
         return (
             <div className="app-wrapper">
                 <div className="animated slideInUpTiny animation-duration-3">
@@ -521,7 +534,7 @@ class ToDo extends Component {
                                 enableDragHandle={true}
                                 open={drawerState}
                                 onOpenChange={this.onToggleDrawer.bind(this)}
-                                sidebar={this.ToDoSideBar()}/>
+                                sidebar={this.ToDoSideBar()} />
                         </div>
                         <div className="app-module-sidenav d-none d-xl-flex">
                             {this.ToDoSideBar()}
@@ -531,12 +544,12 @@ class ToDo extends Component {
                             <div className="module-box-header">
 
                                 <span className="icon-btn drawer-btn d-flex d-xl-none"
-                                      onClick={this.onToggleDrawer.bind(this)}>
-                                    <i className="zmdi zmdi-menu"/>
+                                    onClick={this.onToggleDrawer.bind(this)}>
+                                    <i className="zmdi zmdi-menu" />
                                 </span>
                                 <AppModuleHeader placeholder="Search To Do" user={this.state.user}
-                                                 onChange={this.updateSearch.bind(this)}
-                                                 value={this.state.searchTodo}/>
+                                    onChange={this.updateSearch.bind(this)}
+                                    value={this.state.searchTodo} />
                             </div>
                             <div className="module-box-content">
                                 {this.state.currentTodo === null ?
@@ -545,10 +558,10 @@ class ToDo extends Component {
                                         <div className="form-control-checkbox d-flex">
                                             <div className="form-checkbox">
                                                 <input type="checkbox"
-                                                       checked={selectedToDos > 0}
-                                                       onChange={this.onAllTodoSelect.bind(this)}/>
+                                                    checked={selectedToDos > 0}
+                                                    onChange={this.onAllTodoSelect.bind(this)} />
                                                 <span className="check">
-                                                    <i className="zmdi zmdi-check zmdi-hc-lg"/>
+                                                    <i className="zmdi zmdi-check zmdi-hc-lg" />
                                                 </span>
                                             </div>
                                         </div>
@@ -558,47 +571,47 @@ class ToDo extends Component {
                                             isOpen={optionMenuState}
                                             toggle={this.onOptionMenuToggle.bind(this)}>
                                             <DropdownToggle tag="span" onClick={this.onOptionMenuToggle.bind(this)}
-                                                            caret>
+                                                caret>
                                                 <span className="px-2"> {this.state.optionName}</span>
                                             </DropdownToggle>
 
                                             <DropdownMenu>
                                                 {options.map(option =>
                                                     <DropdownItem key={option.title}
-                                                                  onClick={this.onOptionMenuItemSelect.bind(this, option)}>
+                                                        onClick={this.onOptionMenuItemSelect.bind(this, option)}>
                                                         {option.title}
                                                     </DropdownItem>,
                                                 )}
                                             </DropdownMenu>
                                         </Dropdown>
 
-                                        {( selectedToDos > 0) &&
-                                        <Dropdown className="" isOpen={labelMenuState}
-                                                  toggle={this.onLabelToggle.bind(this)}>
-                                            <DropdownToggle tag="span" onClick={this.onLabelToggle.bind(this)}>
-                                                <span className="icon-btn"><i className="zmdi zmdi-label-alt"/></span>
-                                            </DropdownToggle>
+                                        {(selectedToDos > 0) &&
+                                            <Dropdown className="" isOpen={labelMenuState}
+                                                toggle={this.onLabelToggle.bind(this)}>
+                                                <DropdownToggle tag="span" onClick={this.onLabelToggle.bind(this)}>
+                                                    <span className="icon-btn"><i className="zmdi zmdi-label-alt" /></span>
+                                                </DropdownToggle>
 
-                                            <DropdownMenu>
-                                                {labels.map(label =>
-                                                    <DropdownItem key={label.title}
-                                                                  onClick={this.onLabelMenuItemSelect.bind(this, label)}>
-                                                        {label.title}
-                                                    </DropdownItem>,
-                                                )}
-                                            </DropdownMenu>
-                                        </Dropdown>
+                                                <DropdownMenu>
+                                                    {labels.map(label =>
+                                                        <DropdownItem key={label.title}
+                                                            onClick={this.onLabelMenuItemSelect.bind(this, label)}>
+                                                            {label.title}
+                                                        </DropdownItem>,
+                                                    )}
+                                                </DropdownMenu>
+                                            </Dropdown>
                                         }
                                     </div>
                                     :
                                     <div className="module-box-topbar">
                                         <span className="icon-btn"
-                                              onClick={() => {
-                                                  this.setState({
-                                                      currentTodo: null
-                                                  })
-                                              }}>
-                                            <i className="zmdi zmdi-arrow-back"/>
+                                            onClick={() => {
+                                                this.setState({
+                                                    currentTodo: null
+                                                })
+                                            }}>
+                                            <i className="zmdi zmdi-arrow-back" />
                                         </span>
                                     </div>
                                 }
@@ -606,8 +619,8 @@ class ToDo extends Component {
 
                                 {loader ?
                                     <div className="loader-view"
-                                         style={{height: this.props.width >= 1200 ? 'calc(100vh - 265px)' : 'calc(100vh - 245px)'}}>
-                                        <CircularProgress/>
+                                        style={{ height: this.props.width >= 1200 ? 'calc(100vh - 265px)' : 'calc(100vh - 245px)' }}>
+                                        <CircularProgress />
                                     </div> :
                                     this.showToDos(this.state)
                                 }
@@ -615,7 +628,7 @@ class ToDo extends Component {
                         </div>
                     </div>
                     {showMessage && NotificationManager.success(alertMessage, this.handleRequestClose())}
-                    <NotificationContainer/>
+                    <NotificationContainer />
 
                 </div>
             </div>
@@ -623,8 +636,12 @@ class ToDo extends Component {
     }
 }
 
-const mapStateToProps = ({settings}) => {
-    const {width} = settings;
-    return {width}
+const mapStateToProps = ({ settings, users }) => {
+    const { width } = settings;
+    const usersState = users;
+    return { width, usersState }
 };
-export default connect(mapStateToProps)(ToDo);
+const mapDispatchToProps = dispatch => ({
+    getAllUsers: () => dispatch(getAllUsers()),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(ToDo);

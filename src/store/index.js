@@ -3,37 +3,38 @@ import reducers from '../reducers/index';
 import createHistory from 'history/createHashHistory';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from '../sagas/index';
+import thunk from 'redux-thunk';
 import { routerMiddleware } from 'react-router-redux';
 
 
-const history = createHistory ();
-const routeMiddleware = routerMiddleware (history);
-const sagaMiddleware = createSagaMiddleware ();
+const history = createHistory();
+const routeMiddleware = routerMiddleware(history);
+const sagaMiddleware = createSagaMiddleware();
 const loadFromLocalStorage = () => {
-    try{
+    try {
         const serializedState = localStorage.getItem('state')
-        if(serializedState === null) return undefined
+        if (serializedState === null) return undefined
         return JSON.parse(serializedState)
     }
-    catch(e){
+    catch (e) {
         console.log(e)
         return undefined
     }
 }
-const middlewares = [sagaMiddleware, routeMiddleware];
+const middlewares = [sagaMiddleware, routeMiddleware, thunk];
 
 const persistedState = loadFromLocalStorage()
-export default function configureStore () {
-    const store = createStore (reducers, persistedState,
-        compose (applyMiddleware (...middlewares)));
+export default function configureStore() {
+    const store = createStore(reducers, persistedState,
+        compose(applyMiddleware(...middlewares)));
 
-    sagaMiddleware.run (rootSaga);
+    sagaMiddleware.run(rootSaga);
 
     if (module.hot) {
         // Enable Webpack hot module replacement for reducers
-        module.hot.accept ('../reducers/index', () => {
-            const nextRootReducer = require ('../reducers/index');
-            store.replaceReducer (nextRootReducer);
+        module.hot.accept('../reducers/index', () => {
+            const nextRootReducer = require('../reducers/index');
+            store.replaceReducer(nextRootReducer);
         });
     }
     return store;

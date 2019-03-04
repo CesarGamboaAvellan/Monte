@@ -80,8 +80,6 @@ class SidenavContent extends Component {
         return (
             <CustomScrollbars className="scrollbar dashboard-primary" style={{ height: 'calc(100vh - 70px)' }}>
                 <ul className="nav-menu">
-
-                    <li className="nav-header"><IntlMessages id="sidebar.main" /></li>
                     <li className="menu no-arrow">
                         <NavLink to="/app/sample-page">
                             <i className="zmdi zmdi-home zmdi-hc-fw orange-color" />
