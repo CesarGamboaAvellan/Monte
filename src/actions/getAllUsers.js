@@ -19,7 +19,6 @@ const getData = async () => {
     password: '123qwe',
     rememberClient: true,
   }).then(authUser => {
-    console.log(authUser)
     let config = {
       headers: {
         "Authorization": `Bearer ${authUser.data.result.accessToken}`,

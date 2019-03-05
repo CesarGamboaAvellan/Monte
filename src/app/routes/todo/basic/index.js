@@ -23,7 +23,6 @@ class ToDo extends Component {
         this.props.getAllUsers();
     }
     componentWillReceiveProps(nextProps) {
-        console.log('nextProps', nextProps);
         this.setState({
             users: nextProps.usersState,
         })
@@ -431,10 +430,6 @@ class ToDo extends Component {
         }
     }
 
-    componentDidMount() {
-        // set state here
-        console.log('updated component', this.props);
-    }
     getToDoConversation(id) {
         return todoConversation.find((conversation) => conversation.id === id);
     }
@@ -636,7 +631,7 @@ class ToDo extends Component {
     }
 }
 
-const mapStateToProps = ({ settings, users }) => {
+const mapStateToProps = ({ settings, users, auth }) => {
     const { width } = settings;
     const usersState = users;
     return { width, usersState }
