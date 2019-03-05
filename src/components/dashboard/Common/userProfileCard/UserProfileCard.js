@@ -16,7 +16,7 @@ const UserProfileCard = (props) => {
                     {/* <span className="icon-btn size-30"><i className="zmdi zmdi-more-vert zmdi-hc-lg"/></span> */}
                 </div>
 
-                <Gravatar email='default.com'
+                <Gravatar email={userData.emailAddress || 'default.com'}
                     className="pointer user-avatar size-50" rating="pg" default='mm' />
 
                 <div className="jr-card-hd-content">
