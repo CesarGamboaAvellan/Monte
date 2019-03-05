@@ -542,7 +542,7 @@ class ToDo extends Component {
                                     onClick={this.onToggleDrawer.bind(this)}>
                                     <i className="zmdi zmdi-menu" />
                                 </span>
-                                <AppModuleHeader placeholder="Search To Do" user={this.state.user}
+                                <AppModuleHeader placeholder="Search User" user={this.state.user}
                                     onChange={this.updateSearch.bind(this)}
                                     value={this.state.searchTodo} />
                             </div>

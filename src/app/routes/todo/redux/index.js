@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import Drawer from 'rc-drawer';
-import {Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 
 import filters from '../data/filters';
 import labels from '../data/labels';
@@ -46,8 +46,8 @@ import CustomScrollbars from 'util/CustomScrollbars';
 
 
 class ToDoWithRedux extends Component {
-    onSortEnd = ({oldIndex, newIndex}) => {
-        this.props.onSortEnd({oldIndex, newIndex});
+    onSortEnd = ({ oldIndex, newIndex }) => {
+        this.props.onSortEnd({ oldIndex, newIndex });
     };
 
     onLabelToggle = event => {
@@ -90,7 +90,7 @@ class ToDoWithRedux extends Component {
 
     };
     onLabelUpdate = (data, label) => {
-        this.props.onLabelUpdate({data, label});
+        this.props.onLabelUpdate({ data, label });
     };
     onToDoUpdate = (data) => {
         this.props.onToDoUpdate(data);
@@ -161,7 +161,7 @@ class ToDoWithRedux extends Component {
             }
             }>
                 <a href="javascript:void(0)" className={filter.id === this.props.selectedSectionId ? 'active' : ''}>
-                    <i className={`zmdi zmdi-${filter.icon}`}/>
+                    <i className={`zmdi zmdi-${filter.icon}`} />
                     <span>{filter.title}</span>
                 </a>
             </li>
@@ -177,7 +177,7 @@ class ToDoWithRedux extends Component {
             }
             }>
                 <a href="javascript:void(0)">
-                    <i className={`zmdi zmdi-circle text-${label.color}`}/>
+                    <i className={`zmdi zmdi-circle text-${label.color}`} />
                     <span>{label.title}</span>
                 </a>
             </li>
@@ -187,18 +187,18 @@ class ToDoWithRedux extends Component {
         return <div className="module-side">
             <div className="module-side-header">
                 <div className="module-logo">
-                    <i className="zmdi zmdi-email mr-4"/>
-                    <span><IntlMessages id="sidebar.appModule.toDo"/></span>
+                    <i className="zmdi zmdi-email mr-4" />
+                    <span><IntlMessages id="sidebar.appModule.toDo" /></span>
                 </div>
 
             </div>
             <div className="module-side-content">
                 <CustomScrollbars className="module-side-scroll scrollbar"
-                                  style={{height: this.props.width >= 1200 ? 'calc(100vh - 200px)' : 'calc(100vh - 80px)'}}>
+                    style={{ height: this.props.width >= 1200 ? 'calc(100vh - 200px)' : 'calc(100vh - 80px)' }}>
                     <div className="module-add-task">
                         <Button color="primary" className="btn-block jr-btn" onClick={() => {
-                            this.setState({addTodo: true})
-                        }}> <IntlMessages id="todo.addTask"/> </Button>
+                            this.setState({ addTodo: true })
+                        }}> <IntlMessages id="todo.addTask" /> </Button>
                     </div>
                     <ul className="module-nav">
 
@@ -207,19 +207,19 @@ class ToDoWithRedux extends Component {
                         }
                         }>
                             <a href="javascript:void(0)">
-                                <i className="zmdi zmdi-menu"/>
-                                <span><IntlMessages id="todo.all"/></span>
+                                <i className="zmdi zmdi-menu" />
+                                <span><IntlMessages id="todo.all" /></span>
                             </a>
                         </li>
 
                         <li className="module-nav-label">
-                            <IntlMessages id="todo.filters"/>
+                            <IntlMessages id="todo.filters" />
                         </li>
 
                         {this.getNavFilters()}
 
                         <li className="module-nav-label">
-                            <IntlMessages id="todo.labels"/>
+                            <IntlMessages id="todo.labels" />
                         </li>
 
                         {this.getNavLabels()}
@@ -229,20 +229,20 @@ class ToDoWithRedux extends Component {
             </div>
         </div>
     };
-    showToDos = ({currentTodo, toDos, conversation, user}) => {
+    showToDos = ({ currentTodo, toDos, conversation, user }) => {
         return currentTodo === null ?
             <ToDoList toDos={toDos} onSortEnd={this.onSortEnd}
-                      onTodoSelect={this.onTodoSelect.bind(this)}
-                      width={this.props.width}
-                      onMarkAsStart={this.onMarkAsStart.bind(this)}
-                      onTodoChecked={this.onTodoChecked.bind(this)} useDragHandle={true}/>
+                onTodoSelect={this.onTodoSelect.bind(this)}
+                width={this.props.width}
+                onMarkAsStart={this.onMarkAsStart.bind(this)}
+                onTodoChecked={this.onTodoChecked.bind(this)} useDragHandle={true} />
             :
             <ToDoDetail todo={currentTodo} user={user}
-                        conversation={conversation}
-                        width={this.props.width}
-                        onLabelUpdate={this.onLabelUpdate.bind(this)}
-                        onToDoUpdate={this.onToDoUpdate.bind(this)}
-                        onDeleteToDo={this.onDeleteToDo.bind(this)}/>;
+                conversation={conversation}
+                width={this.props.width}
+                onLabelUpdate={this.onLabelUpdate.bind(this)}
+                onToDoUpdate={this.onToDoUpdate.bind(this)}
+                onDeleteToDo={this.onDeleteToDo.bind(this)} />;
     };
 
     constructor() {
@@ -262,7 +262,7 @@ class ToDoWithRedux extends Component {
     }
 
     render() {
-        const {drawerState, selectedToDos, loader, currentTodo, toDos, conversation, user, alertMessage, showMessage, optionMenuState, labelMenuState} = this.props;
+        const { drawerState, selectedToDos, loader, currentTodo, toDos, conversation, user, alertMessage, showMessage, optionMenuState, labelMenuState } = this.props;
 
         return (
             <div className="app-wrapper">
@@ -275,7 +275,7 @@ class ToDoWithRedux extends Component {
                                 enableDragHandle={true}
                                 open={drawerState}
                                 onOpenChange={this.onToggleDrawer.bind(this)}
-                                sidebar={this.ToDoSideBar()}/>
+                                sidebar={this.ToDoSideBar()} />
 
                         </div>
                         <div className="app-module-sidenav d-none d-xl-flex">
@@ -286,12 +286,12 @@ class ToDoWithRedux extends Component {
                             <div className="module-box-header">
 
                                 <span className="icon-btn drawer-btn d-flex d-xl-none"
-                                      onClick={this.onToggleDrawer.bind(this)}>
-                                    <i className="zmdi zmdi-menu"/>
+                                    onClick={this.onToggleDrawer.bind(this)}>
+                                    <i className="zmdi zmdi-menu" />
                                 </span>
-                                <AppModuleHeader placeholder="Search To Do" user={this.props.user}
-                                                 onChange={this.updateSearch.bind(this)}
-                                                 value={this.props.searchTodo}/>
+                                <AppModuleHeader placeholder="Search an user" user={this.props.user}
+                                    onChange={this.updateSearch.bind(this)}
+                                    value={this.props.searchTodo} />
                             </div>
                             <div className="module-box-content">
                                 {this.props.currentTodo === null ?
@@ -300,11 +300,11 @@ class ToDoWithRedux extends Component {
                                         <div className="form-control-checkbox d-flex">
                                             <div className="form-checkbox">
                                                 <input type="checkbox"
-                                                       checked={selectedToDos > 0}
-                                                       onChange={this.onAllTodoSelect.bind(this)}/>
+                                                    checked={selectedToDos > 0}
+                                                    onChange={this.onAllTodoSelect.bind(this)} />
 
                                                 <span className="check">
-                                                    <i className="zmdi zmdi-check zmdi-hc-lg"/>
+                                                    <i className="zmdi zmdi-check zmdi-hc-lg" />
                                                 </span>
                                             </div>
                                         </div>
@@ -320,41 +320,41 @@ class ToDoWithRedux extends Component {
                                             <DropdownMenu>
                                                 {options.map(option =>
                                                     <DropdownItem key={option.title}
-                                                                  onClick={this.onOptionMenuItemSelect.bind(this, option)}>
+                                                        onClick={this.onOptionMenuItemSelect.bind(this, option)}>
                                                         {option.title}
                                                     </DropdownItem>,
                                                 )}
                                             </DropdownMenu>
                                         </Dropdown>
 
-                                        <div classID="toolbar-separator"/>
+                                        <div classID="toolbar-separator" />
 
-                                        {( selectedToDos > 0) &&
-                                        <Dropdown
-                                            className="d-flex flex-column justify-content-center"
-                                            isOpen={labelMenuState}
-                                            toggle={this.onLabelToggle.bind(this)}>
-                                            <DropdownToggle tag="span">
-                                                <span className="icon-btn"><i className="zmdi zmdi-label-alt"/></span>
-                                            </DropdownToggle>
+                                        {(selectedToDos > 0) &&
+                                            <Dropdown
+                                                className="d-flex flex-column justify-content-center"
+                                                isOpen={labelMenuState}
+                                                toggle={this.onLabelToggle.bind(this)}>
+                                                <DropdownToggle tag="span">
+                                                    <span className="icon-btn"><i className="zmdi zmdi-label-alt" /></span>
+                                                </DropdownToggle>
 
-                                            <DropdownMenu>
-                                                {labels.map(label =>
-                                                    <DropdownItem key={label.title}
-                                                                  onClick={this.onLabelMenuItemSelect.bind(this, label)}>
-                                                        {label.title}
-                                                    </DropdownItem>,
-                                                )}
-                                            </DropdownMenu>
-                                        </Dropdown>}
+                                                <DropdownMenu>
+                                                    {labels.map(label =>
+                                                        <DropdownItem key={label.title}
+                                                            onClick={this.onLabelMenuItemSelect.bind(this, label)}>
+                                                            {label.title}
+                                                        </DropdownItem>,
+                                                    )}
+                                                </DropdownMenu>
+                                            </Dropdown>}
                                     </div>
                                     :
                                     <div className="module-box-topbar">
                                         <span className="icon-btn"
-                                              onClick={() => {
-                                                  this.props.setCurrentToDoNull();
-                                              }}>
-                                            <i className="zmdi zmdi-arrow-back"/>
+                                            onClick={() => {
+                                                this.props.setCurrentToDoNull();
+                                            }}>
+                                            <i className="zmdi zmdi-arrow-back" />
                                         </span>
                                     </div>
                                 }
@@ -362,8 +362,8 @@ class ToDoWithRedux extends Component {
 
                                 {loader ?
                                     <div className="loader-view"
-                                         style={{height: this.props.width >= 1200 ? 'calc(100vh - 265px)' : 'calc(100vh - 245px)'}}>
-                                        <CircularProgress/>
+                                        style={{ height: this.props.width >= 1200 ? 'calc(100vh - 265px)' : 'calc(100vh - 245px)' }}>
+                                        <CircularProgress />
                                     </div> :
                                     this.showToDos(this.props)
                                 }
@@ -372,7 +372,7 @@ class ToDoWithRedux extends Component {
                     </div>
 
                     {showMessage && NotificationManager.success(alertMessage, this.handleRequestClose())}
-                    <NotificationContainer/>
+                    <NotificationContainer />
 
                 </div>
             </div>
@@ -380,8 +380,8 @@ class ToDoWithRedux extends Component {
     }
 }
 
-const mapStateToProps = ({toDo, settings}) => {
-    const {width} = settings;
+const mapStateToProps = ({ toDo, settings }) => {
+    const { width } = settings;
     const {
         searchTodo,
         alertMessage,
