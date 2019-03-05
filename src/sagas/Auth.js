@@ -23,22 +23,18 @@ import {
     userGoogleSignInSuccess,
     userTwitterSignInSuccess
 } from '../actions/Auth';
+import { ADMIN_CREDENTIALS, ADMIN_USER_NAME } from '../../secrets_config';
+import { REGULAR_USER } from '../constants/UserTypes';
+import { config } from '../services/helper';
 
 const getUser = async (loggedUser) => {
     return http.post('/TokenAuth/Authenticate', {
-        userNameOrEmailAddress: 'admin',
-        password: '123qwe',
+        userNameOrEmailAddress: ADMIN_USER_NAME,
+        password: ADMIN_CREDENTIALS,
         rememberClient: true,
     }).then(authUser => {
-        let config = {
-            headers: {
-                "Authorization": `Bearer ${authUser.data.result.accessToken}`,
-            },
-            params: {
-                id: loggedUser.data.result.userId,
-            }
-        }
-        return http.get('/services/app/User/Get', config
+        return http.get('/services/app/User/Get', config(authUser.data.result.accessToken,
+            loggedUser.data.result.userId)
         ).then(user => {
             localStorage.setItem('user', user.data.result.emailAddress)
             return user;
@@ -51,27 +47,22 @@ const getUser = async (loggedUser) => {
 }
 const createUserWithEmailPasswordRequest = async (email, password, name) => {
     return http.post('/TokenAuth/Authenticate', {
-        userNameOrEmailAddress: 'admin',
-        password: '123qwe',
+        userNameOrEmailAddress: ADMIN_USER_NAME,
+        password: ADMIN_CREDENTIALS,
         rememberClient: true,
     })
         .then(authUser => {
-            let config = {
-                headers: {
-                    "Authorization": `Bearer ${authUser.data.result.accessToken}`,
-                }
-            }
             return http.post('/services/app/User/Create', {
                 userName: name,
-                name: "test",
-                surname: "test",
+                name,
+                surname: name,
                 emailAddress: email,
                 isActive: true,
                 roleNames: [
-                    "admin"
+                    REGULAR_USER
                 ],
                 "password": password
-            }, config
+            }, config(authUser.data.result.accessToken)
             ).then(user => user)
                 .catch(error => console.log(error))
         })
@@ -205,7 +196,6 @@ function* signInUserWithEmailPassword({ payload }) {
     const { email, password } = payload;
     try {
         const signInUser = yield call(signInUserWithEmailPasswordRequest, email, password);
-        console.log('signInUser', signInUser);
         if (signInUser.data) {
             localStorage.setItem('user_id', signInUser.data.result.userId);
             localStorage.setItem('accessToken', signInUser.data.result.accessToken);
