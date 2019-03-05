@@ -22,14 +22,14 @@ class SamplePage extends React.Component {
         return (
             <div className="app-wrapper">
                 <div className="d-flex justify-content-center margin-elements">
-                    <UserProfileCard userData={data}/>
-                    </div>
-                    <div className="d-flex justify-content-center margin-elements">
-                    <ContactCard basicInformation={contactData} 
+                    <UserProfileCard userData={data} addStyle="min-height-boxes" />
+                </div>
+                <div className="d-flex justify-content-center margin-elements">
+                    <ContactCard basicInformation={contactData}
                         buttonText="Edit basic information"
                     />
-                        </div>
-               
+                </div>
+
 
             </div>
         );
