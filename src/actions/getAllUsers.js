@@ -1,5 +1,6 @@
 import { GET_ALL_USERS } from '../constants/ActionTypes';
 import http from '../services/api';
+import { ADMIN_CREDENTIALS, ADMIN_USER_NAME } from '../../secrets_config';
 
 export const getAllUsers = () => {
   return (dispatch) => {
@@ -15,8 +16,8 @@ export const getAllUsers = () => {
 };
 const getData = async () => {
   const data = await http.post('/TokenAuth/Authenticate', {
-    userNameOrEmailAddress: 'admin',
-    password: '123qwe',
+    userNameOrEmailAddress: ADMIN_USER_NAME,
+    password: ADMIN_CREDENTIALS,
     rememberClient: true,
   }).then(authUser => {
     let config = {
