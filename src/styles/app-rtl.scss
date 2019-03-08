@@ -12,8 +12,11 @@
 .rtl .social-link {
   padding-right: 0;
 }
+// .dashboard-primary{
+//   background-color: rgb(73, 75, 110) !important;
+// }
 .dashboard-primary{
-  background-color: rgb(73, 75, 110) !important;
+  background-color: $white;
 }
 .rtl .zmdi-hc-ul {
   margin-left: 0;

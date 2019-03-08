@@ -1,20 +1,41 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import ContainerHeader from 'components/ContainerHeader/index';
 import IntlMessages from 'util/IntlMessages';
+import UserProfileCard from '../../../components/dashboard/Common/userProfileCard/UserProfileCard';
 
-class SamplePage extends React.Component {
+class Dashboard extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: {
+                name: '',
+                roleTitle: '',
+                profileUrl: '',
+                description: '',
+            }
+        }
+    }
+    componentDidMount = () => {
+        if (this.props.userLoggedIn) {
+            const user = this.props.userLoggedIn;
+            this.setState({
+                user: user.authUser.data.result,
+            })
+        }
+    }
 
     render() {
         return (
             <div className="app-wrapper">
-                <ContainerHeader match={this.props.match} title={<IntlMessages id="pages.samplePage"/>}/>
-                <div className="d-flex justify-content-center">
-                    <h1>Index here</h1>
-                </div>
-
+                <ContainerHeader match={this.props.match} title={<IntlMessages id="pages.samplePage" />} />
+                <UserProfileCard userData={this.state.user} addStyle="max-width-small-boxes" />
             </div>
         );
     }
 }
-
-export default SamplePage;
+const mapStateToProps = ({ auth }) => {
+    const userLoggedIn = auth;
+    return { userLoggedIn }
+};
+export default connect(mapStateToProps)(Dashboard);
