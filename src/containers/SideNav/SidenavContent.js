@@ -75,48 +75,47 @@ class SidenavContent extends Component {
         return null;
     }
     render() {
-        const userType = (localStorage.getItem('user') === ('admin@defaulttenant.com')) ? 'admin' : 'regular';
 
         return (
             <CustomScrollbars className="scrollbar dashboard-primary" style={{ height: 'calc(100vh - 70px)' }}>
                 <ul className="nav-menu">
 
                     <li className="menu no-arrow">
-                        <NavLink to="/app/sample-page">
-                            <i className="zmdi zmdi-home zmdi-hc-fw orange-color" />
+                        <NavLink to="/app/sample-page" className="nav-link">
+                            <i className="zmdi zmdi-home zmdi-hc-fw nav-text" />
                             <span className="nav-text"><IntlMessages id="pages.samplePage" /> </span>
                         </NavLink>
-                        <NavLink to="/app/domains">
-                            <i className="zmdi zmdi-rss zmdi-hc-fw orange-color" />
+                        <NavLink to="/app/domains" className="nav-link">
+                            <i className="zmdi zmdi-rss zmdi-hc-fw nav-text" />
                             <span className="nav-text"><IntlMessages id="nav.Domains" /> </span>
                         </NavLink>
-                        <NavLink to="/app/timeline">
-                            <i className="zmdi zmdi-time zmdi-hc-fw orange-color" />
+                        <NavLink to="/app/timeline" className="nav-link">
+                            <i className="zmdi zmdi-time zmdi-hc-fw nav-text" />
                             <span className="nav-text"><IntlMessages id="nav.TimeLine" /> </span>
                         </NavLink>
-                        <li className="menu">
+                        <li className="menu" >
                             <a role="button" href="javascript:void(0)">
-                                <i className="zmdi zmdi-account zmdi-hc-fw orange-color" />
+                                <i className="zmdi zmdi-account zmdi-hc-fw nav-text" />
                                 <span className="nav-text">
                                     <IntlMessages id="nav.Admin" />
                                 </span>
                             </a>
                             <ul className="sub-menu">
                                 <li>
-                                    <NavLink className="prepend-icon" to="/app/users">
-                                        <i className="zmdi zmdi-account zmdi-hc-fw orange-color" />
+                                    <NavLink className="prepend-icon nav-link" to="/app/users">
+                                        <i className="zmdi zmdi-account zmdi-hc-fw" />
                                         <span className="nav-text"><IntlMessages id="nav.users" /> </span>
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink className="prepend-icon" to="/app/dashboard/news">
-                                        <i className="zmdi zmdi-account zmdi-hc-fw orange-color" />
+                                    <NavLink className="prepend-icon nav-link" to="/app/roles">
+                                        <i className="zmdi zmdi-account zmdi-hc-fw" />
                                         <span className="nav-text"><IntlMessages id="nav.roles" /></span>
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink className="prepend-icon" to="/app/dashboard/intranet">
-                                        <i className="zmdi zmdi-account zmdi-hc-fw orange-color" />
+                                    <NavLink className="prepend-icon nav-link" to="/app/dashboard/intranet">
+                                        <i className="zmdi zmdi-account zmdi-hc-fw" />
                                         <span className="nav-text"><IntlMessages
                                             id="nav.settings" /></span>
                                     </NavLink>

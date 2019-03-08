@@ -5,3 +5,4 @@ export const timelineRoute = '/timeline';
 export const profileRoute = '/profile';
 export const adminZone = '/admin';
 export const userList = '/users';
+export const roleList = '/roles';
