@@ -7,9 +7,9 @@ class SamplePage extends React.Component {
     render() {
         return (
             <div className="app-wrapper">
-                <ContainerHeader match={this.props.match} title={<IntlMessages id="pages.samplePage"/>}/>
+                <ContainerHeader match={this.props.match} title={<IntlMessages id="pages.samplePage" />} />
                 <div className="d-flex justify-content-center">
-                    <h1>Admin Zone</h1>
+                    <h1>Administration</h1>
                 </div>
 
             </div>

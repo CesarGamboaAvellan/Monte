@@ -32,6 +32,10 @@ class UserInfo extends React.Component {
                     <i className="zmdi zmdi-face zmdi-hc-fw mr-1" />
                     <IntlMessages id="popup.profile" />
                 </Link>
+                <Link to="/app/profile" className="dropdown-item text-muted" >
+                    <i className="zmdi zmdi-key zmdi-hc-fw mr-1" />
+                    <IntlMessages id="popup.changePassword" />
+                </Link>
                 <a className="dropdown-item text-muted" href="javascript:void(0)">
                     <i className="zmdi zmdi-settings zmdi-hc-fw mr-1" />
                     <IntlMessages id="popup.setting" />
