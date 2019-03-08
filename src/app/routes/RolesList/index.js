@@ -1,20 +1,38 @@
 import React from 'react';
-import ContainerHeader from 'components/ContainerHeader/index';
-import IntlMessages from 'util/IntlMessages';
-import Table from '../../../components/Table/basic/index';
+import { connect } from 'react-redux'
+import Table from '../../../components/Tables/TableRoles';
+import { getAllRoles } from '../../../actions/getAllRoles';
 
 class RolesList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: ''
+    }
+  }
+  componentDidMount = () => {
+    this.props.getAllRoles();
+    this.setState({
+      data: this.props.roles
+    });
+  }
 
   render() {
     return (
       <div className="app-wrapper">
+        <h1>This is getting the roles from our database, will add a button to add new roles</h1>
         <div className="d-flex justify-content-center">
-          <Table selectedWidth="width-100" />
+          <Table data={this.state.data} selectedWidth="width-100" />
         </div>
 
       </div>
     );
   }
 }
-
-export default RolesList;
+const mapDispatchToProps = dispatch => ({
+  getAllRoles: () => dispatch(getAllRoles()),
+});
+const mapStateToProps = ({ roles }) => {
+  return { roles }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(RolesList);

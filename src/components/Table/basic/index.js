@@ -15,7 +15,7 @@ const BasicTables = (props) => {
                 <CardBox styleName="col-12" cardStyle="p-0 overflow-hidden"
                     heading={<IntlMessages id="table.Roles" />}
                     headerOutside>
-                    <BasicTable />
+                    <BasicTable data={props.data} />
                 </CardBox>
             </div>
 
