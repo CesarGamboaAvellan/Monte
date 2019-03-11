@@ -7,22 +7,26 @@ class RolesList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: ''
+      data: []
     }
   }
-  componentDidMount = () => {
+  componentWillMount() {
     this.props.getAllRoles();
+  }
+  componentWillReceiveProps = (nextProps) => {
     this.setState({
-      data: this.props.roles
+      data: nextProps.roles,
     });
   }
 
   render() {
+    console.log('data state', this.state.data)
     return (
       <div className="app-wrapper">
-        <h1>This is getting the roles from our database, will add a button to add new roles</h1>
         <div className="d-flex justify-content-center">
-          <Table data={this.state.data} selectedWidth="width-100" />
+          {
+            this.state.data.length ? <Table data={this.props.roles} selectedWidth="width-100" /> : <h1>Loading</h1>
+          }
         </div>
 
       </div>

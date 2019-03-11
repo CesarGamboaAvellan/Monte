@@ -5,13 +5,12 @@ import { Table, Button } from 'reactstrap';
 
 
 const BasicTable = (props) => {
-  console.group('props in table', props.data);
   return (
     <CardBox styleName="col-12" cardStyle="p-0 overflow-hidden"
       heading={<IntlMessages id="table.Roles" />}
       headerOutside>
-      <div className="table-responsive-material">
-        <Table>
+      <div>
+        <Table hover size="sm">
           <thead>
             <tr className="gray-color">
               {/* {
