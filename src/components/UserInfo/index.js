@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { userSignOut } from 'actions/Auth';
 import IntlMessages from 'util/IntlMessages';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { Button } from 'reactstrap';
 // import Gravatar from 'react-gravatar'
 
 class UserInfo extends React.Component {
@@ -22,7 +23,6 @@ class UserInfo extends React.Component {
         return (
             <div>
                 <div className="user-profile">
-                    {/* <Gravatar email="mathews.kyle@gmail.com" /> */}
                     <div className="user-detail ml-2">
                         <h4 className="user-name mb-0">{name || ''}</h4>
                         <small>{email}</small>
@@ -32,10 +32,10 @@ class UserInfo extends React.Component {
                     <i className="zmdi zmdi-face zmdi-hc-fw mr-1" />
                     <IntlMessages id="popup.profile" />
                 </Link>
-                <Link to="/app/profile" className="dropdown-item text-muted" >
+                <Button className="dropdown-item text-muted" >
                     <i className="zmdi zmdi-key zmdi-hc-fw mr-1" />
                     <IntlMessages id="popup.changePassword" />
-                </Link>
+                </Button>
                 <a className="dropdown-item text-muted" href="javascript:void(0)">
                     <i className="zmdi zmdi-settings zmdi-hc-fw mr-1" />
                     <IntlMessages id="popup.setting" />
