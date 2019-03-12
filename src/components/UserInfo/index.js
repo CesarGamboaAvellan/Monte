@@ -4,15 +4,22 @@ import { userSignOut } from 'actions/Auth';
 import IntlMessages from 'util/IntlMessages';
 import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
-// import Gravatar from 'react-gravatar'
+import Modal from '../../shared/Modal';
 
 class UserInfo extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showModal: false,
+        }
+    }
     render() {
+
         let image, name, email;
         if (!this.props.state.authUser) {
             console.log('loading');
         } else {
-            console.log(this.props.state.authUser)
+            console.log(this.props.state.authUser);
             if (this.props.state.authUser.data.result) {
                 name = this.props.state.authUser.data.result.userName;
                 localStorage.setItem('userName', name);
@@ -32,7 +39,9 @@ class UserInfo extends React.Component {
                     <i className="zmdi zmdi-face zmdi-hc-fw mr-1" />
                     <IntlMessages id="popup.profile" />
                 </Link>
-                <Button className="dropdown-item text-muted" >
+                <Button
+                    onClick={this.props.showPasswordModal}
+                    className="dropdown-item text-muted" >
                     <i className="zmdi zmdi-key zmdi-hc-fw mr-1" />
                     <IntlMessages id="popup.changePassword" />
                 </Button>

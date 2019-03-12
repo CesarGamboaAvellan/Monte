@@ -14,6 +14,7 @@ import UserInfo from 'components/UserInfo';
 import Menu from "components/Header/Menu";
 import Gravatar from 'react-gravatar';
 import logoIcon from '../../assets/images/pentagon.png';
+import Modal from '../../shared/Modal';
 
 class Header extends React.Component {
 
@@ -34,6 +35,11 @@ class Header extends React.Component {
             userInfo: !this.state.userInfo
         })
     };
+    showPasswordModal = () => {
+        this.setState({
+            showPasswordModal: !this.state.showPasswordModal,
+        })
+    }
 
     onLangSwitcherSelect = (event) => {
         this.setState({
@@ -57,6 +63,7 @@ class Header extends React.Component {
         super();
         this.state = {
             searchBox: false,
+            showPasswordModal: false,
             searchText: '',
             mailNotification: false,
             langSwitcher: false,
@@ -78,6 +85,15 @@ class Header extends React.Component {
 
         return (
             <div className="app-main-header">
+                {
+                    this.state.showPasswordModal && <Modal
+                        title="Reset your Password"
+                        action="Reset"
+                        showPasswordModal={() => this.showPasswordModal()}
+                        value1="Your current password"
+                        value2="Your new password"
+                    />
+                }
                 <div className="d-flex app-toolbar align-items-center">
                     {navigationStyle === HORIZONTAL_NAVIGATION ?
                         <div className="app-logo-bl">
@@ -210,8 +226,7 @@ class Header extends React.Component {
                                 </DropdownToggle>
 
                                 <DropdownMenu right>
-
-                                    <UserInfo />
+                                    <UserInfo showPasswordModal={() => this.showPasswordModal()} />
                                 </DropdownMenu>
                             </Dropdown>
 

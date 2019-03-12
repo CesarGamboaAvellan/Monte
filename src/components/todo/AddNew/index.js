@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import Moment from 'moment';
 
 
@@ -27,19 +27,19 @@ class AddNew extends React.Component {
 
             <Modal onClose={this.props.onclose} isOpen={this.state.modal}>
                 <ModalHeader>
-                    <div className="header" style={{minWidth: 300}}>
+                    <div className="header" style={{ minWidth: 300 }}>
                         <div className="subject">
                             Password Reset
                         </div>
                     </div>
                     <div className="">
                         <Button className="button-link" onClick={this.toggle}>X</Button>
-                        </div>
+                    </div>
                 </ModalHeader>
-                <div className="add-todo" style={{minWidth: 300}}>
-                    <ModalBody className="body d-flex flex-column" style={{width: '100%'}}>
+                <div className="add-todo" style={{ minWidth: 300 }}>
+                    <ModalBody className="body d-flex flex-column" style={{ width: '100%' }}>
                         <input type="text" className="form-control" placeholder="Email"
-                               defaultValue={this.props.value}
+                            defaultValue={this.props.value}
                         />
                     </ModalBody>
 
