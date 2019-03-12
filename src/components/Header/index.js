@@ -35,10 +35,24 @@ class Header extends React.Component {
             userInfo: !this.state.userInfo
         })
     };
-    showPasswordModal = () => {
-        this.setState({
-            showPasswordModal: !this.state.showPasswordModal,
-        })
+    showPasswordModal = (type) => {
+        console.log('type of call', type);
+        if (type === 'password') {
+            this.setState({
+                showPasswordModal: !this.state.showPasswordModal,
+            })
+        }
+        else if (type === 'settings') {
+            this.setState({
+                showSettingsModal: !this.state.showSettingsModal,
+            })
+        }
+        else {
+            this.setState({
+                showSettingsModal: false,
+                showPasswordModal: false,
+            })
+        }
     }
 
     onLangSwitcherSelect = (event) => {
@@ -64,6 +78,7 @@ class Header extends React.Component {
         this.state = {
             searchBox: false,
             showPasswordModal: false,
+            showSettingsModal: false,
             searchText: '',
             mailNotification: false,
             langSwitcher: false,
@@ -89,9 +104,18 @@ class Header extends React.Component {
                     this.state.showPasswordModal && <Modal
                         title="Reset your Password"
                         action="Reset"
-                        showPasswordModal={() => this.showPasswordModal()}
+                        showPasswordModal={() => this.showPasswordModal('password')}
                         value1="Your current password"
                         value2="Your new password"
+                    />
+                }
+                {
+                    this.state.showSettingsModal && <Modal
+                        title="My Settings"
+                        action="Change"
+                        showPasswordModal={() => this.showPasswordModal('settings')}
+                        value1="UserName"
+                        value2="Password"
                     />
                 }
                 <div className="d-flex app-toolbar align-items-center">
@@ -226,7 +250,9 @@ class Header extends React.Component {
                                 </DropdownToggle>
 
                                 <DropdownMenu right>
-                                    <UserInfo showPasswordModal={() => this.showPasswordModal()} />
+                                    <UserInfo
+                                        showPasswordModal={(data) => this.showPasswordModal(data)}
+                                    />
                                 </DropdownMenu>
                             </Dropdown>
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-import Moment from 'moment';
 
 
 class ModalComponent extends React.Component {
@@ -35,7 +34,9 @@ class ModalComponent extends React.Component {
             </div>
           </div>
           <div className="">
-            <Button className="button-link" onClick={this.props.showPasswordModal}>X</Button>
+            <Button
+              className="button-no-styles"
+              onClick={this.props.showPasswordModal}>X</Button>
           </div>
         </ModalHeader>
         <div className="add-todo" style={{ minWidth: 300 }}>
@@ -45,13 +46,14 @@ class ModalComponent extends React.Component {
               value={this.state.input1}
               defaultValue={this.props.value1}
             />
+          </ModalBody>
+          <ModalBody className="body d-flex flex-column" style={{ width: '100%' }}>
             <input type="text" className="form-control" placeholder={this.props.value2}
               onChange={(e) => this.handleChange(e, 'input2')}
               value={this.state.input2}
               defaultValue={this.props.value2}
             />
           </ModalBody>
-
           <ModalFooter className="footer d-flex flex-row">
             <Button className="button-link" onClick={() => {
             }}>{this.props.action}</Button>

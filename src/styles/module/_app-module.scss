@@ -289,6 +289,11 @@
   width: 100%;
   font-size: 18px;
 }
+@media (max-width: 600px) {
+  .modal-title{
+    display: contents;
+  }
+}
 
 .loader-view-block {
   @include display-flex(flex, column, nowrap);

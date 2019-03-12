@@ -40,15 +40,17 @@ class UserInfo extends React.Component {
                     <IntlMessages id="popup.profile" />
                 </Link>
                 <Button
-                    onClick={this.props.showPasswordModal}
+                    onClick={() => this.props.showPasswordModal('password')}
                     className="dropdown-item text-muted" >
                     <i className="zmdi zmdi-key zmdi-hc-fw mr-1" />
                     <IntlMessages id="popup.changePassword" />
                 </Button>
-                <a className="dropdown-item text-muted" href="javascript:void(0)">
+                <Button
+                    onClick={() => this.props.showPasswordModal('settings')}
+                    className="dropdown-item text-muted" href="javascript:void(0)">
                     <i className="zmdi zmdi-settings zmdi-hc-fw mr-1" />
                     <IntlMessages id="popup.setting" />
-                </a>
+                </Button>
                 <a className="dropdown-item text-muted" href="javascript:void(0)" onClick={() => {
                     this.props.userSignOut()
                 }}>
