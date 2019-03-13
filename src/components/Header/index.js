@@ -111,11 +111,12 @@ class Header extends React.Component {
                 }
                 {
                     this.state.showSettingsModal && <Modal
+                        userData={this.props.auth}
                         title="My Settings"
                         action="Change"
                         showPasswordModal={() => this.showPasswordModal('settings')}
                         value1="UserName"
-                        value2="Password"
+                        value2="Email"
                     />
                 }
                 <div className="d-flex app-toolbar align-items-center">
@@ -265,9 +266,9 @@ class Header extends React.Component {
 
 }
 
-const mapStateToProps = ({ settings }) => {
+const mapStateToProps = ({ settings, auth }) => {
     const { drawerType, locale, navigationStyle, horizontalNavPosition } = settings;
-    return { drawerType, locale, navigationStyle, horizontalNavPosition }
+    return { drawerType, locale, navigationStyle, horizontalNavPosition, auth }
 };
 
 export default withRouter(connect(mapStateToProps, { toggleCollapsedNav, switchLanguage })(Header));
