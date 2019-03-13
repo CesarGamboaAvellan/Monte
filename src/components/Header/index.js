@@ -14,7 +14,10 @@ import UserInfo from 'components/UserInfo';
 import Menu from "components/Header/Menu";
 import Gravatar from 'react-gravatar';
 import logoIcon from '../../assets/images/pentagon.png';
-import Modal from '../../shared/Modal';
+// import Modal from '../../shared/Modal';
+import PasswordModal from '../../containers/Modals/PasswordModalForm';
+import MySettingsModal from '../../containers/Modals/settingsModal';
+
 
 class Header extends React.Component {
 
@@ -101,7 +104,7 @@ class Header extends React.Component {
         return (
             <div className="app-main-header">
                 {
-                    this.state.showPasswordModal && <Modal
+                    this.state.showPasswordModal && <PasswordModal
                         title="Reset your Password"
                         action="Reset"
                         showPasswordModal={() => this.showPasswordModal('password')}
@@ -110,7 +113,7 @@ class Header extends React.Component {
                     />
                 }
                 {
-                    this.state.showSettingsModal && <Modal
+                    this.state.showSettingsModal && <MySettingsModal
                         userData={this.props.auth}
                         title="My Settings"
                         action="Change"

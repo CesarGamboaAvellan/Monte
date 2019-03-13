@@ -5,22 +5,24 @@ import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 class ModalComponent extends React.Component {
   constructor(props) {
     super(props);
-    if (this.props.userData) {
-      this.state = {
-        input1: this.props.userData.authUser.data.result.userName,
-        input2: this.props.userData.authUser.data.result.emailAddress
-      };
-    }
-    else {
-      this.state = {
-        input1: '',
-        input2: ''
-      }
+
+    this.state = {
+      input1: '',
+      input2: ''
     }
 
   }
   handleChange = (e, element) => {
-
+    if (element === "input1") {
+      this.setState({
+        input1: e.target.value,
+      })
+    }
+    else {
+      this.setState({
+        input2: e.target.value,
+      })
+    }
   }
   render() {
     return (

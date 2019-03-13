@@ -8,19 +8,23 @@ class ModalComponent extends React.Component {
     if (this.props.userData) {
       this.state = {
         input1: this.props.userData.authUser.data.result.userName,
-        input2: this.props.userData.authUser.data.result.emailAddress
+        input2: this.props.userData.authUser.data.result.emailAddress,
+        input3: this.props.userData.authUser.data.result.fullName,
       };
-    }
-    else {
-      this.state = {
-        input1: '',
-        input2: ''
-      }
     }
 
   }
   handleChange = (e, element) => {
-
+    if (element === "input1") {
+      this.setState({
+        input1: e.target.value,
+      })
+    }
+    else {
+      this.setState({
+        input2: e.target.value,
+      })
+    }
   }
   render() {
     return (
@@ -40,12 +44,21 @@ class ModalComponent extends React.Component {
         </ModalHeader>
         <div className="add-todo" style={{ minWidth: 300 }}>
           <ModalBody className="body d-flex flex-column" style={{ width: '100%' }}>
+            Full Name
+            <input type="text" className="form-control" placeholder={this.props.value1}
+              onChange={(e) => this.handleChange(e, 'input1')}
+              value={this.state.input3}
+            />
+          </ModalBody>
+          <ModalBody className="body d-flex flex-column" style={{ width: '100%' }}>
+            User Name
             <input type="text" className="form-control" placeholder={this.props.value1}
               onChange={(e) => this.handleChange(e, 'input1')}
               value={this.state.input1}
             />
           </ModalBody>
           <ModalBody className="body d-flex flex-column" style={{ width: '100%' }}>
+            Email
             <input type="text" className="form-control" placeholder={this.props.value2}
               onChange={(e) => this.handleChange(e, 'input2')}
               value={this.state.input2}
