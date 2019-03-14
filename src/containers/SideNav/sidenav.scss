@@ -35,7 +35,10 @@
     margin-top: 15%;
 }
 .border-solid-purple{
-  border: solid 1px rgb(73, 75, 110);
+  border: solid 1px #ededfd;
+}
+.margin-bottom{
+  margin-bottom: 25px;;
 }
 .button-no-styles:hover{
   background:none;
@@ -117,4 +120,35 @@
   color: #fff;
   background-color: #384ad7;
   border-color: #2e40d4;
+}
+
+
+// media queries
+
+@media only screen and (max-width: 600px) {
+  .display-none-small-devices{
+        display: none!important;
+  }
+  .display-grid{
+    display: grid;
+  }
+  // .domains-grid{
+  //   color: red;
+  // }
+  .color-main-span{
+    color: #384ad7
+  }
+  .vertical-centered{
+    vertical-align: inherit!important;
+  }
+  .divider-domain-table{
+    border: solid 0.5px #384ad7;
+    margin-top: 7px;
+    margin-bottom: 7px;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .display-none-big-devices{
+        display: none!important;
+  }
 }

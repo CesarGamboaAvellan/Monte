@@ -8,7 +8,7 @@ class OrderTable extends Component {
     render() {
         const { data } = this.props;
         return (
-            <div className="table-responsive-material">
+            <div size="sm">
                 <table className="default-table table-unbordered table table-sm table-hover">
                     <thead className="th-border-b">
                         <tr>
