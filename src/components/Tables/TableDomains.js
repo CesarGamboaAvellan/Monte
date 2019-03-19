@@ -7,7 +7,7 @@ import { Table, Button } from 'reactstrap';
 const DomainsTable = (props) => {
   return (
     <div>
-      <Table hover className="table-bordered">
+      <Table hover className="table-domains">
         <thead>
           <tr className="gray-color">
             {/* {
@@ -24,6 +24,18 @@ const DomainsTable = (props) => {
           </tr>
         </thead>
         <tbody>
+          <tr className="display-none-small-devices">
+            <td>BlueHost</td>
+            <td>www.launchrocket.com</td>
+            <td>$10</td>
+            <td><Button className="button-secondary">
+              <i className="zmdi zmdi-edit zmdi-hc-fw" />
+              <span>
+                Buy
+                        </span>
+            </Button>
+            </td>
+          </tr>
           <tr className="display-none-small-devices">
             <td>Go daddy</td>
             <td>www.test.com</td>
@@ -68,7 +80,7 @@ const DomainsTable = (props) => {
               </div>
             </td>
           </tr>
-          {/* <tr className="display-none-big-devices">
+          <tr className="display-none-big-devices">
             <td colSpan="2">
               <div className="display-grid domains-grid">
                 <span className="color-main-span">
@@ -99,7 +111,7 @@ const DomainsTable = (props) => {
               </span>
               </div>
             </td>
-          </tr> */}
+          </tr>
         </tbody>
       </Table>
     </div>

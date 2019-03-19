@@ -46,8 +46,8 @@ class SamplePage extends React.Component {
         return (
             <div className="app-wrapper">
                 <ContainerHeader match={this.props.match} title={<IntlMessages id="pages.Domains" />} />
-                <Card>
-                    <SearchBox styleName="d-lg-block margin-bottom"
+                <Card className="table-domains">
+                    <SearchBox className="padding-search-bar" styleName="d-lg-block margin-bottom"
                         placeholder="Search for a domain here"
                         onChange={(e) => this.setDomain(e)}
                         value={this.state.domain}

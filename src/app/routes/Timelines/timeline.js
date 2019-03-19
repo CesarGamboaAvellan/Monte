@@ -83,6 +83,7 @@ class TimeLine extends React.Component {
                                     modalTask={activity.modalTask}
                                     color={color}
                                     buttonClick={() => this.openModal(activity.title)}
+                                    buttonText="Start Modal"
                                     onclick={() => this.openModal(activity.title)}>
                                     <span className="d-block text-white">
                                         <i className={`zmdi ${icon}`} />
@@ -93,6 +94,7 @@ class TimeLine extends React.Component {
                                         timeLine={activity}
                                         canBeAccess={activity.canBeAccess}
                                         modalTask={activity.modalTask}
+                                        buttonText="Start on Window"
                                         color={color}
                                         isCompleted={true}
                                     >

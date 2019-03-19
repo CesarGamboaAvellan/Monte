@@ -146,9 +146,20 @@
     margin-top: 7px;
     margin-bottom: 7px;
   }
+  .padding-search-bar{
+    padding: 1;
+  }
+  .jr-card{
+    padding: 0;
+  }
+  .search-bar .form-group{
+    padding: 8px;
+  }
+  
 }
 @media only screen and (min-width: 600px) {
   .display-none-big-devices{
         display: none!important;
   }
+ 
 }

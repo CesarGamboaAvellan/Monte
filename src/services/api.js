@@ -7,7 +7,7 @@ const http = axios.create({
   timeout: 30000,
   headers: {
     "Abp.TenantId": 1,
-    "Content-Type":  "application/json" 
+    "Content-Type": "application/json"
   }
 });
 export default http;

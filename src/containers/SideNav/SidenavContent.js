@@ -85,6 +85,10 @@ class SidenavContent extends Component {
                             <i className="zmdi zmdi-home zmdi-hc-fw nav-text" />
                             <span className="nav-text"><IntlMessages id="pages.samplePage" /> </span>
                         </NavLink>
+                        <NavLink to="/app/getDomain" className="nav-link">
+                            <i className="zmdi zmdi-home zmdi-hc-fw nav-text" />
+                            <span className="nav-text">Get a Domain</span>
+                        </NavLink>
                         <NavLink to="/app/domains" className="nav-link">
                             <i className="zmdi zmdi-rss zmdi-hc-fw nav-text" />
                             <span className="nav-text"><IntlMessages id="nav.Domains" /> </span>
@@ -114,7 +118,7 @@ class SidenavContent extends Component {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink className="prepend-icon nav-link" to="/app/dashboard/intranet">
+                                    <NavLink className="prepend-icon nav-link" to="/app/settings">
                                         <i className="zmdi zmdi-account zmdi-hc-fw" />
                                         <span className="nav-text"><IntlMessages
                                             id="nav.settings" /></span>

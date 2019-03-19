@@ -72,10 +72,10 @@ class Header extends React.Component {
         this.setState({ langSwitcher: false, mailNotification: false, appNotification: false, searchBox: false });
     };
     onToggleCollapsedNav = (e) => {
-        const val = !this.props.navCollapsed;
+        let val = !this.props.navCollapsed
+
         this.props.toggleCollapsedNav(val);
     };
-
     constructor() {
         super();
         this.state = {
@@ -98,8 +98,9 @@ class Header extends React.Component {
     }
 
     render() {
-        const { drawerType, locale, navigationStyle, horizontalNavPosition } = this.props;
-        const drawerStyle = drawerType.includes(FIXED_DRAWER) ? 'd-flex d-xl-none' : drawerType.includes(COLLAPSED_DRAWER) ? 'd-flex' : 'd-none';
+        const { drawerType, locale, navigationStyle, horizontalNavPosition, navCollapsed } = this.props;
+        console.log(this.props, 'header');
+        const drawerStyle = drawerType.includes(COLLAPSED_DRAWER) ? 'd-flex' : 'd-flex';
 
         return (
             <div className="app-main-header">
@@ -270,8 +271,8 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = ({ settings, auth }) => {
-    const { drawerType, locale, navigationStyle, horizontalNavPosition } = settings;
-    return { drawerType, locale, navigationStyle, horizontalNavPosition, auth }
+    const { drawerType, locale, navigationStyle, horizontalNavPosition, navCollapsed } = settings;
+    return { drawerType, locale, navigationStyle, horizontalNavPosition, auth, navCollapsed }
 };
 
 export default withRouter(connect(mapStateToProps, { toggleCollapsedNav, switchLanguage })(Header));

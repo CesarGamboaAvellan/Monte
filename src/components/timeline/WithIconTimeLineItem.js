@@ -19,9 +19,9 @@ const WithIconTimeLineItem = (props) => {
                 {(props.canBeAccess && props.modalTask) ? <Button
                     onClick={props.buttonClick}
                     className="button-link">
-                    Start Task Modal
+                    {props.buttonText}
                 </Button> : (props.canBeAccess && <Link className="btn button-link text-white" to={`/app/activity/${id}`}>
-                        Start Task Window
+                    {props.buttonText}
                 </Link>)}
             </div>
         </div>

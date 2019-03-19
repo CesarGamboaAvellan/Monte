@@ -6,3 +6,5 @@ export const profileRoute = '/profile';
 export const adminZone = '/admin';
 export const userList = '/users';
 export const roleList = '/roles';
+export const settings = '/settings';
+export const getDomains = '/getDomain';
