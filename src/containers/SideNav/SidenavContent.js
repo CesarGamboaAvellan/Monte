@@ -1,14 +1,13 @@
-import React, {Component} from 'react';
-import {NavLink, withRouter} from 'react-router-dom';
+import React, { Component } from 'react';
+import { NavLink, withRouter } from 'react-router-dom';
 
 import IntlMessages from 'util/IntlMessages';
 import CustomScrollbars from "util/CustomScrollbars";
 
-
 class SidenavContent extends Component {
 
     componentDidMount() {
-        const {history} = this.props;
+        const { history } = this.props;
         const that = this;
         const pathname = `#${history.location.pathname}`;// get current path
 
@@ -75,18 +74,65 @@ class SidenavContent extends Component {
 
         return null;
     }
-
     render() {
+
         return (
-            <CustomScrollbars className="scrollbar" style={{height: 'calc(100vh - 70px)'}}>
+            <CustomScrollbars className="scrollbar dashboard-primary" style={{ height: 'calc(100vh - 70px)' }}>
                 <ul className="nav-menu">
 
-                    <li className="nav-header"><IntlMessages id="sidebar.main"/></li>
                     <li className="menu no-arrow">
-                        <NavLink to="/app/sample-page">
-                            <i className="zmdi zmdi-view-dashboard zmdi-hc-fw"/>
-                            <span className="nav-text"><IntlMessages id="pages.samplePage"/> </span>
+                        <NavLink to="/app/sample-page" className="nav-link">
+                            <i className="zmdi zmdi-home zmdi-hc-fw nav-text" />
+                            <span className="nav-text"><IntlMessages id="pages.samplePage" /> </span>
                         </NavLink>
+                        <NavLink to="/app/getDomain" className="nav-link">
+                            <i className="zmdi zmdi-home zmdi-hc-fw nav-text" />
+                            <span className="nav-text">Get a Domain</span>
+                        </NavLink>
+                        <NavLink to="/app/domains" className="nav-link">
+                            <i className="zmdi zmdi-rss zmdi-hc-fw nav-text" />
+                            <span className="nav-text"><IntlMessages id="nav.Domains" /> </span>
+                        </NavLink>
+                        <NavLink to="/app/timeline" className="nav-link">
+                            <i className="zmdi zmdi-time zmdi-hc-fw nav-text" />
+                            <span className="nav-text"><IntlMessages id="nav.TimeLine" /> </span>
+                        </NavLink>
+                        <li className="menu" >
+                            <a role="button" href="javascript:void(0)">
+                                <i className="zmdi zmdi-account zmdi-hc-fw nav-text" />
+                                <span className="nav-text">
+                                    <IntlMessages id="nav.Admin" />
+                                </span>
+                            </a>
+                            <ul className="sub-menu">
+                                <li>
+                                    <NavLink className="prepend-icon nav-link" to="/app/users">
+                                        <i className="zmdi zmdi-account zmdi-hc-fw" />
+                                        <span className="nav-text"><IntlMessages id="nav.users" /> </span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="prepend-icon nav-link" to="/app/roles">
+                                        <i className="zmdi zmdi-account zmdi-hc-fw" />
+                                        <span className="nav-text"><IntlMessages id="nav.roles" /></span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="prepend-icon nav-link" to="/app/settings">
+                                        <i className="zmdi zmdi-account zmdi-hc-fw" />
+                                        <span className="nav-text"><IntlMessages
+                                            id="nav.settings" /></span>
+                                    </NavLink>
+                                </li>
+                            </ul>
+
+                        </li>
+                        {/* // userType === 'admin' && <NavLink to="/app/admin">
+                            //     <i className="zmdi zmdi-account zmdi-hc-fw orange-color" />
+                            //     <span className="nav-text secondary-color"><IntlMessages id="nav.Admin" /> </span>
+                            // </NavLink>{ */}
+
+
                     </li>
 
                 </ul>

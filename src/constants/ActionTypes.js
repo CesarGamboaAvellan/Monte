@@ -137,3 +137,9 @@ export const SET_CURRENT_TODO_NULL = 'set_current_todo_null';
 export const REMOVE_LABEL = 'remove_label';
 export const UPDATE_SEARCH = 'update_search';
 
+// get users
+
+export const GET_ALL_USERS = 'get_all_users';
+
+// get roles
+export const GET_ALL_ROLES = 'get_all_roles';

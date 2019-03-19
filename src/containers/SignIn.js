@@ -3,6 +3,7 @@ import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
+import AddContact from '../components/todo/AddNew';
 import IntlMessages from 'util/IntlMessages';
 import {
     hideMessage,
@@ -20,7 +21,8 @@ class SignIn extends React.Component {
         super ();
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            showPasswordModal: false
         }
     }
 
@@ -34,6 +36,14 @@ class SignIn extends React.Component {
             this.props.history.push ('/');
         }
     }
+    showPasswordModal = () =>  {
+        this.setState({
+            showPasswordModal: !this.state.showPasswordModal
+        })
+    }
+    resetPassword = () => {
+
+    }
 
     render () {
         const {
@@ -42,13 +52,19 @@ class SignIn extends React.Component {
         } = this.state;
         const { showMessage, loader, alertMessage } = this.props;
         return (
+            <React.Fragment>
+            {this.state.showPasswordModal && <AddContact 
+            action="Send Recovery Email" 
+            onclick={this.resetPassword}
+            valueToSend="cesar@firstfactory.com"
+            />
+            }
             <div
                 className="app-login-container d-flex justify-content-center align-items-center animated slideInUpTiny animation-duration-3">
                 <div className="app-login-main-content">
-
                     <div className="app-logo-content d-flex align-items-center justify-content-center">
                         <Link className="logo-lg" to="/" title="Jambo">
-                            <img src="http://via.placeholder.com/177x65" alt="jambo" title="jambo" />
+                            <img src="//launchrocket.co/wp-content/uploads/launchrocket-logo.png"  className= "login-icon"alt="jambo" title="jambo" />
                         </Link>
                     </div>
 
@@ -82,13 +98,19 @@ class SignIn extends React.Component {
                                     <Button onClick={() => {
                                         this.props.showAuthLoader ();
                                         this.props.userSignIn ({ email, password });
-                                    }} color="primary" className="text-uppercase">
+                                    }} className="text-uppercase button-link">
                                         <IntlMessages id="appModule.signIn" />
                                     </Button>
 
-                                    <Link to="/signup">
-                                        <IntlMessages id="signIn.signUp" />
+                                    <div className ="secondary-login-buttons">
+                                    <Link to="/signup" className="center-text">
+                                        <IntlMessages id="signIn.signUp" className="button-link-secondary"/>
                                     </Link>
+                                    <Button onClick={this.showPasswordModal} className="forgot-password">
+                                        <IntlMessages id="sidebar.appModule.forgotPassword" 
+                                        />
+                                    </Button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -104,6 +126,7 @@ class SignIn extends React.Component {
                 {showMessage && NotificationManager.error (alertMessage)}
                 <NotificationContainer />
             </div>
+            </React.Fragment>
         );
     }
 }

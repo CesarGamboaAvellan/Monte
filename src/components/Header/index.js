@@ -1,18 +1,23 @@
 import React from 'react';
-import {withRouter} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {Dropdown, DropdownMenu, DropdownToggle} from 'reactstrap';
-import {COLLAPSED_DRAWER, FIXED_DRAWER, HORIZONTAL_NAVIGATION, INSIDE_THE_HEADER} from 'constants/ActionTypes';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Dropdown, DropdownMenu, DropdownToggle } from 'reactstrap';
+import { COLLAPSED_DRAWER, FIXED_DRAWER, HORIZONTAL_NAVIGATION, INSIDE_THE_HEADER } from 'constants/ActionTypes';
 import SearchBox from 'components/SearchBox';
 import MailNotification from '../MailNotification/index';
 import AppNotification from '../AppNotification/index';
 import CardHeader from 'components/dashboard/Common/CardHeader/index';
-import {switchLanguage, toggleCollapsedNav} from 'actions/Setting';
+import { switchLanguage, toggleCollapsedNav } from 'actions/Setting';
 import IntlMessages from 'util/IntlMessages';
 import LanguageSwitcher from 'components/LanguageSwitcher/index';
 import UserInfo from 'components/UserInfo';
 import Menu from "components/Header/Menu";
+import Gravatar from 'react-gravatar';
 import logoIcon from '../../assets/images/pentagon.png';
+// import Modal from '../../shared/Modal';
+import PasswordModal from '../../containers/Modals/PasswordModalForm';
+import MySettingsModal from '../../containers/Modals/settingsModal';
+
 
 class Header extends React.Component {
 
@@ -33,6 +38,25 @@ class Header extends React.Component {
             userInfo: !this.state.userInfo
         })
     };
+    showPasswordModal = (type) => {
+        console.log('type of call', type);
+        if (type === 'password') {
+            this.setState({
+                showPasswordModal: !this.state.showPasswordModal,
+            })
+        }
+        else if (type === 'settings') {
+            this.setState({
+                showSettingsModal: !this.state.showSettingsModal,
+            })
+        }
+        else {
+            this.setState({
+                showSettingsModal: false,
+                showPasswordModal: false,
+            })
+        }
+    }
 
     onLangSwitcherSelect = (event) => {
         this.setState({
@@ -45,17 +69,19 @@ class Header extends React.Component {
         })
     };
     handleRequestClose = () => {
-        this.setState({langSwitcher: false, mailNotification: false, appNotification: false, searchBox: false});
+        this.setState({ langSwitcher: false, mailNotification: false, appNotification: false, searchBox: false });
     };
     onToggleCollapsedNav = (e) => {
-        const val = !this.props.navCollapsed;
+        let val = !this.props.navCollapsed
+
         this.props.toggleCollapsedNav(val);
     };
-
     constructor() {
         super();
         this.state = {
             searchBox: false,
+            showPasswordModal: false,
+            showSettingsModal: false,
             searchText: '',
             mailNotification: false,
             langSwitcher: false,
@@ -72,38 +98,55 @@ class Header extends React.Component {
     }
 
     render() {
-        const {drawerType, locale, navigationStyle, horizontalNavPosition} = this.props;
-        const drawerStyle = drawerType.includes(FIXED_DRAWER) ? 'd-flex d-xl-none' : drawerType.includes(COLLAPSED_DRAWER) ? 'd-flex' : 'd-none';
+        const { drawerType, locale, navigationStyle, horizontalNavPosition, navCollapsed } = this.props;
+        console.log(this.props, 'header');
+        const drawerStyle = drawerType.includes(COLLAPSED_DRAWER) ? 'd-flex' : 'd-flex';
 
         return (
             <div className="app-main-header">
+                {
+                    this.state.showPasswordModal && <PasswordModal
+                        title="Reset your Password"
+                        action="Reset"
+                        showPasswordModal={() => this.showPasswordModal('password')}
+                        value1="Your current password"
+                        value2="Your new password"
+                    />
+                }
+                {
+                    this.state.showSettingsModal && <MySettingsModal
+                        userData={this.props.auth}
+                        title="My Settings"
+                        action="Change"
+                        showPasswordModal={() => this.showPasswordModal('settings')}
+                        value1="UserName"
+                        value2="Email"
+                    />
+                }
                 <div className="d-flex app-toolbar align-items-center">
-                    {navigationStyle === HORIZONTAL_NAVIGATION  ?
+                    {navigationStyle === HORIZONTAL_NAVIGATION ?
                         <div className="app-logo-bl">
                             <div className="d-block d-md-none">
                                 <span className="jr-menu-icon"
-                                      onClick={this.onToggleCollapsedNav}>
-                                    <span className="menu-icon"/>
+                                    onClick={this.onToggleCollapsedNav}>
+                                    <span className="menu-icon" />
                                 </span>
                             </div>
                             <div className="app-logo pointer d-none d-md-block">
-                                <img className="d-none d-lg-block" alt='...' src='http://via.placeholder.com/105x36'/>
+                                <img className="d-none d-lg-block" alt='...' src='http://via.placeholder.com/105x36' />
                                 <img className="d-block d-lg-none mr-3" alt='...'
-                                     src='http://via.placeholder.com/32x32'/>
+                                    src='http://via.placeholder.com/32x32' />
                             </div>
                         </div>
                         :
                         <span className={`jr-menu-icon pointer ${drawerStyle}`}
-                              onClick={this.onToggleCollapsedNav}>
-                            <span className="menu-icon"/>
+                            onClick={this.onToggleCollapsedNav}>
+                            <span className="menu-icon" />
                         </span>
                     }
 
-                    <SearchBox styleName="d-none d-lg-block"
-                               onChange={this.updateSearchText.bind(this)}
-                               value={this.state.searchText}/>
                     {(navigationStyle === HORIZONTAL_NAVIGATION && horizontalNavPosition === INSIDE_THE_HEADER) &&
-                    <Menu/>}
+                        <Menu />}
 
                     <ul className="header-notifications list-inline ml-auto">
                         <li className="d-inline-block d-lg-none list-inline-item">
@@ -116,15 +159,15 @@ class Header extends React.Component {
                                     className="d-inline-block"
                                     tag="span"
                                     data-toggle="dropdown">
-                                    <span className="icon-btn size-30">
-                                        <i className="zmdi zmdi-search zmdi-hc-fw"/>
+                                    <span className="icon-btn size-30 orange-color">
+                                        <i className="zmdi zmdi-search zmdi-hc-fw orange-color" />
                                     </span>
                                 </DropdownToggle>
 
                                 <DropdownMenu right className="p-0">
                                     <SearchBox styleName="search-dropdown" placeholder=""
-                                               onChange={this.updateSearchText.bind(this)}
-                                               value={this.state.searchText}/>
+                                        onChange={this.updateSearchText.bind(this)}
+                                        value={this.state.searchText} />
                                 </DropdownMenu>
                             </Dropdown>
                         </li>
@@ -139,13 +182,13 @@ class Header extends React.Component {
                                     tag="span"
                                     data-toggle="dropdown">
                                     <div className="d-flex align-items-center pointer">
-                                        <i className={`flag flag-24 flag-${locale.icon}`}/>
+                                        <i className={`flag flag-24 flag-${locale.icon} orange-color`} />
                                     </div>
                                 </DropdownToggle>
 
                                 <DropdownMenu right className="w-50">
                                     <LanguageSwitcher switchLanguage={this.props.switchLanguage}
-                                                      handleRequestClose={this.handleRequestClose}/>
+                                        handleRequestClose={this.handleRequestClose} />
                                 </DropdownMenu>
                             </Dropdown>
 
@@ -162,20 +205,20 @@ class Header extends React.Component {
                                     tag="span"
                                     data-toggle="dropdown">
                                     <span className="icon-btn size-20 font-size-16">
-                                        <i className="zmdi zmdi-notifications-active zmdi-hc-lg icon-alert"/>
+                                        <i className="zmdi zmdi-notifications-active zmdi-hc-lg icon-alert orange-color" />
                                     </span>
                                 </DropdownToggle>
 
                                 <DropdownMenu right>
                                     <CardHeader styleName="align-items-center"
-                                                heading={<IntlMessages id="appNotification.title"/>}/>
-                                    <AppNotification/>
+                                        heading={<IntlMessages id="appNotification.title" />} />
+                                    <AppNotification />
                                 </DropdownMenu>
                             </Dropdown>
                         </li>
                         <li className="list-inline-item mail-tour">
                             <Dropdown
-                                className="quick-menu"
+                                className="quick-menu orange-color"
                                 isOpen={this.state.mailNotification}
                                 toggle={this.onMailNotificationSelect.bind(this)}
                             >
@@ -185,15 +228,15 @@ class Header extends React.Component {
                                     data-toggle="dropdown">
 
                                     <span className="icon-btn size-20 font-size-16">
-                                        <i className="zmdi zmdi-comment-alt-text icon-alert zmdi-hc-lg"/>
+                                        <i className="zmdi zmdi-comment-alt-text icon-alert zmdi-hc-lg orange-color" />
                                     </span>
                                 </DropdownToggle>
 
 
                                 <DropdownMenu right>
                                     <CardHeader styleName="align-items-center"
-                                                heading={<IntlMessages id="mailNotification.title"/>}/>
-                                    <MailNotification/>
+                                        heading={<IntlMessages id="mailNotification.title" />} />
+                                    <MailNotification />
                                 </DropdownMenu>
                             </Dropdown>
                         </li>
@@ -207,15 +250,14 @@ class Header extends React.Component {
                                     className="d-inline-block"
                                     tag="span"
                                     data-toggle="dropdown">
-                                    <img
-                                        alt='...'
-                                        src={logoIcon}
-                                        className="pointer user-avatar size-30"/>
+                                    <Gravatar email={localStorage.getItem('user') || 'default.com'}
+                                        className="pointer user-avatar size-30" rating="pg" default='mm' />
                                 </DropdownToggle>
 
                                 <DropdownMenu right>
-
-                                    <UserInfo/>
+                                    <UserInfo
+                                        showPasswordModal={(data) => this.showPasswordModal(data)}
+                                    />
                                 </DropdownMenu>
                             </Dropdown>
 
@@ -228,9 +270,9 @@ class Header extends React.Component {
 
 }
 
-const mapStateToProps = ({settings}) => {
-    const {drawerType, locale, navigationStyle, horizontalNavPosition} = settings;
-    return {drawerType, locale, navigationStyle, horizontalNavPosition}
+const mapStateToProps = ({ settings, auth }) => {
+    const { drawerType, locale, navigationStyle, horizontalNavPosition, navCollapsed } = settings;
+    return { drawerType, locale, navigationStyle, horizontalNavPosition, auth, navCollapsed }
 };
 
-export default withRouter(connect(mapStateToProps, {toggleCollapsedNav, switchLanguage})(Header));
+export default withRouter(connect(mapStateToProps, { toggleCollapsedNav, switchLanguage })(Header));

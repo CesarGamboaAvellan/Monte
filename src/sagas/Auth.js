@@ -23,201 +23,241 @@ import {
     userGoogleSignInSuccess,
     userTwitterSignInSuccess
 } from '../actions/Auth';
+import { ADMIN_CREDENTIALS, ADMIN_USER_NAME } from '../../secrets_config';
+import { REGULAR_USER } from '../constants/UserTypes';
+import { config } from '../services/helper';
 
-const createUserWithEmailPasswordRequest = async (email, password) =>
-    await  auth.createUserWithEmailAndPassword (email, password)
-        .then (authUser => authUser)
-        .catch (error => error);
-
-const signInUserWithEmailPasswordRequest = async (email, password) => {
-        return http.post('/api/TokenAuth/Authenticate', {
-            userNameOrEmailAddress: email,
-            password,
-            rememberClient: true,
+const getUser = async (loggedUser) => {
+    return http.post('/TokenAuth/Authenticate', {
+        userNameOrEmailAddress: ADMIN_USER_NAME,
+        password: ADMIN_CREDENTIALS,
+        rememberClient: true,
+    }).then(authUser => {
+        return http.get('/services/app/User/Get', config(authUser.data.result.accessToken,
+            loggedUser.data.result.userId)
+        ).then(user => {
+            localStorage.setItem('user', user.data.result.emailAddress)
+            return user;
         })
-        .then (authUser => 
-            {
-                console.log(authUser, email, password)
-                return authUser
-            })
-        .catch (error => {
-            console.log(error);
-            return { Error: 'Authentication failed: check email and password', details :error}
+            .catch(error => console.log(error))
+    })
+        .catch(error => {
+            return { Error: 'Authentication failed: check email and password', details: error }
         });
-    
 }
-    
+const createUserWithEmailPasswordRequest = async (email, password, name) => {
+    return http.post('/TokenAuth/Authenticate', {
+        userNameOrEmailAddress: ADMIN_USER_NAME,
+        password: ADMIN_CREDENTIALS,
+        rememberClient: true,
+    })
+        .then(authUser => {
+            return http.post('/services/app/User/Create', {
+                userName: name,
+                name,
+                surname: name,
+                emailAddress: email,
+                isActive: true,
+                roleNames: [
+                    REGULAR_USER
+                ],
+                "password": password
+            }, config(authUser.data.result.accessToken)
+            ).then(user => user)
+                .catch(error => console.log(error))
+        })
+        .catch(error => {
+            return { Error: 'Authentication failed: check email and password', details: error }
+        });
+}
+const signInUserWithEmailPasswordRequest = async (email, password) => {
+    return http.post('/TokenAuth/Authenticate', {
+        userNameOrEmailAddress: email,
+        password,
+        rememberClient: true,
+    })
+        .then(authUser => {
+            console.log('auth user', authUser);
+            return getUser(authUser)
+        })
+        .then(user => user)
+        .catch(error => {
+            return { Error: 'Authentication failed: check email and password', details: error }
+        });
+
+}
+
 
 const signOutRequest = async () =>
-    await  auth.signOut ()
-        .then (authUser => authUser)
-        .catch (error => error);
+    await auth.signOut()
+        .then(authUser => authUser)
+        .catch(error => error);
 
 
-function* createUserWithEmailPassword ({ payload }) {
-    const { email, password } = payload;
+function* createUserWithEmailPassword({ payload }) {
+    const { email, password, name } = payload;
     try {
-        const signUpUser = yield call (createUserWithEmailPasswordRequest, email, password);
-        if (signUpUser.message) {
-            yield put (showAuthMessage (signUpUser.message));
+        const signUpUserData = yield call(createUserWithEmailPasswordRequest, email, password, name);
+        if (!signUpUserData.data) {
+            yield put(showAuthMessage('Error: Email while creating account'));
         } else {
-            localStorage.setItem ('user_id', signUpUser.uid);
-            yield put (userSignUpSuccess (signUpUser));
+            localStorage.setItem('user', signUpUserData.data.result.userName);
+            yield put(userSignUpSuccess(signUpUserData.data));
         }
     } catch (error) {
-        yield put (showAuthMessage (error));
+        yield put(showAuthMessage('Error creating the user, email or username may be already used, also username sould be lower case, with no spaces'));
     }
 }
 
 const signInUserWithGoogleRequest = async () =>
-    await  auth.signInWithPopup (googleAuthProvider)
-        .then (authUser => authUser)
-        .catch (error => error);
+    await auth.signInWithPopup(googleAuthProvider)
+        .then(authUser => authUser)
+        .catch(error => error);
 
 const signInUserWithFacebookRequest = async () =>
-    await  auth.signInWithPopup (facebookAuthProvider)
-        .then (authUser => authUser)
-        .catch (error => error);
+    await auth.signInWithPopup(facebookAuthProvider)
+        .then(authUser => authUser)
+        .catch(error => error);
 
 const signInUserWithGithubRequest = async () =>
-    await  auth.signInWithPopup (githubAuthProvider)
-        .then (authUser => authUser)
-        .catch (error => error);
+    await auth.signInWithPopup(githubAuthProvider)
+        .then(authUser => authUser)
+        .catch(error => error);
 
 const signInUserWithTwitterRequest = async () =>
-    await  auth.signInWithPopup (twitterAuthProvider)
-        .then (authUser => authUser)
-        .catch (error => error);
+    await auth.signInWithPopup(twitterAuthProvider)
+        .then(authUser => authUser)
+        .catch(error => error);
 
 
-function* signInUserWithGoogle () {
+function* signInUserWithGoogle() {
     try {
-        const signUpUser = yield call (signInUserWithGoogleRequest);
+        const signUpUser = yield call(signInUserWithGoogleRequest);
         if (signUpUser.message) {
-            yield put (showAuthMessage (signUpUser.message));
+            yield put(showAuthMessage(signUpUser.message));
         } else {
-            localStorage.setItem ('user_id', signUpUser.uid);
-            yield put (userGoogleSignInSuccess (signUpUser));
+            localStorage.setItem('user_id', signUpUser.uid);
+            yield put(userGoogleSignInSuccess(signUpUser));
         }
     } catch (error) {
-        yield put (showAuthMessage (error));
+        yield put(showAuthMessage(error));
     }
 }
 
 
-function* signInUserWithFacebook () {
+function* signInUserWithFacebook() {
     try {
-        const signUpUser = yield call (signInUserWithFacebookRequest);
+        const signUpUser = yield call(signInUserWithFacebookRequest);
         if (signUpUser.message) {
-            yield put (showAuthMessage (signUpUser.message));
+            yield put(showAuthMessage(signUpUser.message));
         } else {
-            localStorage.setItem ('user_id', signUpUser.uid);
-            yield put (userFacebookSignInSuccess (signUpUser));
+            localStorage.setItem('user_id', signUpUser.uid);
+            yield put(userFacebookSignInSuccess(signUpUser));
         }
     } catch (error) {
-        yield put (showAuthMessage (error));
+        yield put(showAuthMessage(error));
     }
 }
 
 
-function* signInUserWithGithub () {
+function* signInUserWithGithub() {
     try {
-        const signUpUser = yield call (signInUserWithGithubRequest);
+        const signUpUser = yield call(signInUserWithGithubRequest);
         if (signUpUser.message) {
-            yield put (showAuthMessage (signUpUser.message));
+            yield put(showAuthMessage(signUpUser.message));
         } else {
-            localStorage.setItem ('user_id', signUpUser.uid);
-            yield put (userGithubSignInSuccess (signUpUser));
+            localStorage.setItem('user_id', signUpUser.uid);
+            yield put(userGithubSignInSuccess(signUpUser));
         }
     } catch (error) {
-        yield put (showAuthMessage (error));
+        yield put(showAuthMessage(error));
     }
 }
 
 
-function* signInUserWithTwitter () {
+function* signInUserWithTwitter() {
     try {
-        const signUpUser = yield call (signInUserWithTwitterRequest);
+        const signUpUser = yield call(signInUserWithTwitterRequest);
         if (signUpUser.message) {
             if (signUpUser.message.length > 100) {
-                yield put (showAuthMessage ('Your request has been canceled.'));
+                yield put(showAuthMessage('Your request has been canceled.'));
             } else {
-                yield put (showAuthMessage (signUpUser.message));
+                yield put(showAuthMessage(signUpUser.message));
             }
         } else {
-            localStorage.setItem ('user_id', signUpUser.uid);
-            yield put (userTwitterSignInSuccess (signUpUser));
+            localStorage.setItem('user_id', signUpUser.uid);
+            yield put(userTwitterSignInSuccess(signUpUser));
         }
     } catch (error) {
-        yield put (showAuthMessage (error));
+        yield put(showAuthMessage(error));
     }
 }
 
-function* signInUserWithEmailPassword ({ payload }) {
+function* signInUserWithEmailPassword({ payload }) {
     const { email, password } = payload;
     try {
-        const signInUser = yield call (signInUserWithEmailPasswordRequest, email, password);
-            if(signInUser.data){
-                localStorage.setItem ('user_id', signInUser.data.result.userId);
-                localStorage.setItem('accessToken', signInUser.data.result.accessToken);
-                yield put (userSignInSuccess (signInUser));
-            }
-            if(signInUser.Error){
-                yield put (showAuthMessage (signInUser.Error));
-            }
-    } catch (error) {
-        yield put (showAuthMessage (error));
-    }
-}
-
-function* signOut () {
-    try {
-        const signOutUser = yield call (signOutRequest);
-        if (signInUser.message) {
-            yield put (showAuthMessage (signInUser.message));
-        } else {
-            localStorage.removeItem ('user_id');
-            yield put (userSignOutSuccess (signInUser));
+        const signInUser = yield call(signInUserWithEmailPasswordRequest, email, password);
+        if (signInUser.data) {
+            localStorage.setItem('user_id', signInUser.data.result.userId);
+            localStorage.setItem('accessToken', signInUser.data.result.accessToken);
+            yield put(userSignInSuccess(signInUser));
+        }
+        if (signInUser.Error) {
+            yield put(showAuthMessage(signInUser.Error));
         }
     } catch (error) {
-        yield put (showAuthMessage (error));
+        yield put(showAuthMessage(error));
     }
 }
 
-export function* createUserAccount () {
-    yield takeEvery (SIGNUP_USER, createUserWithEmailPassword);
+function* signOut() {
+    try {
+        const signOutUser = yield call(signOutRequest);
+        if (signInUser.message) {
+            yield put(showAuthMessage(signInUser.message));
+        } else {
+            localStorage.removeItem('user_id');
+            yield put(userSignOutSuccess(signInUser));
+        }
+    } catch (error) {
+        yield put(showAuthMessage(error));
+    }
 }
 
-export function* signInWithGoogle () {
-    yield takeEvery (SIGNIN_GOOGLE_USER, signInUserWithGoogle);
+export function* createUserAccount() {
+    yield takeEvery(SIGNUP_USER, createUserWithEmailPassword);
 }
 
-export function* signInWithFacebook () {
-    yield takeEvery (SIGNIN_FACEBOOK_USER, signInUserWithFacebook);
+export function* signInWithGoogle() {
+    yield takeEvery(SIGNIN_GOOGLE_USER, signInUserWithGoogle);
 }
 
-export function* signInWithTwitter () {
-    yield takeEvery (SIGNIN_TWITTER_USER, signInUserWithTwitter);
+export function* signInWithFacebook() {
+    yield takeEvery(SIGNIN_FACEBOOK_USER, signInUserWithFacebook);
 }
 
-export function* signInWithGithub () {
-    yield takeEvery (SIGNIN_GITHUB_USER, signInUserWithGithub);
+export function* signInWithTwitter() {
+    yield takeEvery(SIGNIN_TWITTER_USER, signInUserWithTwitter);
 }
 
-export function* signInUser () {
-    yield takeEvery (SIGNIN_USER, signInUserWithEmailPassword);
+export function* signInWithGithub() {
+    yield takeEvery(SIGNIN_GITHUB_USER, signInUserWithGithub);
 }
 
-export function* signOutUser () {
-    yield takeEvery (SIGNOUT_USER, signOut);
+export function* signInUser() {
+    yield takeEvery(SIGNIN_USER, signInUserWithEmailPassword);
 }
 
-export default function* rootSaga () {
-    yield all ([fork (signInUser),
-        fork (createUserAccount),
-        fork (signInWithGoogle),
-        fork (signInWithFacebook),
-        fork (signInWithTwitter),
-        fork (signInWithGithub),
-        fork (signOutUser)]);
+export function* signOutUser() {
+    yield takeEvery(SIGNOUT_USER, signOut);
+}
+
+export default function* rootSaga() {
+    yield all([fork(signInUser),
+    fork(createUserAccount),
+    fork(signInWithGoogle),
+    fork(signInWithFacebook),
+    fork(signInWithTwitter),
+    fork(signInWithGithub),
+    fork(signOutUser)]);
 }

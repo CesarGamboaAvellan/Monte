@@ -1,57 +1,72 @@
 import React from 'react';
-import {connect} from 'react-redux'
-import {userSignOut} from 'actions/Auth';
+import { connect } from 'react-redux'
+import { userSignOut } from 'actions/Auth';
 import IntlMessages from 'util/IntlMessages';
-import userIcon from '../../assets/images/pentagon_1.png'
+import { Link } from 'react-router-dom';
+import { Button } from 'reactstrap';
+import Modal from '../../shared/Modal';
 
 class UserInfo extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showModal: false,
+        }
+    }
     render() {
-        let image, name;
-        if(!this.props.state.authUser){
+
+        let image, name, email;
+        if (!this.props.state.authUser) {
             console.log('loading');
-        }else{
-            if(this.props.state.authUser.additionalUserInfo){
-                name = this.props.state.authUser.additionalUserInfo.profile.name;
+        } else {
+            console.log(this.props.state.authUser);
+            if (this.props.state.authUser.data.result) {
+                name = this.props.state.authUser.data.result.userName;
                 localStorage.setItem('userName', name);
-                image = this.props.state.authUser.additionalUserInfo.profile.picture;
-                localStorage.setItem('imageProfile', image);
+                image = this.props.state.authUser.data.result.userName;
+                email = this.props.state.authUser.data.result.emailAddress;
             }
         }
         return (
             <div>
                 <div className="user-profile">
-                    <img className="user-avatar border-0 size-40" src={userIcon}
-                         alt="User"/>
-                        <div className="user-detail ml-2">
-                            <h4 className="user-name mb-0">{name || localStorage
-                                .getItem('userName')}</h4>
-                            <small>Developer</small>
-                        </div>
+                    <div className="user-detail ml-2">
+                        <h4 className="user-name mb-0">{name || ''}</h4>
+                        <small>{email}</small>
+                    </div>
                 </div>
-                    <a className="dropdown-item text-muted" href="javascript:void(0)">
-                        <i className="zmdi zmdi-face zmdi-hc-fw mr-1"/>
-                        <IntlMessages id="popup.profile"/>
-                    </a>
-                    <a className="dropdown-item text-muted" href="javascript:void(0)">
-                        <i className="zmdi zmdi-settings zmdi-hc-fw mr-1"/>
-                        <IntlMessages id="popup.setting"/>
-                    </a>
-                    <a className="dropdown-item text-muted" href="javascript:void(0)" onClick={() => {
-                        this.props.userSignOut()
-                    }}>
-                        <i className="zmdi zmdi-sign-in zmdi-hc-fw mr-1"/>
-                        <IntlMessages id="popup.logout"/>
-                    </a>
+                <Link to="/app/profile" className="dropdown-item text-muted" >
+                    <i className="zmdi zmdi-face zmdi-hc-fw mr-1" />
+                    <IntlMessages id="popup.profile" />
+                </Link>
+                <Button
+                    onClick={() => this.props.showPasswordModal('password')}
+                    className="dropdown-item text-muted" >
+                    <i className="zmdi zmdi-key zmdi-hc-fw mr-1" />
+                    <IntlMessages id="popup.changePassword" />
+                </Button>
+                <Button
+                    onClick={() => this.props.showPasswordModal('settings')}
+                    className="dropdown-item text-muted" href="javascript:void(0)">
+                    <i className="zmdi zmdi-settings zmdi-hc-fw mr-1" />
+                    <IntlMessages id="popup.setting" />
+                </Button>
+                <a className="dropdown-item text-muted" href="javascript:void(0)" onClick={() => {
+                    this.props.userSignOut()
+                }}>
+                    <i className="zmdi zmdi-sign-in zmdi-hc-fw mr-1" />
+                    <IntlMessages id="popup.logout" />
+                </a>
             </div>
         );
     }
 }
 
-function mapStateToProps(state){
-    return{
-      state: state.auth, // takes the store selected as renders it as a prop
+function mapStateToProps(state) {
+    return {
+        state: state.auth, // takes the store selected as renders it as a prop
     }
-  }
-export default connect(mapStateToProps, {userSignOut})(UserInfo);
+}
+export default connect(mapStateToProps, { userSignOut })(UserInfo);
 
 

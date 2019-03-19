@@ -1,0 +1,10 @@
+export const activityRoute = '/activity/:id';
+export const samplePage = '/sample-page';
+export const domainsRoute = '/domains';
+export const timelineRoute = '/timeline';
+export const profileRoute = '/profile';
+export const adminZone = '/admin';
+export const userList = '/users';
+export const roleList = '/roles';
+export const settings = '/settings';
+export const getDomains = '/getDomain';
