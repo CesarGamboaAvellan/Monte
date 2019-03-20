@@ -159,8 +159,8 @@ class Header extends React.Component {
                                     className="d-inline-block"
                                     tag="span"
                                     data-toggle="dropdown">
-                                    <span className="icon-btn size-30 orange-color">
-                                        <i className="zmdi zmdi-search zmdi-hc-fw orange-color" />
+                                    <span className="icon-btn size-30 purple-color">
+                                        <i className="zmdi zmdi-search zmdi-hc-fw purple-color" />
                                     </span>
                                 </DropdownToggle>
 
@@ -182,7 +182,7 @@ class Header extends React.Component {
                                     tag="span"
                                     data-toggle="dropdown">
                                     <div className="d-flex align-items-center pointer">
-                                        <i className={`flag flag-24 flag-${locale.icon} orange-color`} />
+                                        <i className={`flag flag-24 flag-${locale.icon} purple-color`} />
                                     </div>
                                 </DropdownToggle>
 
@@ -205,7 +205,7 @@ class Header extends React.Component {
                                     tag="span"
                                     data-toggle="dropdown">
                                     <span className="icon-btn size-20 font-size-16">
-                                        <i className="zmdi zmdi-notifications-active zmdi-hc-lg icon-alert orange-color" />
+                                        <i className="zmdi zmdi-notifications-active zmdi-hc-lg icon-alert purple-color" />
                                     </span>
                                 </DropdownToggle>
 
@@ -218,7 +218,7 @@ class Header extends React.Component {
                         </li>
                         <li className="list-inline-item mail-tour">
                             <Dropdown
-                                className="quick-menu orange-color"
+                                className="quick-menu purple-color"
                                 isOpen={this.state.mailNotification}
                                 toggle={this.onMailNotificationSelect.bind(this)}
                             >
@@ -228,7 +228,7 @@ class Header extends React.Component {
                                     data-toggle="dropdown">
 
                                     <span className="icon-btn size-20 font-size-16">
-                                        <i className="zmdi zmdi-comment-alt-text icon-alert zmdi-hc-lg orange-color" />
+                                        <i className="zmdi zmdi-comment-alt-text icon-alert zmdi-hc-lg purple-color" />
                                     </span>
                                 </DropdownToggle>
 

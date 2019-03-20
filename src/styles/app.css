@@ -93,7 +93,7 @@ Version        : 1.0
     height: 1px;
     min-height: 1px;
     color: inherit;
-    background-color: #fff;
+    background-color: #591df1;
     display: block;
     -webkit-transition: all 0.4s ease;
     -o-transition: all 0.4s ease;
@@ -104,7 +104,7 @@ Version        : 1.0
     position: absolute;
     display: block;
     color: inherit;
-    background-color: inherit;
+    background-color: #591df1;
     left: 0;
     height: 1px;
     min-height: 1px;
