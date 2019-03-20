@@ -79,14 +79,14 @@
 
 .forgot-password {
   background: none;
-  color: gray;
+  color: #cacad2;
   border: none;
 }
 .primary-color {
   color: #f2f3ff !important
 }
 .gray-color{
-  background-color: #f4f4f4;
+  background-color: #cacad2;
 }
 
 .forgot-password:hover {
@@ -108,7 +108,9 @@
   color: #5e6383;
 }
 .nav-link:hover{
-  background-color: #f8f8fb;
+  i, span{
+    color: #3f51b5!important;
+  }
 }
 
 .button-secondary{
@@ -151,6 +153,8 @@
   }
   .jr-card{
     padding: 0;
+    border: none!important;
+    box-shadow: 0px 0px 40px 0px rgba(82,63,105,0.1)!important;
   }
   .search-bar .form-group{
     padding: 8px;
