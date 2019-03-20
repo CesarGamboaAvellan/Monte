@@ -104,6 +104,7 @@ class Header extends React.Component {
 
         return (
             <div className="app-main-header">
+
                 {
                     this.state.showPasswordModal && <PasswordModal
                         title="Reset your Password"
@@ -149,20 +150,24 @@ class Header extends React.Component {
                         <Menu />}
 
                     <ul className="header-notifications list-inline ml-auto">
+
+                        <li>
+                            <img className='login-icon header-centered-icon' alt='...' src='//launchrocket.co/wp-content/uploads/launchrocket-logo.png' />
+                        </li>
                         <li className="d-inline-block d-lg-none list-inline-item">
                             <Dropdown
                                 className="quick-menu nav-searchbox"
                                 isOpen={this.state.searchBox}
                                 toggle={this.onSearchBoxSelect.bind(this)}>
 
-                                <DropdownToggle
+                                {/* <DropdownToggle
                                     className="d-inline-block"
                                     tag="span"
                                     data-toggle="dropdown">
                                     <span className="icon-btn size-30 purple-color">
                                         <i className="zmdi zmdi-search zmdi-hc-fw purple-color" />
                                     </span>
-                                </DropdownToggle>
+                                </DropdownToggle> */}
 
                                 <DropdownMenu right className="p-0">
                                     <SearchBox styleName="search-dropdown" placeholder=""

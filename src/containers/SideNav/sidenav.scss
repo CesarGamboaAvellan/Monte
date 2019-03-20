@@ -85,6 +85,14 @@
 .primary-color {
   color: #f2f3ff !important
 }
+.header-centered-icon{
+  position: absolute;
+    left: 50%;
+    right: 50%;
+    top: 17px;
+    margin-left: -100px;
+   
+}
 .gray-color{
   background-color: #cacad2;
 }
@@ -130,6 +138,13 @@
 @media only screen and (max-width: 600px) {
   .display-none-small-devices{
         display: none!important;
+  }
+  .header-centered-icon{
+    position: absolute;
+    left: 39%;
+    width: 49%;
+    top: 19px;
+     
   }
   .display-grid{
     display: grid;
