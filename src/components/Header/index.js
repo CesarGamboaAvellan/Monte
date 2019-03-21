@@ -150,7 +150,6 @@ class Header extends React.Component {
                         <Menu />}
 
                     <ul className="header-notifications list-inline ml-auto">
-
                         <li>
                             <img className='login-icon header-centered-icon' alt='...' src='//launchrocket.co/wp-content/uploads/launchrocket-logo.png' />
                         </li>
@@ -210,7 +209,7 @@ class Header extends React.Component {
                                     tag="span"
                                     data-toggle="dropdown">
                                     <span className="icon-btn size-20 font-size-16">
-                                        <i className="zmdi zmdi-notifications-active zmdi-hc-lg icon-alert purple-color" />
+                                        <i className="flaticon-alert" />
                                     </span>
                                 </DropdownToggle>
 
@@ -233,7 +232,7 @@ class Header extends React.Component {
                                     data-toggle="dropdown">
 
                                     <span className="icon-btn size-20 font-size-16">
-                                        <i className="zmdi zmdi-comment-alt-text icon-alert zmdi-hc-lg purple-color" />
+                                        <i className="flaticon-speech-bubble" />
                                     </span>
                                 </DropdownToggle>
 

@@ -82,24 +82,24 @@ class SidenavContent extends Component {
 
                     <li className="menu no-arrow">
                         <NavLink to="/app/sample-page" className="nav-link">
-                            <i className="zmdi zmdi-home zmdi-hc-fw nav-text" />
+                            <i className="flaticon-home-1 nav-text" />
                             <span className="nav-text"><IntlMessages id="pages.samplePage" /> </span>
                         </NavLink>
                         <NavLink to="/app/getDomain" className="nav-link">
-                            <i className="zmdi zmdi-home zmdi-hc-fw nav-text" />
+                            <i className="flaticon-globe nav-text" />
                             <span className="nav-text">Get a Domain</span>
                         </NavLink>
                         <NavLink to="/app/domains" className="nav-link">
-                            <i className="zmdi zmdi-rss zmdi-hc-fw nav-text" />
+                            <i className="flaticon-globe nav-text" />
                             <span className="nav-text"><IntlMessages id="nav.Domains" /> </span>
                         </NavLink>
                         <NavLink to="/app/timeline" className="nav-link">
-                            <i className="zmdi zmdi-time zmdi-hc-fw nav-text" />
+                            <i className="flaticon-list-1 nav-text" />
                             <span className="nav-text"><IntlMessages id="nav.TimeLine" /> </span>
                         </NavLink>
                         <li className="menu" >
                             <a role="button" href="javascript:void(0)">
-                                <i className="zmdi zmdi-account zmdi-hc-fw nav-text" />
+                                <i className="flaticon-avatar nav-text" />
                                 <span className="nav-text">
                                     <IntlMessages id="nav.Admin" />
                                 </span>
@@ -107,19 +107,19 @@ class SidenavContent extends Component {
                             <ul className="sub-menu">
                                 <li>
                                     <NavLink className="prepend-icon nav-link" to="/app/users">
-                                        <i className="zmdi zmdi-account zmdi-hc-fw" />
+                                        <i className="flaticon-users zmdi-hc-fw" />
                                         <span className="nav-text"><IntlMessages id="nav.users" /> </span>
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink className="prepend-icon nav-link" to="/app/roles">
-                                        <i className="zmdi zmdi-account zmdi-hc-fw" />
+                                        <i className="flaticon-map" />
                                         <span className="nav-text"><IntlMessages id="nav.roles" /></span>
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink className="prepend-icon nav-link" to="/app/settings">
-                                        <i className="zmdi zmdi-account zmdi-hc-fw" />
+                                        <i className="flaticon-cogwheel" />
                                         <span className="nav-text"><IntlMessages
                                             id="nav.settings" /></span>
                                     </NavLink>

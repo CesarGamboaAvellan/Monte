@@ -3,14 +3,14 @@
 /**
  * Webpack configuration base class
  */
-const fs = require ('fs');
-const path = require ('path');
-const ExtractTextPlugin = require ('extract-text-webpack-plugin');
-const npmBase = path.join (__dirname, '../../node_modules');
+const fs = require('fs');
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const npmBase = path.join(__dirname, '../../node_modules');
 
 class WebpackBaseConfig {
 
-    constructor () {
+    constructor() {
         this._config = {};
     }
 
@@ -18,15 +18,15 @@ class WebpackBaseConfig {
      * Get the list of included packages
      * @return {Array} List of included packages
      */
-    get includedPackages () {
-        return [].map ((pkg) => fs.realpathSync (path.join (npmBase, pkg)));
+    get includedPackages() {
+        return [].map((pkg) => fs.realpathSync(path.join(npmBase, pkg)));
     }
 
     /**
      * Get the global config
      * @return {Object} config Final webpack config
      */
-    get config () {
+    get config() {
         return this._config;
     }
 
@@ -36,8 +36,8 @@ class WebpackBaseConfig {
      * @param {Object} data Keys to assign
      * @return {Object}
      */
-    set config (data) {
-        this._config = Object.assign ({}, this.defaultSettings, data);
+    set config(data) {
+        this._config = Object.assign({}, this.defaultSettings, data);
         return this._config;
     }
 
@@ -45,7 +45,7 @@ class WebpackBaseConfig {
      * Get the environment name
      * @return {String} The current environment
      */
-    get env () {
+    get env() {
         return 'dev';
     }
 
@@ -53,23 +53,23 @@ class WebpackBaseConfig {
      * Get the absolute path to src directory
      * @return {String}
      */
-    get srcPathAbsolute () {
-        return path.resolve ('./src');
+    get srcPathAbsolute() {
+        return path.resolve('./src');
     }
 
     /**
      * Get the absolute path to tests directory
      * @return {String}
      */
-    get testPathAbsolute () {
-        return path.resolve ('./test');
+    get testPathAbsolute() {
+        return path.resolve('./test');
     }
 
     /**
      * Get the default settings
      * @return {Object}
      */
-    get defaultSettings () {
+    get defaultSettings() {
         const cssModulesQuery = {
             modules: true,
             importLoaders: 1,
@@ -171,7 +171,7 @@ class WebpackBaseConfig {
                         use: {
                             loader: 'babel-loader',
                             options: {
-                                extends: path.join (__dirname, '../../.babelrc'),
+                                extends: path.join(__dirname, '../../.babelrc'),
                                 cacheDirectory: true
                             }
                         }
@@ -180,12 +180,12 @@ class WebpackBaseConfig {
                 ]
             },
             output: {
-                path: path.resolve ('./dist/assets'),
+                path: path.resolve('./dist/assets'),
                 filename: 'app.js',
                 publicPath: './assets/'
             },
             plugins: [
-                new ExtractTextPlugin ('styles.css'),
+                new ExtractTextPlugin('styles.css'),
             ],
             resolve: {
                 alias: {
