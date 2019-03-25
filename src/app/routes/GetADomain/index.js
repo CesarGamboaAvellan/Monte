@@ -1,113 +1,126 @@
 import React from 'react';
-import WithIconTimeLineItem from 'components/timeline/WithIconTimeLineItem';
-import ActivityModal from '../Timelines/activityModal';
-const timeLineData = [
-  {
-    image: 'http://via.placeholder.com/150x150',
-    time: 'Step 1.',
-    title: 'Get ready to get your Domain',
-    description: 'A domain is an identifier for your website, it usually is related to your company name, and example of a domain will be google.com, facebook.com. Here we will guide to get one',
-    canBeAccess: true,
-    modalTask: true,
-    taskData: {},
-    id: 1
-  }, {
-    image: 'http://via.placeholder.com/150x150',
-    time: 'Step 2.',
-    title: 'What domain do you want?',
-    description: '',
-    canBeAccess: true,
-    taskData: {},
-    modalTask: false,
-    id: 2
-  }, {
-    image: 'http://via.placeholder.com/150x150',
-    time: 'Get a domain',
-    title: 'Facebook Groups',
-    description: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words,',
-    canBeAccess: false,
-    taskData: {},
-    modalTask: false,
-    id: 3
-  }, {
-    image: 'http://via.placeholder.com/150x150',
-    time: '18 SEPT, 1984',
-    title: 'Best builder award from usa builder board',
-    description: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text.',
-    canBeAccess: false,
-    taskData: {},
-    modalTask: false,
-    id: 4
-  }, {
-    image: 'http://via.placeholder.com/150x150',
-    time: '30 NOV, 1985',
-    title: 'completed first 100 projects',
-    description: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.',
-    canBeAccess: false,
-    taskData: {},
-    modalTask: false,
-    id: 5
-  }
-];
-class TimeLine extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isOpen: false,
-      activity: '',
-    }
-  }
-  openModal = (activity) => {
-    this.setState({
-      isOpen: !this.state.isOpen,
-      activity: activity
-    })
-  }
-  render() {
-    return (
-      <div>
-        {this.state.isOpen ? <ActivityModal
-          title="Launch Rocket Activity"
-          modal={this.state.isOpen}
-          handleToggle={this.openModal}
-          activity={this.state.activity}
-        /> : ''}
-        <div className="timeline-section timeline-center clearfix animated slideInUpTiny animation-duration-3">
-          {
-            timeLineData.map((activity, number) => {
-              const icon = activity.canBeAccess ? 'zmdi-play' : 'zmdi-time'
-              const color = activity.canBeAccess ? 'orange' : 'grey'
-              return (
-                (number % 2 === 0) ? <WithIconTimeLineItem timeLine={activity}
-                  canBeAccess={activity.canBeAccess}
-                  modalTask={activity.modalTask}
-                  buttonText="Start"
-                  color={color}
-                  buttonClick={() => this.openModal(activity.title)}
-                  onclick={() => this.openModal(activity.title)}>
-                  <span className="d-block text-white">
-                    <i className={`zmdi ${icon}`} />
-                  </span>
-                </WithIconTimeLineItem> :
-                  <WithIconTimeLineItem
-                    styleName="timeline-inverted"
-                    timeLine={activity}
-                    buttonText="Start"
-                    canBeAccess={activity.canBeAccess}
-                    modalTask={activity.modalTask}
-                    color={color}
-                    isCompleted={true}
-                  >
-                    <span className="d-block text-white"><i className={`zmdi ${icon}`} /></span>
-                  </WithIconTimeLineItem>
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import StepContent from '@material-ui/core/StepContent';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import DomainSearch from '../Domains/domains';
 
-              )
-            })
-          }
-        </div>
-      </div>
-    )
+const styles = theme => ({
+  root: {
+    width: '90%',
+  },
+  button: {
+    marginTop: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+  },
+  actionsContainer: {
+    marginBottom: theme.spacing.unit * 2,
+  },
+  resetContainer: {
+    padding: theme.spacing.unit * 3,
+  },
+});
+
+function getSteps() {
+  return ['Get a domain', 'Search for a domain', 'Purchase the Domain', 'Finish your order'];
+}
+
+function getStepContent(step) {
+  switch (step) {
+    case 0:
+      return `Your about to purchase a domain, just follow this steps, we will set you up`;
+    case 1:
+      return <DomainSearch />;
+    case 2:
+      return `Try out different ad text to see what brings in the most customers,
+              and learn how to enhance your ads using features like ad extensions.
+              If you run into any problems with your ads, find out how to tell if
+              they're running and how to resolve approval issues.`;
+    case 3:
+      return `Now just click submit!!`;
+    default:
+      return 'Unknown step';
   }
+}
+
+class VerticalLinearStepper extends React.Component {
+  state = {
+    activeStep: 0,
+  };
+
+  handleNext = () => {
+    this.setState(state => ({
+      activeStep: state.activeStep + 1,
+    }));
+  };
+
+  handleBack = () => {
+    this.setState(state => ({
+      activeStep: state.activeStep - 1,
+    }));
+  };
+
+  handleReset = () => {
+    this.setState({
+      activeStep: 0,
+    });
+  };
+
+  render() {
+    const { classes } = this.props;
+    const steps = getSteps();
+    const { activeStep } = this.state;
+
+    return (
+      <div className="jr-card domain-container">
+        <Stepper activeStep={activeStep} orientation="vertical">
+          {steps.map((label, index) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+              <StepContent>
+                <Typography className="nav-text">{getStepContent(index)}</Typography>
+                <div className={classes.actionsContainer}>
+                  <div>
+                    <Button
+                      disabled={activeStep === 0}
+                      onClick={this.handleBack}
+                      className={classes.button}
+                    >
+                      Back
+                    </Button>
+                    <Button
+                      variant="contained"
+                      onClick={this.handleNext}
+                      className={classes.button}
+                    >
+                      {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                    </Button>
+                  </div>
+                </div>
+              </StepContent>
+            </Step>
+          ))}
+        </Stepper>
+        {activeStep === steps.length && (
+          <Paper square elevation={0} className={classes.resetContainer}>
+            <Typography>All steps completed - you&apos;re finished</Typography>
+            <Button onClick={this.handleReset} className={classes.button}>
+              Reset
+            </Button>
+          </Paper>
+        )}
+      </div>
+    );
+  }
+}
+
+VerticalLinearStepper.propTypes = {
+  classes: PropTypes.object,
 };
 
-export default TimeLine;
+export default withStyles(styles)(VerticalLinearStepper);

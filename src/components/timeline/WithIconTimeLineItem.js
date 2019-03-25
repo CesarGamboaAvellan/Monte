@@ -28,4 +28,3 @@ const WithIconTimeLineItem = (props) => {
     )
 };
 export default WithIconTimeLineItem;
-

@@ -20,7 +20,7 @@ const DomainsTable = (props) => {
             <th className="display-none-small-devices">Provider</th>
             <th className="display-none-small-devices">Domain</th>
             <th className="display-none-small-devices">Price</th>
-            <th className="display-none-small-devices">Purchase</th>
+            <th className="display-none-small-devices">Add to cart</th>
           </tr>
         </thead>
         <tbody>
@@ -29,10 +29,7 @@ const DomainsTable = (props) => {
             <td>www.launchrocket.com</td>
             <td>$10</td>
             <td><Button className="button-secondary">
-              <i className="zmdi zmdi-edit zmdi-hc-fw" />
-              <span>
-                Buy
-                        </span>
+              <i className="flaticon-cart" />
             </Button>
             </td>
           </tr>
@@ -41,10 +38,7 @@ const DomainsTable = (props) => {
             <td>www.test.com</td>
             <td>$12</td>
             <td><Button className="button-secondary">
-              <i className="zmdi zmdi-edit zmdi-hc-fw" />
-              <span>
-                Buy
-                        </span>
+              <i className="flaticon-cart" />
             </Button>
             </td>
           </tr>
@@ -69,10 +63,7 @@ const DomainsTable = (props) => {
             <td colSpan="1" className="vertical-centered">
               <div className="display-grid">
                 <Button className="button-secondary">
-                  <i className="zmdi zmdi-edit zmdi-hc-fw" />
-                  <span>
-                    Buy
-                        </span>
+                  <i className="flaticon-cart" />
                 </Button>
                 <span>
                   Price: 12$
@@ -101,10 +92,7 @@ const DomainsTable = (props) => {
             <td colSpan="1" className="vertical-centered">
               <div className="display-grid">
                 <Button className="button-secondary">
-                  <i className="zmdi zmdi-edit zmdi-hc-fw" />
-                  <span>
-                    Buy
-                        </span>
+                  <i className="flaticon-cart" />
                 </Button>
                 <span>
                   Price: 11$

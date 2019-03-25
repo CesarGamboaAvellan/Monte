@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import ContainerHeader from 'components/ContainerHeader/index';
 import IntlMessages from 'util/IntlMessages';
 import UserProfileCard from '../../../components/dashboard/Common/userProfileCard/UserProfileCard';
+import TimeLineTest from '../../../MetroComponents/testTimeLine';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class Dashboard extends React.Component {
       <div className="app-wrapper">
         <ContainerHeader match={this.props.match} title={<IntlMessages id="pages.samplePage" />} />
         <UserProfileCard userData={this.state.user} addStyle="max-width-small-boxes" />
+        <TimeLineTest />
       </div>
     );
   }
