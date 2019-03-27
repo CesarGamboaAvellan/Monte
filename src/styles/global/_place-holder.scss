@@ -6,7 +6,7 @@
     height: 1px;
     min-height: 1px;
     color: inherit;
-    background-color: $gray-default;
+    background-color: #591df1;
     display: block;
     @include transition(all 0.4s ease);
     margin: 6px 0;
@@ -105,8 +105,7 @@
   padding: $jr-card-padding;
   margin-bottom: $jr-card-margin;
   background-color: $white;
-  @include border-radius($border-radius-lg);
-  border: $jr-border;
+  box-shadow: 0px 0px 40px 0px rgba(82,63,105,0.1);
   position: relative;
 }
 

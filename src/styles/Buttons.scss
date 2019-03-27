@@ -1,0 +1,31 @@
+.btn-metro-outline-warning {
+  color: #ff9800 ;
+  border-color: #ff9800!important;
+}
+.btn-metro {
+  background: transparent;
+  outline: none !important;
+  vertical-align: middle;
+}
+.btn-metro-outline-warning:hover {
+  color: #111;
+  background-color: #ffb822;
+  border-color: #ffb822;
+}
+
+.btn-metro-success {
+  color: #fff;
+  background-color: #1dc9b7;
+  border-color: #1dc9b7;
+}
+.btn-metro-lg {
+  padding: 1.15rem 1.65rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: .3rem;
+}
+.link-btn{
+  border: solid 1px;
+    padding: 5px;
+    border-radius: 0.2rem;
+}

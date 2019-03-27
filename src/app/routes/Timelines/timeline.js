@@ -67,7 +67,7 @@ class TimeLine extends React.Component {
         return (
             <div>
                 {this.state.isOpen ? <ActivityModal
-                    title="Launcher Rocket Activity"
+                    title="Launch Rocket Activity"
                     modal={this.state.isOpen}
                     handleToggle={this.openModal}
                     activity={this.state.activity}
@@ -75,7 +75,7 @@ class TimeLine extends React.Component {
                 <div className="timeline-section timeline-center clearfix animated slideInUpTiny animation-duration-3">
                     {
                         timeLineData.map((activity, number) => {
-                            const icon = activity.canBeAccess ? 'zmdi-play': 'zmdi-time'
+                            const icon = activity.canBeAccess ? 'flaticon-file' : 'flaticon-time-1'
                             const color = activity.canBeAccess ? 'orange' : 'grey'
                             return (
                                 (number % 2 === 0) ? <WithIconTimeLineItem timeLine={activity}
@@ -83,21 +83,23 @@ class TimeLine extends React.Component {
                                     modalTask={activity.modalTask}
                                     color={color}
                                     buttonClick={() => this.openModal(activity.title)}
+                                    buttonText="Start Modal"
                                     onclick={() => this.openModal(activity.title)}>
                                     <span className="d-block text-white">
                                         <i className={`zmdi ${icon}`} />
                                     </span>
                                 </WithIconTimeLineItem> :
-                                     <WithIconTimeLineItem 
-                                     styleName="timeline-inverted" 
-                                     timeLine={activity} 
-                                     canBeAccess={activity.canBeAccess}
-                                     modalTask={activity.modalTask}
-                                     color={color}
-                                     isCompleted={true}
-                                     >
-                                         <span className="d-block text-white"><i className={`zmdi ${icon}`}/></span>
-                                     </WithIconTimeLineItem>
+                                    <WithIconTimeLineItem
+                                        styleName="timeline-inverted"
+                                        timeLine={activity}
+                                        canBeAccess={activity.canBeAccess}
+                                        modalTask={activity.modalTask}
+                                        buttonText="Start on Window"
+                                        color={color}
+                                        isCompleted={true}
+                                    >
+                                        <span className="d-block text-white"><i className={icon} /></span>
+                                    </WithIconTimeLineItem>
 
                             )
                         })

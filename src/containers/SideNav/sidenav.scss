@@ -16,12 +16,14 @@
   background-color: rgb(229, 91, 82) !important;
   background-image: linear-gradient(rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.04)), linear-gradient(45deg, rgb(255, 101, 94) 0%, rgb(255, 202, 113) 100%) !important;
   background-size: auto, auto !important;
+  border: none;
   background-position: 50% 50%, 50% 50% !important;
   background-attachment: scroll, scroll !important;
   background-repeat: no-repeat, no-repeat !important;
   box-shadow: rgba(0, 0, 0, 0.15) 6px 6px 16px 0px !important;
 }
 .button-no-styles{
+  color: rgb(55, 56, 84) !important;
   background: none;
   border: none;
   margin-top: 3px;
@@ -33,7 +35,10 @@
     margin-top: 15%;
 }
 .border-solid-purple{
-  border: solid 1px rgb(73, 75, 110);
+  border: solid 1px #ededfd;
+}
+.margin-bottom{
+  margin-bottom: 25px;;
 }
 .button-no-styles:hover{
   background:none;
@@ -65,8 +70,8 @@
 .third-color {
   background-color: rgb(73, 75, 110) !important;
 }
-.orange-color{
-  color: rgb(229, 91, 82) !important;
+.purple-color{
+  color: #591df1 !important;
 }
 .secondary-login-buttons {
   display: grid;
@@ -74,11 +79,22 @@
 
 .forgot-password {
   background: none;
-  color: gray;
+  color: #cacad2;
   border: none;
 }
 .primary-color {
   color: #f2f3ff !important
+}
+.header-centered-icon{
+  position: absolute;
+    left: 50%;
+    right: 50%;
+    top: 17px;
+    margin-left: -100px;
+   
+}
+.gray-color{
+  background-color: #cacad2;
 }
 
 .forgot-password:hover {
@@ -92,4 +108,79 @@
 
 .center-text {
   text-align: center;
+}
+.width-100{
+  width: 100%;
+}
+.nav-text{
+  color: #5e6383;
+}
+.nav-link:hover{
+  i, span{
+    color: #3f51b5!important;
+    font-size: 1.05em;
+  }
+}
+
+.button-secondary{
+    color: #fff;
+    background-color: #5867dd;
+    border-color: #5867dd;
+}
+.button-secondary:hover{
+  color: #fff;
+  background-color: #384ad7;
+  border-color: #2e40d4;
+}
+
+
+// media queries
+
+@media only screen and (max-width: 600px) {
+  .display-none-small-devices{
+        display: none!important;
+  }
+  .header-centered-icon{
+    position: absolute;
+    left: 39%;
+    width: 49%;
+    top: 19px;
+     
+  }
+  .display-grid{
+    display: grid;
+  }
+  // .domains-grid{
+  //   color: red;
+  // }
+  .color-main-span{
+    color: #384ad7
+  }
+  .vertical-centered{
+    vertical-align: inherit!important;
+  }
+  .divider-domain-table{
+    border: solid 0.5px #384ad7;
+    margin-top: 7px;
+    margin-bottom: 7px;
+  }
+  .padding-search-bar{
+    padding: 1;
+  }
+  .jr-card{
+    padding: 0;
+    border: none!important;
+    border-radius: 0px!important; 
+    box-shadow: 0px 0px 40px 0px rgba(82,63,105,0.1)!important;
+  }
+  .search-bar .form-group{
+    padding: 8px;
+  }
+  
+}
+@media only screen and (min-width: 600px) {
+  .display-none-big-devices{
+        display: none!important;
+  }
+ 
 }

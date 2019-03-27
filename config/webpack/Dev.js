@@ -3,13 +3,13 @@
 /**
  * Default dev server configuration.
  */
-const webpack = require ('webpack');
-const WebpackBaseConfig = require ('./Base');
+const webpack = require('webpack');
+const WebpackBaseConfig = require('./Base');
 
 class WebpackDevConfig extends WebpackBaseConfig {
 
-    constructor () {
-        super ();
+    constructor() {
+        super();
         this.config = {
             entry: [
                 'babel-polyfill',
@@ -18,22 +18,22 @@ class WebpackDevConfig extends WebpackBaseConfig {
                 './index.js'
             ],
             plugins: [
-                new webpack.DefinePlugin ({
-                    'process.env.NODE_ENV': JSON.stringify (process.env.NODE_ENV || 'development'),
+                new webpack.DefinePlugin({
+                    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
                 }),
-                new webpack.optimize.ModuleConcatenationPlugin (),
-                new webpack.ProvidePlugin ({
+                new webpack.optimize.ModuleConcatenationPlugin(),
+                new webpack.ProvidePlugin({
                     $: 'jquery',
                     jQuery: 'jquery',
                     'window.jQuery': 'jquery'
                 }),
 
-                new webpack.NoEmitOnErrorsPlugin (),
-                new webpack.NamedModulesPlugin (),
+                new webpack.NoEmitOnErrorsPlugin(),
+                new webpack.NamedModulesPlugin(),
             ]
         };
 
-        this.config.module.rules = this.config.module.rules.concat ([
+        this.config.module.rules = this.config.module.rules.concat([
             {
                 test: /^.((?!cssmodule).)*\.(sass|scss)$/,
                 loaders: [

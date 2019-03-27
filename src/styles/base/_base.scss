@@ -5,11 +5,13 @@ html {
 }
 
 body {
-  font: {
-    family: $font-family-base;
-    size: $font-size-base;
-    weight: $font-weight-base;
-  }
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-size: 13px;
+    font-weight: 300;
+    font-family: Poppins!important;
+  
   color: $body-color;
   background-color: $body-bg;
   height: 100%;

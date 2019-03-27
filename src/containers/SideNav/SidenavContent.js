@@ -75,35 +75,63 @@ class SidenavContent extends Component {
         return null;
     }
     render() {
-        const userType = (localStorage.getItem('user') === ('admin@defaulttenant.com')) ? 'admin' : 'regular';
 
         return (
             <CustomScrollbars className="scrollbar dashboard-primary" style={{ height: 'calc(100vh - 70px)' }}>
                 <ul className="nav-menu">
+
                     <li className="menu no-arrow">
-                        <NavLink to="/app/sample-page">
-                            <i className="zmdi zmdi-home zmdi-hc-fw orange-color" />
-                            <span className="nav-text secondary-color"><IntlMessages id="pages.samplePage" /> </span>
+                        <NavLink to="/app/sample-page" className="nav-link">
+                            <i className="flaticon-home-1 nav-text" />
+                            <span className="nav-text"><IntlMessages id="pages.samplePage" /> </span>
                         </NavLink>
-                        <NavLink to="/app/domains">
-                            <i className="zmdi zmdi-rss zmdi-hc-fw orange-color" />
-                            <span className="nav-text secondary-color"><IntlMessages id="nav.Domains" /> </span>
+                        <NavLink to="/app/getDomain" className="nav-link">
+                            <i className="flaticon-globe nav-text" />
+                            <span className="nav-text">Get a Domain</span>
                         </NavLink>
-                        <NavLink to="/app/timeline">
-                            <i className="zmdi zmdi-time zmdi-hc-fw orange-color" />
-                            <span className="nav-text secondary-color"><IntlMessages id="nav.TimeLine" /> </span>
+                        {/* <NavLink to="/app/domains" className="nav-link">
+                            <i className="flaticon-globe nav-text" />
+                            <span className="nav-text"><IntlMessages id="nav.Domains" /> </span>
+                        </NavLink> */}
+                        <NavLink to="/app/timeline" className="nav-link">
+                            <i className="flaticon-list-1 nav-text" />
+                            <span className="nav-text"><IntlMessages id="nav.TimeLine" /> </span>
                         </NavLink>
-                        {
-                            userType === 'admin' && <NavLink to="/app/admin">
-                                <i className="zmdi zmdi-account zmdi-hc-fw orange-color" />
-                                <span className="nav-text secondary-color"><IntlMessages id="nav.Admin" /> </span>
-                            </NavLink>
-                        }{
-                            userType === 'admin' && <NavLink to="/app/users">
-                                <i className="zmdi zmdi-account zmdi-hc-fw orange-color" />
-                                <span className="nav-text secondary-color"><IntlMessages id="nav.Users" /> </span>
-                            </NavLink>
-                        }
+                        <li className="menu" >
+                            <a role="button" href="javascript:void(0)">
+                                <i className="flaticon-avatar nav-text" />
+                                <span className="nav-text">
+                                    <IntlMessages id="nav.Admin" />
+                                </span>
+                            </a>
+                            <ul className="sub-menu">
+                                <li>
+                                    <NavLink className="prepend-icon nav-link" to="/app/users">
+                                        <i className="flaticon-users zmdi-hc-fw" />
+                                        <span className="nav-text"><IntlMessages id="nav.users" /> </span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="prepend-icon nav-link" to="/app/roles">
+                                        <i className="flaticon-map" />
+                                        <span className="nav-text"><IntlMessages id="nav.roles" /></span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="prepend-icon nav-link" to="/app/settings">
+                                        <i className="flaticon-cogwheel" />
+                                        <span className="nav-text"><IntlMessages
+                                            id="nav.settings" /></span>
+                                    </NavLink>
+                                </li>
+                            </ul>
+
+                        </li>
+                        {/* // userType === 'admin' && <NavLink to="/app/admin">
+                            //     <i className="zmdi zmdi-account zmdi-hc-fw orange-color" />
+                            //     <span className="nav-text secondary-color"><IntlMessages id="nav.Admin" /> </span>
+                            // </NavLink>{ */}
+
 
                     </li>
 

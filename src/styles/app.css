@@ -93,7 +93,7 @@ Version        : 1.0
     height: 1px;
     min-height: 1px;
     color: inherit;
-    background-color: #fff;
+    background-color: #591df1;
     display: block;
     -webkit-transition: all 0.4s ease;
     -o-transition: all 0.4s ease;
@@ -104,7 +104,7 @@ Version        : 1.0
     position: absolute;
     display: block;
     color: inherit;
-    background-color: inherit;
+    background-color: #591df1;
     left: 0;
     height: 1px;
     min-height: 1px;
@@ -2975,7 +2975,7 @@ a.btn-info:hover, a.btn-danger:hover, a.btn-warning:hover, a.btn-success:hover, 
 }
 
 .bg-orange {
-    background-color: #ff9800 !important;
+    background-color: #591df1 !important;
 }
 
 .text-orange {
@@ -5382,7 +5382,7 @@ ul.nav-menu li.menu .sub-menu li > a:hover:before {
     -webkit-box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.15);
     -o-box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.15);
-    box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 40px 0px rgba(82,63,105,0.1);
     background-color: rgb(242, 243, 255) !important;
     color: #a1a1a1;
     line-height: 50px;

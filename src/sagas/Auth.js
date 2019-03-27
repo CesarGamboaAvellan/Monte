@@ -77,6 +77,7 @@ const signInUserWithEmailPasswordRequest = async (email, password) => {
         rememberClient: true,
     })
         .then(authUser => {
+            console.log('auth user', authUser);
             return getUser(authUser)
         })
         .then(user => user)

@@ -14,6 +14,10 @@ import UserInfo from 'components/UserInfo';
 import Menu from "components/Header/Menu";
 import Gravatar from 'react-gravatar';
 import logoIcon from '../../assets/images/pentagon.png';
+// import Modal from '../../shared/Modal';
+import PasswordModal from '../../containers/Modals/PasswordModalForm';
+import MySettingsModal from '../../containers/Modals/settingsModal';
+
 
 class Header extends React.Component {
 
@@ -34,6 +38,25 @@ class Header extends React.Component {
             userInfo: !this.state.userInfo
         })
     };
+    showPasswordModal = (type) => {
+        console.log('type of call', type);
+        if (type === 'password') {
+            this.setState({
+                showPasswordModal: !this.state.showPasswordModal,
+            })
+        }
+        else if (type === 'settings') {
+            this.setState({
+                showSettingsModal: !this.state.showSettingsModal,
+            })
+        }
+        else {
+            this.setState({
+                showSettingsModal: false,
+                showPasswordModal: false,
+            })
+        }
+    }
 
     onLangSwitcherSelect = (event) => {
         this.setState({
@@ -49,14 +72,16 @@ class Header extends React.Component {
         this.setState({ langSwitcher: false, mailNotification: false, appNotification: false, searchBox: false });
     };
     onToggleCollapsedNav = (e) => {
-        const val = !this.props.navCollapsed;
+        let val = !this.props.navCollapsed
+
         this.props.toggleCollapsedNav(val);
     };
-
     constructor() {
         super();
         this.state = {
             searchBox: false,
+            showPasswordModal: false,
+            showSettingsModal: false,
             searchText: '',
             mailNotification: false,
             langSwitcher: false,
@@ -73,11 +98,32 @@ class Header extends React.Component {
     }
 
     render() {
-        const { drawerType, locale, navigationStyle, horizontalNavPosition } = this.props;
-        const drawerStyle = drawerType.includes(FIXED_DRAWER) ? 'd-flex d-xl-none' : drawerType.includes(COLLAPSED_DRAWER) ? 'd-flex' : 'd-none';
+        const { drawerType, locale, navigationStyle, horizontalNavPosition, navCollapsed } = this.props;
+        console.log(this.props, 'header');
+        const drawerStyle = drawerType.includes(COLLAPSED_DRAWER) ? 'd-flex' : 'd-flex';
 
         return (
             <div className="app-main-header">
+
+                {
+                    this.state.showPasswordModal && <PasswordModal
+                        title="Reset your Password"
+                        action="Reset"
+                        showPasswordModal={() => this.showPasswordModal('password')}
+                        value1="Your current password"
+                        value2="Your new password"
+                    />
+                }
+                {
+                    this.state.showSettingsModal && <MySettingsModal
+                        userData={this.props.auth}
+                        title="My Settings"
+                        action="Change"
+                        showPasswordModal={() => this.showPasswordModal('settings')}
+                        value1="UserName"
+                        value2="Email"
+                    />
+                }
                 <div className="d-flex app-toolbar align-items-center">
                     {navigationStyle === HORIZONTAL_NAVIGATION ?
                         <div className="app-logo-bl">
@@ -104,20 +150,23 @@ class Header extends React.Component {
                         <Menu />}
 
                     <ul className="header-notifications list-inline ml-auto">
+                        <li>
+                            <img className='login-icon header-centered-icon' alt='...' src='//launchrocket.co/wp-content/uploads/launchrocket-logo.png' />
+                        </li>
                         <li className="d-inline-block d-lg-none list-inline-item">
                             <Dropdown
                                 className="quick-menu nav-searchbox"
                                 isOpen={this.state.searchBox}
                                 toggle={this.onSearchBoxSelect.bind(this)}>
 
-                                <DropdownToggle
+                                {/* <DropdownToggle
                                     className="d-inline-block"
                                     tag="span"
                                     data-toggle="dropdown">
-                                    <span className="icon-btn size-30 orange-color">
-                                        <i className="zmdi zmdi-search zmdi-hc-fw orange-color" />
+                                    <span className="icon-btn size-30 purple-color">
+                                        <i className="zmdi zmdi-search zmdi-hc-fw purple-color" />
                                     </span>
-                                </DropdownToggle>
+                                </DropdownToggle> */}
 
                                 <DropdownMenu right className="p-0">
                                     <SearchBox styleName="search-dropdown" placeholder=""
@@ -137,7 +186,7 @@ class Header extends React.Component {
                                     tag="span"
                                     data-toggle="dropdown">
                                     <div className="d-flex align-items-center pointer">
-                                        <i className={`flag flag-24 flag-${locale.icon} orange-color`} />
+                                        <i className={`flag flag-24 flag-${locale.icon} purple-color`} />
                                     </div>
                                 </DropdownToggle>
 
@@ -160,7 +209,7 @@ class Header extends React.Component {
                                     tag="span"
                                     data-toggle="dropdown">
                                     <span className="icon-btn size-20 font-size-16">
-                                        <i className="zmdi zmdi-notifications-active zmdi-hc-lg icon-alert orange-color" />
+                                        <i className="flaticon-alert" />
                                     </span>
                                 </DropdownToggle>
 
@@ -173,7 +222,7 @@ class Header extends React.Component {
                         </li>
                         <li className="list-inline-item mail-tour">
                             <Dropdown
-                                className="quick-menu orange-color"
+                                className="quick-menu purple-color"
                                 isOpen={this.state.mailNotification}
                                 toggle={this.onMailNotificationSelect.bind(this)}
                             >
@@ -183,7 +232,7 @@ class Header extends React.Component {
                                     data-toggle="dropdown">
 
                                     <span className="icon-btn size-20 font-size-16">
-                                        <i className="zmdi zmdi-comment-alt-text icon-alert zmdi-hc-lg orange-color" />
+                                        <i className="flaticon-speech-bubble" />
                                     </span>
                                 </DropdownToggle>
 
@@ -210,8 +259,9 @@ class Header extends React.Component {
                                 </DropdownToggle>
 
                                 <DropdownMenu right>
-
-                                    <UserInfo />
+                                    <UserInfo
+                                        showPasswordModal={(data) => this.showPasswordModal(data)}
+                                    />
                                 </DropdownMenu>
                             </Dropdown>
 
@@ -224,9 +274,9 @@ class Header extends React.Component {
 
 }
 
-const mapStateToProps = ({ settings }) => {
-    const { drawerType, locale, navigationStyle, horizontalNavPosition } = settings;
-    return { drawerType, locale, navigationStyle, horizontalNavPosition }
+const mapStateToProps = ({ settings, auth }) => {
+    const { drawerType, locale, navigationStyle, horizontalNavPosition, navCollapsed } = settings;
+    return { drawerType, locale, navigationStyle, horizontalNavPosition, auth, navCollapsed }
 };
 
 export default withRouter(connect(mapStateToProps, { toggleCollapsedNav, switchLanguage })(Header));

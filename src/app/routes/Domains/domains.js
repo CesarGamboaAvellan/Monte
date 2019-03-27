@@ -1,9 +1,9 @@
 import OrderTable from '../../../components/dashboard/eCommerce/OrderTable';
 import SearchBox from '../../../components/SearchBox/index';
 import React from 'react';
-import ContainerHeader from 'components/ContainerHeader/index';
-import IntlMessages from 'util/IntlMessages';
 import Card from '../../../components/Cards/Sample/index';
+import DomainsTable from '../../../components/Tables/TableDomains';
+
 let counter = 0;
 function createData(domainName, host, price) {
     counter += 1;
@@ -42,20 +42,19 @@ class SamplePage extends React.Component {
     render() {
 
         return (
-            <div className="app-wrapper">
-                <ContainerHeader match={this.props.match} title={<IntlMessages id="pages.Domains" />} />
-                <Card>
-                    <SearchBox styleName="d-lg-block"
-                        placeholder="Search for a domain here"
-                        onChange={(e) => this.setDomain(e)}
-                        value={this.state.domain}
-                        clickEvent={() => this.fetchDomain(this.state.domain)}
-                    />
-                </Card>
-                <Card>
-                    <OrderTable data={this.state.dataState} />
-                </Card>
-            </div>
+            // <div className="app-wrapper">
+            //     <ContainerHeader match={this.props.match} title={<IntlMessages id="pages.Domains" />} />
+            <Card className="table-domains">
+                <SearchBox className="padding-search-bar" styleName="d-lg-block margin-bottom"
+                    placeholder="Search for a domain here"
+                    onChange={(e) => this.setDomain(e)}
+                    value={this.state.domain}
+                    clickEvent={() => this.fetchDomain(this.state.domain)}
+                />
+                <DomainsTable data={this.state.dataState} />
+            </Card>
+
+            // </div>
         );
     }
 }

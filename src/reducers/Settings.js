@@ -12,11 +12,11 @@ import {
     VERTICAL_NAVIGATION,
     WINDOW_WIDTH
 } from 'constants/ActionTypes';
-import {INDIGO} from 'constants/ThemeColors';
+import { INDIGO } from 'constants/ThemeColors';
 
 const rltLocale = ['ar'];
 const initialSettings = {
-    navCollapsed: false,
+    navCollapsed: true,
     drawerType: FIXED_DRAWER,
     themeColor: INDIGO,
     darkTheme: false,

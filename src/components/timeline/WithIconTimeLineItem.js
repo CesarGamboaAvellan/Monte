@@ -18,14 +18,13 @@ const WithIconTimeLineItem = (props) => {
                 <p>{description}</p>
                 {(props.canBeAccess && props.modalTask) ? <Button
                     onClick={props.buttonClick}
-                    className="button-link">
-                    Start Task Modal
-                </Button> : (props.canBeAccess && <Link className="btn button-link text-white" to={`/app/activity/${id}`}>
-                        Start Task Window
+                    className="btn-metro btn-metro-outline-warning">
+                    {props.buttonText}
+                </Button> : (props.canBeAccess && <Link className=" link-btn btn-metro btn-metro-outline-warning" to={`/app/activity/${id}`}>
+                    {props.buttonText}
                 </Link>)}
             </div>
         </div>
     )
 };
 export default WithIconTimeLineItem;
-
