@@ -96,7 +96,7 @@ class VerticalLinearStepper extends React.Component {
                     <Button
                       variant="contained"
                       onClick={this.handleNext}
-                      className={classes.button}
+                      className={`${classes.button} continue-domain-button`}
                     >
                       {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                     </Button>
