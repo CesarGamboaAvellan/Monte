@@ -75,6 +75,7 @@
     "react-table": "6.8.0",
     "react-text-mask": "5.0.2",
     "react-toggle-switch": "3.0.4",
+    "react-typist": "^2.0.5",
     "reactstrap": "^6.4.0",
     "recharts": "1.4.2",
     "recompose": "0.26.0",

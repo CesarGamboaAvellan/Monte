@@ -20,17 +20,25 @@
     box-shadow: none;
     border-color: #ff9800 !important;
 }
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+.button-domains{
+  color: $white;
+  width: 90px;
+    height: 24px;
+    padding: 0;
+    text-transform: none;
 }
+
 @keyframes blinking-cursor {
   from, to { border-color: transparent }
   50% { border-color: orange }
 }
 .typewritter{
-  animation: 
-    typing 3.5s steps(40, end),
-    blinking-cursor .5s step-end infinite;
+  caret-color: red;
+      animation: 
+      blinking-cursor .5s step-end infinite;
+}
+.button-alighment{
+  text-align: right;
+    margin-top: 16px;
 }
 }

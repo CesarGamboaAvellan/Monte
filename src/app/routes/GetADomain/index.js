@@ -5,10 +5,12 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
+import Typist from 'react-typist';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import DomainSearch from '../Domains/domains';
+import SearchBox from '../../../components/SearchBox/index';
 
 const styles = theme => ({
   root: {
@@ -30,27 +32,11 @@ function getSteps() {
   return ['Get a domain', 'Search for a domain', 'Purchase the Domain', 'Finish your order'];
 }
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return `Your about to purchase a domain. Follow this steps and we'll set you up!!`;
-    case 1:
-      return <DomainSearch />;
-    case 2:
-      return `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`;
-    case 3:
-      return `Now just click submit!!`;
-    default:
-      return 'Unknown step';
-  }
-}
 
 class VerticalLinearStepper extends React.Component {
   state = {
     activeStep: 0,
+    domainRequested: '',
   };
 
   handleNext = () => {
@@ -58,6 +44,19 @@ class VerticalLinearStepper extends React.Component {
       activeStep: state.activeStep + 1,
     }));
   };
+  setDomain = (e) => {
+    this.setState({
+      domainRequested: e.target.value
+    })
+  }
+  // fetchDomain = (domain) => {
+  //   console.log(domain)
+  //   this.setState({
+  //     dataState: data.filter((item) => {
+  //       return item.domainName.toLowerCase().indexOf(this.state.domain.toLowerCase()) !== -1
+  //     })
+  //   })
+  // }
 
   handleBack = () => {
     this.setState(state => ({
@@ -70,7 +69,53 @@ class VerticalLinearStepper extends React.Component {
       activeStep: 0,
     });
   };
-
+  getStepContent = (step) => {
+    const options = {
+      show: true,
+      blink: true,
+      element: '|',
+      hideWhenDone: true,
+      hideWhenDoneDelay: 200,
+    }
+    switch (step) {
+      case 0:
+        return {
+          text: <Typist cursor={options}>
+            <span className="typewritter">Your about to purchase a domain. Follow these steps and we'll set you up!</span>
+          </Typist>,
+          hasButton: true,
+        }
+      case 1:
+        return {
+          text: <div>
+            <Typist cursor={options}>
+              <span className="typewritter">Tell me the name of the domain you want to look for</span>
+            </Typist>
+            <SearchBox className="padding-search-bar" styleName="d-lg-block margin-bottom"
+              onChange={(e) => this.setDomain(e)}
+              value={this.state.domain}
+            // clickEvent={() => this.fetchDomain(this.state.domain)}
+            />
+          </div>,
+          hasButton: false,
+        }
+      case 2:
+        return {
+          text: 'hi',
+          hasButton: false,
+        };
+      case 3:
+        return {
+          text: 'hi',
+          hasButton: false,
+        };
+      default:
+        return {
+          text: 'unkwnon step',
+          hasButton: false,
+        };;
+    }
+  }
   render() {
     const { classes } = this.props;
     const steps = getSteps();
@@ -83,23 +128,26 @@ class VerticalLinearStepper extends React.Component {
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
               <StepContent>
-                <Typography className="nav-text typewritter">{getStepContent(index)}</Typography>
+                <Typography className="nav-text">{this.getStepContent(index).text}</Typography>
                 <div className={classes.actionsContainer}>
-                  <div>
-                    <Button
+                  <div className="button-alighment">
+                    {/* <Button
                       disabled={activeStep === 0}
                       onClick={this.handleBack}
                       className={classes.button}
                     >
                       Back
-                    </Button>
-                    <Button
-                      variant="contained"
-                      onClick={this.handleNext}
-                      className={`${classes.button} continue-domain-button`}
-                    >
-                      {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                    </Button>
+                    </Button> */}
+                    {
+                      this.getStepContent(index).hasButton && <Button
+                        variant="contained"
+                        onClick={this.handleNext}
+                        className={`button-link button-domains`}
+                      >
+                        {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                      </Button>
+                    }
+
                   </div>
                 </div>
               </StepContent>

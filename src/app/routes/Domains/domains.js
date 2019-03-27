@@ -31,14 +31,13 @@ class SamplePage extends React.Component {
             domain: e.target.value
         })
     }
-    fetchDomain = (domain) => {
-        console.log(domain)
-        this.setState({
-            dataState: data.filter((item) => {
-                return item.domainName.toLowerCase().indexOf(this.state.domain.toLowerCase()) !== -1
-            })
-        })
-    }
+    // fetchDomain = (domain) => {
+    //     this.setState({
+    //         dataState: data.filter((item) => {
+    //             return item.domainName.toLowerCase().indexOf(this.state.domain.toLowerCase()) !== -1
+    //         })
+    //     })
+    // }
     render() {
 
         return (
