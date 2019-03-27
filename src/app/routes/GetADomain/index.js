@@ -33,7 +33,7 @@ function getSteps() {
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return `Your about to purchase a domain, just follow this steps, we will set you up`;
+      return `Your about to purchase a domain. Follow this steps and we'll set you up!!`;
     case 1:
       return <DomainSearch />;
     case 2:
@@ -83,7 +83,7 @@ class VerticalLinearStepper extends React.Component {
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
               <StepContent>
-                <Typography className="nav-text">{getStepContent(index)}</Typography>
+                <Typography className="nav-text typewritter">{getStepContent(index)}</Typography>
                 <div className={classes.actionsContainer}>
                   <div>
                     <Button
