@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import DomainSearch from '../Domains/domains';
 import SearchBox from '../../../components/SearchBox/index';
 import { Table } from 'reactstrap';
-import Fade from 'react-fade-opacity';
+import FadeIn from 'react-fade-in';
 
 const styles = theme => ({
   root: {
@@ -40,6 +40,8 @@ class VerticalLinearStepper extends React.Component {
     activeStep: 0,
     domainRequested: '',
     mockDomains: [],
+    fetchResults: false,
+    fetchedResultTaken: false,
   };
 
   handleNext = () => {
@@ -59,7 +61,9 @@ class VerticalLinearStepper extends React.Component {
     this.setState({
       mockDomains: this.state.mockDomains
         .concat(domain1)
-        .concat(domain2)
+        .concat(domain2),
+      fetchResults: true,
+      fetchedResultTaken: true,
     })
   };
 
@@ -86,7 +90,7 @@ class VerticalLinearStepper extends React.Component {
       case 0:
         return {
           text: <Typist cursor={options}>
-            <span className="typewritter">Your about to purchase a domain. Follow these steps and we'll set you up!</span>
+            <span className="typewritter">You're about to purchase a domain. Follow these steps and we'll set you up!</span>
           </Typist>,
           hasButton: true,
         }
@@ -101,7 +105,7 @@ class VerticalLinearStepper extends React.Component {
         }
       case 2:
         return {
-          text: 'hi',
+          text: 'This step is to enter credit card',
           hasButton: false,
         };
       case 3:
@@ -117,6 +121,13 @@ class VerticalLinearStepper extends React.Component {
     }
   }
   render() {
+    const options = {
+      show: true,
+      blink: true,
+      element: '|',
+      hideWhenDone: true,
+      hideWhenDoneDelay: 200,
+    }
     const { classes } = this.props;
     const steps = getSteps();
     const { activeStep } = this.state;
@@ -125,19 +136,11 @@ class VerticalLinearStepper extends React.Component {
         <Stepper activeStep={activeStep} orientation="vertical">
           {steps.map((label, index) => (
             <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+              <StepLabel className="border-left-none step-header">{label}</StepLabel>
               <StepContent>
                 <Typography className="nav-text">{this.getStepContent(index).text}</Typography>
                 <div className={classes.actionsContainer}>
-
                   <div className="button-alighment">
-                    {/* <Button
-                      disabled={activeStep === 0}
-                      onClick={this.handleBack}
-                      className={classes.button}
-                    >
-                      Back
-                    </Button> */}
                     {
                       this.getStepContent(index).hasButton && <Button
                         variant="contained"
@@ -148,7 +151,7 @@ class VerticalLinearStepper extends React.Component {
                       </Button>
                     }
                     {
-                      activeStep === 1 &&
+                      (activeStep === 1 && !this.state.fetchResults) &&
                       <div className="fade-in-search" >
                         <SearchBox className="padding-search-bar"
                           styleName="d-lg-block margin-bottom"
@@ -158,33 +161,63 @@ class VerticalLinearStepper extends React.Component {
                         />
                       </div>
                     }
+                    {(activeStep === 1 && this.state.fetchResults) && <div className="box-background">
+                      <span>{this.state.domainRequested}</span></div>}
+                    {(activeStep === 1 && this.state.fetchedResultTaken) &&
+                      <Typography className="nav-text"><Typist className="typist-align" cursor={options}>
+                        <span
+                          className="typewritter">Sorry, that domain is taken, maybe you'll like one of this options?
+                    </span>
+                      </Typist></Typography>
+                    }
                     {
-                      activeStep === 1 && this.state.mockDomains.length > 0 &&
-                      <h1>{this.state.domainRequested}</h1>
-                      &&
-                      <Table hover>
-                        <tbody>
-                          {this.state.mockDomains.map((record) => {
-                            return (
-                              <tr>
-                                <td className="border-td">
-                                  {record}
-                                </td>
-                                <td className="border-td">
-                                  <Button
-                                    variant="contained"
-                                    onClick={this.handleNext}
-                                    className={`button-link button-domains`}
-                                  >
-                                    Select
-                                  </Button>
-                                </td>
-                              </tr>
-                            );
-                          })}
 
-                        </tbody>
-                      </Table>
+                      activeStep === 1 && this.state.mockDomains.length > 0 &&
+                      <FadeIn delay={4700}>
+                        <Table hover>
+                          <tbody>
+                            {this.state.mockDomains.map((record) => {
+                              return (
+                                <tr>
+                                  <td className="border-td">
+                                    {record}
+                                  </td>
+                                  <td className="border-td">
+                                    <Button
+                                      variant="contained"
+                                      onClick={this.handleNext}
+                                      className={`button-link button-domains`}
+                                    >
+                                      Select
+                                    </Button>
+                                  </td>
+                                </tr>
+                              );
+                            })}
+
+                          </tbody>
+                        </Table>
+                      </FadeIn>
+
+                    }
+                    {(activeStep === 1 && this.state.fetchedResultTaken) &&
+                      <Typography className="nav-text"><Typist className="typist-align" cursor={options}>
+                        <Typist.Delay ms={5850} cursor={options} />
+                        <span
+                          className="typewritter">You can also perform a new search below
+                    </span>
+                      </Typist></Typography>
+                    }
+                    {
+                      (activeStep === 1 && this.state.fetchedResultTaken) &&
+                      <FadeIn delay={9000}>
+                        <SearchBox className="padding-search-bar"
+                          styleName="d-lg-block margin-bottom"
+                          onChange={(e) => this.setDomain(e)}
+                          value={this.state.domainRequested}
+                          clickEvent={() => this.fetchDomain(this.state.domainRequested)}
+                        />
+                      </FadeIn>
                     }
 
                   </div>

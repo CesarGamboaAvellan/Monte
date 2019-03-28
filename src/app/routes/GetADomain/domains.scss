@@ -1,4 +1,18 @@
 .domain-container{
+  font-family: Poppins;
+  button{
+    span{
+      color: white,
+    }
+  }
+  span{
+    color: #5e6383;
+  }
+  .step-header{
+    font-size: 1.3rem;
+  }
+  
+  
   width: initial;
   max-width: 589px;;
     margin-top: 27px;
@@ -22,24 +36,55 @@
 }
 .button-domains{
   color: $white;
-  width: 90px;
-    height: 24px;
-    padding: 0;
-    text-transform: none;
+  width: 64px;
+  height: 20px;
+  padding: 0;
+  text-transform: none;
 }
-
+.MuiStepContent-root-102,
+ .MuiStepContent-root-292,
+  .MuiStepContent-root-1134,
+  .MuiStepContent-root-1442{
+  border-left: none;
+}
+.MuiStepConnector-lineVertical-147,
+ .MuiStepConnector-lineVertical-337,
+ .MuiStepConnector-lineVertical-1179,
+ .MuiStepConnector-lineVertical-1487{
+  border-left: none;
+}
+.MuiStepContent-root-256 {
+  border:none;
+}
+.box-background{
+  background-color: #f9f9fc !important;
+  width: 102px;
+    margin-left: auto;
+    text-align: center;
+    margin-bottom: 24px;
+    padding: 7px;
+}
+.MuiStepConnector-line-299 {
+  border: none;
+}
 @keyframes blinking-cursor {
   from, to { border-color: transparent }
   50% { border-color: orange }
 }
 .typewritter{
-  caret-color: red;
       animation: 
       blinking-cursor .5s step-end infinite;
 }
+.typist-align{
+  caret-color: transparent;
+}
 .button-alighment{
+  
   text-align: right;
     margin-top: 16px;
+}
+.typist-align{
+  text-align: left;
 }
 .fade-in{
   opacity: 0;
