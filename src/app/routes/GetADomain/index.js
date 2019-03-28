@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import DomainSearch from '../Domains/domains';
 import SearchBox from '../../../components/SearchBox/index';
+import FadeIn from 'react-fade-in';
 
 const styles = theme => ({
   root: {
@@ -89,12 +90,11 @@ class VerticalLinearStepper extends React.Component {
         return {
           text: <div>
             <Typist cursor={options}>
-              <span className="typewritter">Tell me the name of the domain you want to look for</span>
+              <span className="typewritter">Tell me the name of the domain you want to look for?</span>
             </Typist>
             <SearchBox className="padding-search-bar" styleName="d-lg-block margin-bottom"
               onChange={(e) => this.setDomain(e)}
-              value={this.state.domain}
-            // clickEvent={() => this.fetchDomain(this.state.domain)}
+              value={this.state.domainRequested}
             />
           </div>,
           hasButton: false,
@@ -130,6 +130,7 @@ class VerticalLinearStepper extends React.Component {
               <StepContent>
                 <Typography className="nav-text">{this.getStepContent(index).text}</Typography>
                 <div className={classes.actionsContainer}>
+
                   <div className="button-alighment">
                     {/* <Button
                       disabled={activeStep === 0}
@@ -142,7 +143,7 @@ class VerticalLinearStepper extends React.Component {
                       this.getStepContent(index).hasButton && <Button
                         variant="contained"
                         onClick={this.handleNext}
-                        className={`button-link button-domains`}
+                        className={`button-link button-domains fade-in`}
                       >
                         {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                       </Button>
