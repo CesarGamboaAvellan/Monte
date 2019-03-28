@@ -11,7 +11,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import DomainSearch from '../Domains/domains';
 import SearchBox from '../../../components/SearchBox/index';
-import FadeIn from 'react-fade-in';
+import { Table } from 'reactstrap';
+import Fade from 'react-fade-opacity';
 
 const styles = theme => ({
   root: {
@@ -38,6 +39,7 @@ class VerticalLinearStepper extends React.Component {
   state = {
     activeStep: 0,
     domainRequested: '',
+    mockDomains: [],
   };
 
   handleNext = () => {
@@ -50,14 +52,16 @@ class VerticalLinearStepper extends React.Component {
       domainRequested: e.target.value
     })
   }
-  // fetchDomain = (domain) => {
-  //   console.log(domain)
-  //   this.setState({
-  //     dataState: data.filter((item) => {
-  //       return item.domainName.toLowerCase().indexOf(this.state.domain.toLowerCase()) !== -1
-  //     })
-  //   })
-  // }
+  fetchDomain = (domain) => {
+    console.log(domain)
+    const domain1 = `www.${domain}.co.cr`;
+    const domain2 = `www.${domain}.org`;
+    this.setState({
+      mockDomains: this.state.mockDomains
+        .concat(domain1)
+        .concat(domain2)
+    })
+  };
 
   handleBack = () => {
     this.setState(state => ({
@@ -92,10 +96,6 @@ class VerticalLinearStepper extends React.Component {
             <Typist cursor={options}>
               <span className="typewritter">Tell me the name of the domain you want to look for?</span>
             </Typist>
-            <SearchBox className="padding-search-bar" styleName="d-lg-block margin-bottom"
-              onChange={(e) => this.setDomain(e)}
-              value={this.state.domainRequested}
-            />
           </div>,
           hasButton: false,
         }
@@ -120,7 +120,6 @@ class VerticalLinearStepper extends React.Component {
     const { classes } = this.props;
     const steps = getSteps();
     const { activeStep } = this.state;
-
     return (
       <div className="jr-card domain-container">
         <Stepper activeStep={activeStep} orientation="vertical">
@@ -147,6 +146,45 @@ class VerticalLinearStepper extends React.Component {
                       >
                         {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                       </Button>
+                    }
+                    {
+                      activeStep === 1 &&
+                      <div className="fade-in-search" >
+                        <SearchBox className="padding-search-bar"
+                          styleName="d-lg-block margin-bottom"
+                          onChange={(e) => this.setDomain(e)}
+                          value={this.state.domainRequested}
+                          clickEvent={() => this.fetchDomain(this.state.domainRequested)}
+                        />
+                      </div>
+                    }
+                    {
+                      activeStep === 1 && this.state.mockDomains.length > 0 &&
+                      <h1>{this.state.domainRequested}</h1>
+                      &&
+                      <Table hover>
+                        <tbody>
+                          {this.state.mockDomains.map((record) => {
+                            return (
+                              <tr>
+                                <td className="border-td">
+                                  {record}
+                                </td>
+                                <td className="border-td">
+                                  <Button
+                                    variant="contained"
+                                    onClick={this.handleNext}
+                                    className={`button-link button-domains`}
+                                  >
+                                    Select
+                                  </Button>
+                                </td>
+                              </tr>
+                            );
+                          })}
+
+                        </tbody>
+                      </Table>
                     }
 
                   </div>
