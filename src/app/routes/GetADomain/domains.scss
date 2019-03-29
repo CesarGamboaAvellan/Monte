@@ -1,5 +1,8 @@
 .domain-container{
   font-family: Poppins;
+  div, span{
+    border-left: none!important;
+  }
   button{
     span{
       color: white,
