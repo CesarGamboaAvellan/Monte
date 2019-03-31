@@ -36,35 +36,53 @@ function getSteps() {
 
 
 class VerticalLinearStepper extends React.Component {
-  state = {
-    activeStep: 0,
-    domainRequested: '',
-    mockDomains: [],
-    fetchResults: false,
-    fetchedResultTaken: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeStep: 0,
+      domainRequested: '',
+      mockDomains: [],
+      fetchResults: false,
+      fetchedResultTaken: false,
+    };
+
+  }
 
   handleNext = () => {
     this.setState(state => ({
       activeStep: state.activeStep + 1,
     }));
   };
+  resetState = () => {
+    this.setState({
+      mockDomains: [],
+    })
+  }
   setDomain = (e) => {
     this.setState({
       domainRequested: e.target.value
     })
   }
+  componentWillReceiveProps = (nextProps) => {
+    console.log('next props', nextProps);
+  }
   fetchDomain = (domain) => {
-    console.log(domain)
+    const cleaningArray = [];
+    console.log('called the fetchDomainFunction', this.state.mockDomains, domain);
     const domain1 = `www.${domain}.co.cr`;
     const domain2 = `www.${domain}.org`;
     this.setState({
-      mockDomains: this.state.mockDomains
-        .concat(domain1)
-        .concat(domain2),
-      fetchResults: true,
-      fetchedResultTaken: true,
+      mockDomains: [],
+    }, function () {
+      console.log('in the callback', this.state.mockDomains)
+      this.setState({
+        cleanTable: true,
+        mockDomains: this.state.mockDomains.concat(domain1, domain2),
+        fetchResults: true,
+        fetchedResultTaken: true,
+      })
     })
+
   };
 
   handleBack = () => {
@@ -90,7 +108,8 @@ class VerticalLinearStepper extends React.Component {
       case 0:
         return {
           text: <Typist cursor={options}>
-            <span className="typewritter">You're about to purchase a domain. Follow these steps and we'll set you up!</span>
+            <span className="typewritter">You're about to purchase a domain. Follow these steps and we'll set you up!
+            </span>
           </Typist>,
           hasButton: true,
         }
@@ -128,6 +147,7 @@ class VerticalLinearStepper extends React.Component {
       hideWhenDone: true,
       hideWhenDoneDelay: 200,
     }
+    console.log('mock domains in the render', this.state.mockDomains);
     const { classes } = this.props;
     const steps = getSteps();
     const { activeStep } = this.state;
@@ -174,6 +194,7 @@ class VerticalLinearStepper extends React.Component {
 
                       activeStep === 1 && this.state.mockDomains.length > 0 &&
                       <FadeIn delay={4700}>
+
                         <Table hover>
                           <tbody>
                             {this.state.mockDomains.map((record) => {
@@ -197,6 +218,7 @@ class VerticalLinearStepper extends React.Component {
 
                           </tbody>
                         </Table>
+
                       </FadeIn>
 
                     }
