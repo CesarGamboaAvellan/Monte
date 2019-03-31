@@ -28,15 +28,6 @@
       font-family: Poppins;
       line-height: 1.46429em;
   }
-  .continue-domain-button{
-  background: transparent;
-    outline: none !important;
-    vertical-align: middle;
-    color: #ff9800;
-    border: solid 1px;
-    box-shadow: none;
-    border-color: #ff9800 !important;
-}
 .button-domains{
   color: $white;
   width: 64px;
@@ -49,6 +40,12 @@
   .MuiStepContent-root-1134,
   .MuiStepContent-root-1442{
   border-left: none;
+}
+.domains-back-button{
+  width: 64px;
+  height: 20px;
+  padding: 0;
+  text-transform: none;
 }
 .MuiStepConnector-lineVertical-147,
  .MuiStepConnector-lineVertical-337,
@@ -89,12 +86,22 @@
 .typist-align{
   text-align: left;
 }
-.fade-in{
+.fade-in-step1{
   opacity: 0;
     -moz-animation: fadein 2s ease-in 5s forwards; /* Firefox */
     -webkit-animation: fadein 2s ease-in 5s forwards; /* Safari and Chrome */
     -o-animation: fadein 2s ease-in 5s forwards; /* Opera */
     animation: fadein 2s ease-in 5s forwards;
+}
+.domains-back-button{
+  color: #5e6383
+}
+.fade-in-step3{
+  opacity: 0;
+    -moz-animation: fadein 2s ease-in 3s forwards; /* Firefox */
+    -webkit-animation: fadein 2s ease-in 3s forwards; /* Safari and Chrome */
+    -o-animation: fadein 2s ease-in 3s forwards; /* Opera */
+    animation: fadein 2s ease-in 3s forwards;
 }
 .fade-in-search{
   opacity: 0;

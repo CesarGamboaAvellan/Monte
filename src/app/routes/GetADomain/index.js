@@ -9,7 +9,6 @@ import Typist from 'react-typist';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import DomainSearch from '../Domains/domains';
 import SearchBox from '../../../components/SearchBox/index';
 import { Table } from 'reactstrap';
 import FadeIn from 'react-fade-in';
@@ -44,6 +43,7 @@ class VerticalLinearStepper extends React.Component {
       mockDomains: [],
       fetchResults: false,
       fetchedResultTaken: false,
+      foundSearch: false,
     };
 
   }
@@ -63,25 +63,32 @@ class VerticalLinearStepper extends React.Component {
       domainRequested: e.target.value
     })
   }
-  componentWillReceiveProps = (nextProps) => {
-    console.log('next props', nextProps);
-  }
-  fetchDomain = (domain) => {
-    const cleaningArray = [];
-    console.log('called the fetchDomainFunction', this.state.mockDomains, domain);
-    const domain1 = `www.${domain}.co.cr`;
-    const domain2 = `www.${domain}.org`;
-    this.setState({
-      mockDomains: [],
-    }, function () {
-      console.log('in the callback', this.state.mockDomains)
+  fetchDomain = (domain, status) => {
+    if (status === 'success') {
       this.setState({
-        cleanTable: true,
-        mockDomains: this.state.mockDomains.concat(domain1, domain2),
-        fetchResults: true,
-        fetchedResultTaken: true,
+        mockDomains: [],
+      }, function () {
+        console.log('mockdomains if success', this.state.mockDomains)
+        this.setState({
+          mockDomains: this.state.mockDomains.concat(domain),
+          foundSearch: true,
+        })
       })
-    })
+    }
+    else {
+      const domain1 = `www.${domain}.co.cr`;
+      const domain2 = `www.${domain}.org`;
+      this.setState({
+        mockDomains: [],
+      }, function () {
+        this.setState({
+          cleanTable: true,
+          mockDomains: this.state.mockDomains.concat(domain1, domain2),
+          fetchResults: true,
+          fetchedResultTaken: true,
+        })
+      })
+    }
 
   };
 
@@ -108,34 +115,51 @@ class VerticalLinearStepper extends React.Component {
       case 0:
         return {
           text: <Typist cursor={options}>
-            <span className="typewritter">You're about to purchase a domain. Follow these steps and we'll set you up!
+            <span
+              className="typewritter">
+              You're about to purchase a domain. Follow these steps and we'll set you up!
             </span>
           </Typist>,
           hasButton: true,
+          hasBackButton: false,
         }
       case 1:
         return {
           text: <div>
             <Typist cursor={options}>
-              <span className="typewritter">Tell me the name of the domain you want to look for?</span>
+              <span
+                className="typewritter">Tell me the name of the domain you want to look for?
+                </span>
             </Typist>
           </div>,
           hasButton: false,
+          hasBackButton: false,
         }
       case 2:
         return {
-          text: 'This step is to enter credit card',
-          hasButton: false,
+          text: <div>
+            <Typist cursor={options}>
+              <span
+                className="typewritter">{
+                  `You're about to purchase the domain ${this.state.mockDomains[0]}, if you agree, click purchase`
+                }
+              </span>
+            </Typist>
+          </div>,
+          hasButton: true,
+          hasBackButton: true,
         };
       case 3:
         return {
-          text: 'hi',
+          text: 'Congratulations!!, you just purchased your domain',
           hasButton: false,
+          hasBackButton: false,
         };
       default:
         return {
           text: 'unkwnon step',
           hasButton: false,
+          hasBackButton: false,
         };;
     }
   }
@@ -147,10 +171,17 @@ class VerticalLinearStepper extends React.Component {
       hideWhenDone: true,
       hideWhenDoneDelay: 200,
     }
-    console.log('mock domains in the render', this.state.mockDomains);
+
     const { classes } = this.props;
     const steps = getSteps();
     const { activeStep } = this.state;
+    let fadeInClass = 'fade-in-step1';
+    let buttonText = 'Next';
+    console.log('active step', this.state.activeStep);
+    if (activeStep === 2) {
+      fadeInClass = 'fade-in-step3'
+      buttonText = 'Purchase'
+    }
     return (
       <div className="jr-card domain-container">
         <Stepper activeStep={activeStep} orientation="vertical">
@@ -162,12 +193,21 @@ class VerticalLinearStepper extends React.Component {
                 <div className={classes.actionsContainer}>
                   <div className="button-alighment">
                     {
+                      this.getStepContent(index).hasBackButton &&
+                      <button
+                        onClick={this.handleBack}
+                        className={`domains-back-button  ${fadeInClass}`}
+                      >
+                        Back
+                    </button>
+                    }
+                    {
                       this.getStepContent(index).hasButton && <Button
                         variant="contained"
                         onClick={this.handleNext}
-                        className={`button-link button-domains fade-in`}
+                        className={`button-link button-domains ${fadeInClass}`}
                       >
-                        {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                        {activeStep === steps.length - 1 ? 'Finish' : buttonText}
                       </Button>
                     }
                     {
@@ -183,7 +223,7 @@ class VerticalLinearStepper extends React.Component {
                     }
                     {(activeStep === 1 && this.state.fetchResults) && <div className="box-background">
                       <span>{this.state.domainRequested}</span></div>}
-                    {(activeStep === 1 && this.state.fetchedResultTaken) &&
+                    {(activeStep === 1 && this.state.fetchedResultTaken && !this.state.foundSearch) &&
                       <Typography className="nav-text"><Typist className="typist-align" cursor={options}>
                         <span
                           className="typewritter">Sorry, that domain is taken, maybe you'll like one of this options?
@@ -223,21 +263,22 @@ class VerticalLinearStepper extends React.Component {
 
                     }
                     {(activeStep === 1 && this.state.fetchedResultTaken) &&
-                      <Typography className="nav-text"><Typist className="typist-align" cursor={options}>
-                        <Typist.Delay ms={5850} cursor={options} />
-                        <span
-                          className="typewritter">You can also perform a new search below
-                    </span>
-                      </Typist></Typography>
+                      <Typography className="nav-text typist-align">
+                        <FadeIn delay={4800}>
+                          <span
+                            className="typewritter">You can also, perform a new search below
+                          </span>
+                        </FadeIn>
+                      </Typography>
                     }
                     {
                       (activeStep === 1 && this.state.fetchedResultTaken) &&
-                      <FadeIn delay={9000}>
+                      <FadeIn delay={4900}>
                         <SearchBox className="padding-search-bar"
                           styleName="d-lg-block margin-bottom"
                           onChange={(e) => this.setDomain(e)}
                           value={this.state.domainRequested}
-                          clickEvent={() => this.fetchDomain(this.state.domainRequested)}
+                          clickEvent={() => this.fetchDomain(this.state.domainRequested, 'success')}
                         />
                       </FadeIn>
                     }
