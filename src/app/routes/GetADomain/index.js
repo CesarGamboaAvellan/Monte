@@ -76,8 +76,8 @@ class VerticalLinearStepper extends React.Component {
       })
     }
     else {
-      const domain1 = `www.${domain}.co.cr`;
-      const domain2 = `www.${domain}.org`;
+      const domain1 = `www.org.${domain}`;
+      const domain2 = `www.mgx-${domain}`;
       this.setState({
         mockDomains: [],
       }, function () {
@@ -177,7 +177,6 @@ class VerticalLinearStepper extends React.Component {
     const { activeStep } = this.state;
     let fadeInClass = 'fade-in-step1';
     let buttonText = 'Next';
-    console.log('active step', this.state.activeStep);
     if (activeStep === 2) {
       fadeInClass = 'fade-in-step3'
       buttonText = 'Purchase'
@@ -185,109 +184,112 @@ class VerticalLinearStepper extends React.Component {
     return (
       <div className="jr-card domain-container">
         <Stepper activeStep={activeStep} orientation="vertical">
-          {steps.map((label, index) => (
-            <Step key={label}>
-              <StepLabel className="border-left-none step-header">{label}</StepLabel>
-              <StepContent>
-                <Typography className="nav-text">{this.getStepContent(index).text}</Typography>
-                <div className={classes.actionsContainer}>
-                  <div className="button-alighment">
-                    {
-                      this.getStepContent(index).hasBackButton &&
-                      <button
-                        onClick={this.handleBack}
-                        className={`domains-back-button  ${fadeInClass}`}
-                      >
-                        Back
+          {steps.map((label, index) => {
+            let fadeStyle = label === 'Get a domain' ? '' : 'fade-in-step-labels';
+            return (
+              <Step key={label}>
+                <StepLabel className={`border-left-none step-header ${fadeStyle}`}>{label}</StepLabel>
+                <StepContent>
+                  <Typography className="nav-text">{this.getStepContent(index).text}</Typography>
+                  <div className={classes.actionsContainer}>
+                    <div className="button-alighment">
+                      {
+                        this.getStepContent(index).hasBackButton &&
+                        <button
+                          onClick={this.handleBack}
+                          className={`domains-back-button  ${fadeInClass}`}
+                        >
+                          Back
                     </button>
-                    }
-                    {
-                      this.getStepContent(index).hasButton && <Button
-                        variant="contained"
-                        onClick={this.handleNext}
-                        className={`button-link button-domains ${fadeInClass}`}
-                      >
-                        {activeStep === steps.length - 1 ? 'Finish' : buttonText}
-                      </Button>
-                    }
-                    {
-                      (activeStep === 1 && !this.state.fetchResults) &&
-                      <div className="fade-in-search" >
-                        <SearchBox className="padding-search-bar"
-                          styleName="d-lg-block margin-bottom"
-                          onChange={(e) => this.setDomain(e)}
-                          value={this.state.domainRequested}
-                          clickEvent={() => this.fetchDomain(this.state.domainRequested)}
-                        />
-                      </div>
-                    }
-                    {(activeStep === 1 && this.state.fetchResults) && <div className="box-background">
-                      <span>{this.state.domainRequested}</span></div>}
-                    {(activeStep === 1 && this.state.fetchedResultTaken && !this.state.foundSearch) &&
-                      <Typography className="nav-text"><Typist className="typist-align" cursor={options}>
-                        <span
-                          className="typewritter">Sorry, that domain is taken, maybe you'll like one of this options?
-                    </span>
-                      </Typist></Typography>
-                    }
-                    {
-
-                      activeStep === 1 && this.state.mockDomains.length > 0 &&
-                      <FadeIn delay={4700}>
-
-                        <Table hover>
-                          <tbody>
-                            {this.state.mockDomains.map((record) => {
-                              return (
-                                <tr>
-                                  <td className="border-td">
-                                    {record}
-                                  </td>
-                                  <td className="border-td">
-                                    <Button
-                                      variant="contained"
-                                      onClick={this.handleNext}
-                                      className={`button-link button-domains`}
-                                    >
-                                      Select
-                                    </Button>
-                                  </td>
-                                </tr>
-                              );
-                            })}
-
-                          </tbody>
-                        </Table>
-
-                      </FadeIn>
-
-                    }
-                    {(activeStep === 1 && this.state.fetchedResultTaken) &&
-                      <Typography className="nav-text typist-align">
-                        <FadeIn delay={4800}>
+                      }
+                      {
+                        this.getStepContent(index).hasButton && <Button
+                          variant="contained"
+                          onClick={this.handleNext}
+                          className={`button-link button-domains ${fadeInClass}`}
+                        >
+                          {activeStep === steps.length - 1 ? 'Finish' : buttonText}
+                        </Button>
+                      }
+                      {
+                        (activeStep === 1 && !this.state.fetchResults) &&
+                        <div className="fade-in-search" >
+                          <SearchBox className="padding-search-bar"
+                            styleName="d-lg-block margin-bottom"
+                            onChange={(e) => this.setDomain(e)}
+                            value={this.state.domainRequested}
+                            clickEvent={() => this.fetchDomain(this.state.domainRequested)}
+                          />
+                        </div>
+                      }
+                      {(activeStep === 1 && this.state.fetchResults) && <div className="box-background">
+                        <span>{this.state.domainRequested}</span></div>}
+                      {(activeStep === 1 && this.state.fetchedResultTaken && !this.state.foundSearch) &&
+                        <Typography className="nav-text"><Typist className="typist-align" cursor={options}>
                           <span
-                            className="typewritter">You can also, perform a new search below
-                          </span>
-                        </FadeIn>
-                      </Typography>
-                    }
-                    {
-                      (activeStep === 1 && this.state.fetchedResultTaken) &&
-                      <FadeIn delay={4900}>
-                        <SearchBox className="padding-search-bar"
-                          styleName="d-lg-block margin-bottom"
-                          onChange={(e) => this.setDomain(e)}
-                          value={this.state.domainRequested}
-                          clickEvent={() => this.fetchDomain(this.state.domainRequested, 'success')}
-                        />
-                      </FadeIn>
-                    }
+                            className="typewritter">Sorry, that domain is taken, maybe you'll like one of this options?
+                    </span>
+                        </Typist></Typography>
+                      }
+                      {
 
+                        activeStep === 1 && this.state.mockDomains.length > 0 &&
+                        <FadeIn delay={4700}>
+
+                          <Table hover>
+                            <tbody>
+                              {this.state.mockDomains.map((record) => {
+                                return (
+                                  <tr>
+                                    <td className="border-td">
+                                      {record}
+                                    </td>
+                                    <td className="border-td">
+                                      <Button
+                                        variant="contained"
+                                        onClick={this.handleNext}
+                                        className={`button-link button-domains`}
+                                      >
+                                        Select
+                                    </Button>
+                                    </td>
+                                  </tr>
+                                );
+                              })}
+
+                            </tbody>
+                          </Table>
+
+                        </FadeIn>
+
+                      }
+                      {(activeStep === 1 && this.state.fetchedResultTaken) &&
+                        <Typography className="nav-text typist-align">
+                          <FadeIn delay={4800}>
+                            <span
+                              className="typewritter">You can also, perform a new search below
+                          </span>
+                          </FadeIn>
+                        </Typography>
+                      }
+                      {
+                        (activeStep === 1 && this.state.fetchedResultTaken) &&
+                        <FadeIn delay={4900}>
+                          <SearchBox className="padding-search-bar"
+                            styleName="d-lg-block margin-bottom"
+                            onChange={(e) => this.setDomain(e)}
+                            value={this.state.domainRequested}
+                            clickEvent={() => this.fetchDomain(this.state.domainRequested, 'success')}
+                          />
+                        </FadeIn>
+                      }
+
+                    </div>
                   </div>
-                </div>
-              </StepContent>
-            </Step>
-          ))}
+                </StepContent>
+              </Step>
+            )
+          })}
         </Stepper>
         {activeStep === steps.length && (
           <Paper square elevation={0} className={classes.resetContainer}>
