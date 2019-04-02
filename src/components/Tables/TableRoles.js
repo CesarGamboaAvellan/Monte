@@ -47,7 +47,7 @@ class BasicTable extends React.Component {
                           onClick={this.openModal}
                         >
                           <i className="zmdi zmdi-settings zmdi-hc-fw" />
-                          <span>
+                          <span className="actions-span">
                             Actions
                           </span>
                         </Button>
