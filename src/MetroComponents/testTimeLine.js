@@ -6,9 +6,8 @@ const test = () => {
     <React.Fragment>
       <div className="m-portlet  m-portlet--full-height col-xl-6 col-lg-12">
         <div className="m-portlet__head">
-          <div className="m-portlet__head-caption"></div>
           <div className="m-portlet__head-title">
-            <h3 className="m-portlet__head-text">
+            <h3 className="m-portlet__head-text margin-top">
               Recent Activities
           </h3>
           </div>

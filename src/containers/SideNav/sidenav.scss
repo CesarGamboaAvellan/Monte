@@ -66,7 +66,9 @@
   background-color: #3f51b5!important;
   
 }
-
+.rc-drawer.rc-drawer-left .rc-drawer-draghandle {
+  background-color: transparent;
+}
 .third-color {
   background-color: rgb(73, 75, 110) !important;
 }
@@ -76,7 +78,9 @@
 .secondary-login-buttons {
   display: grid;
 }
-
+.search-height{
+  height: 24px;
+}
 .forgot-password {
   background: none;
   color: #cacad2;

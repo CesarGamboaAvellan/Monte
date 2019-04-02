@@ -345,6 +345,7 @@ ul.nav-menu li.menu .sub-menu li > a:hover:before {
 
   .rc-drawer.rc-drawer-left & {
     left: 0;
+    background-color: transparent;
     -webkit-transform: translateX(-100%);
     transform: translateX(-100%);
     z-index: 903;

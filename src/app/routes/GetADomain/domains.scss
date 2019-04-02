@@ -1,4 +1,21 @@
 .domain-container{
+  font-family: Poppins;
+  div, span{
+    border-left: none!important;
+  }
+  button{
+    span{
+      color: white,
+    }
+  }
+  span{
+    color: #5e6383;
+  }
+  .step-header{
+    font-size: 1.3rem;
+  }
+  
+  
   width: initial;
   max-width: 589px;;
     margin-top: 27px;
@@ -11,26 +28,108 @@
       font-family: Poppins;
       line-height: 1.46429em;
   }
-  .continue-domain-button{
-  background: transparent;
-    outline: none !important;
-    vertical-align: middle;
-    color: #ff9800;
-    border: solid 1px;
-    box-shadow: none;
-    border-color: #ff9800 !important;
+  circle{
+    color:#591df1
+  }
+.button-domains{
+  color: $white;
+  width: 64px;
+  height: 20px;
+  padding: 0;
+  text-transform: none;
 }
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+.MuiStepContent-root-102,
+ .MuiStepContent-root-292,
+  .MuiStepContent-root-1134,
+  .MuiStepContent-root-1442{
+  border-left: none;
+}
+.domains-back-button{
+  width: 64px;
+  height: 20px;
+  padding: 0;
+  text-transform: none;
+}
+.MuiStepConnector-lineVertical-147,
+ .MuiStepConnector-lineVertical-337,
+ .MuiStepConnector-lineVertical-1179,
+ .MuiStepConnector-lineVertical-1487{
+  border-left: none;
+}
+.MuiStepContent-root-256 {
+  border:none;
+}
+.box-background{
+  background-color: #f9f9fc !important;
+  width: 50%;
+    margin-left: auto;
+    text-align: center;
+    margin-bottom: 24px;
+    padding: 7px;
+}
+.MuiStepConnector-line-299 {
+  border: none;
 }
 @keyframes blinking-cursor {
   from, to { border-color: transparent }
   50% { border-color: orange }
 }
 .typewritter{
-  animation: 
-    typing 3.5s steps(40, end),
-    blinking-cursor .5s step-end infinite;
+      animation: 
+      blinking-cursor .5s step-end infinite;
+}
+.typist-align{
+  caret-color: transparent;
+}
+.button-alighment{
+  
+  text-align: right;
+    margin-top: 16px;
+}
+.typist-align{
+  text-align: left;
+}
+.fade-in-step1{
+  opacity: 0;
+    -moz-animation: fadein 2s ease-in 5s forwards; /* Firefox */
+    -webkit-animation: fadein 2s ease-in 5s forwards; /* Safari and Chrome */
+    -o-animation: fadein 2s ease-in 5s forwards; /* Opera */
+    animation: fadein 2s ease-in 5s forwards;
+}
+.domains-back-button{
+  color: #5e6383;
+  background-color: white;
+}
+.fade-in-step3{
+  opacity: 0;
+    -moz-animation: fadein 2s ease-in 3s forwards; /* Firefox */
+    -webkit-animation: fadein 2s ease-in 3s forwards; /* Safari and Chrome */
+    -o-animation: fadein 2s ease-in 3s forwards; /* Opera */
+    animation: fadein 2s ease-in 3s forwards;
+}
+.fade-in-search{
+  opacity: 0;
+    -moz-animation: fadein 2s ease-in 3s forwards; /* Firefox */
+    -webkit-animation: fadein 2s ease-in 3s forwards; /* Safari and Chrome */
+    -o-animation: fadein 2s ease-in 3s forwards; /* Opera */
+    animation: fadein 2s ease-in 3s forwards;
+}
+.fade-in-step-labels{
+  opacity: 0;
+    -moz-animation: fadein 2s ease-in 1s forwards; /* Firefox */
+    -webkit-animation: fadein 2s ease-in 1s forwards; /* Safari and Chrome */
+    -o-animation: fadein 2s ease-in 1s forwards; /* Opera */
+    animation: fadein 2s ease-in 1s forwards;
+}
+.border-td{
+  border: none;
+}
+@keyframes fadein {
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
 }
 }
