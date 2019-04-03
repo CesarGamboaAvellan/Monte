@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
 
 class ActivityModal extends React.Component {
@@ -19,16 +19,16 @@ class ActivityModal extends React.Component {
 
             <Modal isOpen={this.state.modal}>
                 <ModalHeader>
-                    <div className="header" style={{minWidth: 300}}>
+                    <div className="header" style={{ minWidth: 300 }}>
                         <div className="subject">
                             {this.props.title}
                         </div>
                     </div>
                     <div className="">
-                        <Button className="button-link" onClick={this.props.handleToggle}>X</Button>
-                        </div>
+                        <Button className="button-no-styles" onClick={this.props.handleToggle}>X</Button>
+                    </div>
                 </ModalHeader>
-                <div className="add-todo activity-modal" style={{minWidth: 300}}>
+                <div className="add-todo activity-modal" style={{ minWidth: 300 }}>
                     {this.props.activity}
                 </div>
             </Modal>
