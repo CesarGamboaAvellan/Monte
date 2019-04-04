@@ -25,18 +25,16 @@ class RolesList extends React.Component {
   render() {
 
     return (
-      <div className="app-wrapper">
-        <div className="d-flex justify-content-center">
-          {
-            this.state.data.length ? <Table
-              data={this.props.roles}
-              selectedWidth="width-100"
-              permissions={this.props.permissions}
-            /> : <CircularLoader />
-          }
-        </div>
-
+      <div className="d-flex justify-content-center">
+        {
+          this.state.data.length ? <Table
+            data={this.props.roles}
+            selectedWidth="width-100"
+            permissions={this.props.permissions}
+          /> : <CircularLoader />
+        }
       </div>
+
     );
   }
 }

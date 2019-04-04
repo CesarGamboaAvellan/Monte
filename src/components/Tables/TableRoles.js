@@ -23,7 +23,7 @@ class BasicTable extends React.Component {
   render() {
     console.log('this props in table roles', this.props);
     return (
-      <CardBox styleName="col-12" cardStyle="p-0 overflow-hidden"
+      <CardBox cardStyle="p-0"
         heading={<IntlMessages id="table.Roles" />}
         headerOutside>
         <Button

@@ -40,12 +40,10 @@ class ModalComponent extends React.Component {
     return (
       <Modal isOpen={true}>
         <ModalHeader>
-          <div className="header" style={{ minWidth: 300 }}>
+          <div className="header text-right" style={{ minWidth: 300 }}>
             <div className="subject">
               {this.props.title}
             </div>
-          </div>
-          <div className="">
             <Button
               className="button-no-styles"
               onClick={this.props.showModal}>X</Button>
