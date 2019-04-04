@@ -36,8 +36,8 @@ class ModalComponent extends React.Component {
     })
   }
   render() {
+    console.log('props in roles Modal', this.props);
     return (
-
       <Modal isOpen={true}>
         <ModalHeader>
           <div className="header" style={{ minWidth: 300 }}>

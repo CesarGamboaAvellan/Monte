@@ -3,12 +3,13 @@ import { connect } from 'react-redux'
 import Table from '../../../components/Tables/TableRoles';
 import { getAllRoles } from '../../../actions/getAllRoles';
 import { GetAllPermissions } from '../../../actions/getAllPermissions';
+import CircularLoader from '../../../components/CircularProgress/index';
 
 class RolesList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+      data: [],
     }
   }
   componentWillMount() {
@@ -22,6 +23,7 @@ class RolesList extends React.Component {
   }
 
   render() {
+
     return (
       <div className="app-wrapper">
         <div className="d-flex justify-content-center">
@@ -30,7 +32,7 @@ class RolesList extends React.Component {
               data={this.props.roles}
               selectedWidth="width-100"
               permissions={this.props.permissions}
-            /> : <h1>Loading</h1>
+            /> : <CircularLoader />
           }
         </div>
 
