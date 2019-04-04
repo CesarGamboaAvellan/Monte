@@ -7,7 +7,7 @@ class ModalComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      admin: false,
+      admin: true,
     }
     if (this.props.userData) {
       this.state = {
@@ -63,45 +63,25 @@ class ModalComponent extends React.Component {
             Permissions
             <Table >
               <tbody>
-                <tr>
-                  <td><label>
-                    <span>Pages.Admin</span>
-                  </label></td>
-                  <td><Switch
-                    onChange={this.changeRoles}
-                    height={20}
-                    width={38}
-                    checked={this.state.admin}
-                    offHandleColor="#fff"
-                  /></td>
-                </tr>
-                <tr>
-                  <td><label>
-                    <span>Pages.User</span>
-                  </label></td>
-                  <td><Switch
-                    onChange={this.changeRoles}
-                    height={20}
-                    width={38}
-                    checked={this.state.admin}
-                    offHandleColor="#fff"
-                  /></td>
-                </tr>
+                {
+                  this.props.allPermissions.map((permission) => {
+                    return (<tr>
+                      <td><label>
+                        <span>{permission.name}</span>
+                      </label></td>
+                      <td><Switch
+                        onChange={this.changeRoles}
+                        height={20}
+                        width={38}
+                        checked={this.state.admin}
+                        offHandleColor="#fff"
+                      /></td>
+                    </tr>
+                    )
+                  })
+                }
               </tbody>
             </Table>
-            {/* <div className="permissions-container">
-              <label>
-                <span>Admin</span>
-              </label>
-              <Switch
-                onChange={this.changeRoles}
-                height={20}
-                width={38}
-                checked={this.state.admin}
-                offHandleColor="#fff"
-              />
-            </div> */}
-
           </ModalBody>
           <ModalFooter className="footer d-flex flex-row">
             <Button className="button-link" onClick={() => {

@@ -9,11 +9,15 @@ class BasicTable extends React.Component {
     super(props);
     this.state = {
       showModal: false,
+      modalType: '',
+      action: '',
     }
   }
-  openModal = () => {
+  openModal = (type, actionType) => {
     this.setState({
       showModal: !this.state.showModal,
+      modalType: type,
+      action: actionType,
     })
   }
   render() {
@@ -22,6 +26,15 @@ class BasicTable extends React.Component {
       <CardBox styleName="col-12" cardStyle="p-0 overflow-hidden"
         heading={<IntlMessages id="table.Roles" />}
         headerOutside>
+        <Button
+          className="button-secondary buttons-with-icons"
+          onClick={() => this.openModal('new', 'create')}
+        >
+          <i className="flaticon-plus" />
+          <span className="actions-span margin-buttons">
+            Create new Role
+                          </span>
+        </Button>
         <div>
           <Table hover size="sm">
             <thead>
@@ -40,19 +53,19 @@ class BasicTable extends React.Component {
                       <React.Fragment>
                         {
                           this.state.showModal && <RolesModal
-                            action="Update"
+                            action={this.state.action}
                             showModal={this.openModal}
                             allPermissions={this.props.permissions}
-                            roleName={row.displayName}
+                            roleName={this.state.modalType === 'new' ? '' : row.displayName}
                             currentPermissions={this.props.data}
                           />
                         }
                         <td><Button
-                          className="button-secondary"
-                          onClick={this.openModal}
+                          className="button-secondary buttons-with-icons"
+                          onClick={() => this.openModal('created', 'update')}
                         >
-                          <i className="zmdi zmdi-settings zmdi-hc-fw" />
-                          <span className="actions-span">
+                          <i className="flaticon-cogwheel-2" />
+                          <span className="actions-span margin-buttons">
                             Actions
                           </span>
                         </Button>
