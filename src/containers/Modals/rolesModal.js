@@ -1,10 +1,14 @@
 import React from 'react';
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
-
+import Switch from "react-switch";
+import { Table } from 'reactstrap';
 
 class ModalComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      admin: false,
+    }
     if (this.props.userData) {
       this.state = {
         input1: this.props.userData.authUser.data.result.userName,
@@ -26,6 +30,11 @@ class ModalComponent extends React.Component {
       })
     }
   }
+  changeRoles = () => {
+    this.setState({
+      admin: !this.state.admin,
+    })
+  }
   render() {
     return (
 
@@ -39,30 +48,60 @@ class ModalComponent extends React.Component {
           <div className="">
             <Button
               className="button-no-styles"
-              onClick={this.props.showPasswordModal}>X</Button>
+              onClick={this.props.showModal}>X</Button>
           </div>
         </ModalHeader>
         <div className="add-todo" style={{ minWidth: 300 }}>
           <ModalBody className="body d-flex flex-column" style={{ width: '100%' }}>
-            Full Name
+            Role Name
             <input type="text" className="form-control" placeholder={this.props.value1}
               onChange={(e) => this.handleChange(e, 'input1')}
-              value={this.state.input3}
+              value={this.props.roleName}
             />
           </ModalBody>
-          <ModalBody className="body d-flex flex-column" style={{ width: '100%' }}>
-            User Name
-            <input type="text" className="form-control" placeholder={this.props.value1}
-              onChange={(e) => this.handleChange(e, 'input1')}
-              value={this.state.input1}
-            />
-          </ModalBody>
-          <ModalBody className="body d-flex flex-column" style={{ width: '100%' }}>
-            Email
-            <input type="text" className="form-control" placeholder={this.props.value2}
-              onChange={(e) => this.handleChange(e, 'input2')}
-              value={this.state.input2}
-            />
+          <ModalBody className="inline-items">
+            Permissions
+            <Table >
+              <tbody>
+                <tr>
+                  <td><label>
+                    <span>Pages.Admin</span>
+                  </label></td>
+                  <td><Switch
+                    onChange={this.changeRoles}
+                    height={20}
+                    width={38}
+                    checked={this.state.admin}
+                    offHandleColor="#fff"
+                  /></td>
+                </tr>
+                <tr>
+                  <td><label>
+                    <span>Pages.User</span>
+                  </label></td>
+                  <td><Switch
+                    onChange={this.changeRoles}
+                    height={20}
+                    width={38}
+                    checked={this.state.admin}
+                    offHandleColor="#fff"
+                  /></td>
+                </tr>
+              </tbody>
+            </Table>
+            {/* <div className="permissions-container">
+              <label>
+                <span>Admin</span>
+              </label>
+              <Switch
+                onChange={this.changeRoles}
+                height={20}
+                width={38}
+                checked={this.state.admin}
+                offHandleColor="#fff"
+              />
+            </div> */}
+
           </ModalBody>
           <ModalFooter className="footer d-flex flex-row">
             <Button className="button-link" onClick={() => {

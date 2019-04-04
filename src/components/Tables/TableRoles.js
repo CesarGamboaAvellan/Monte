@@ -2,7 +2,7 @@ import React from 'react';
 import CardBox from 'components/CardBox/index';
 import IntlMessages from 'util/IntlMessages';
 import { Table, Button } from 'reactstrap';
-
+import RolesModal from '../../containers/Modals/rolesModal';
 
 class BasicTable extends React.Component {
   constructor(props) {
@@ -12,9 +12,12 @@ class BasicTable extends React.Component {
     }
   }
   openModal = () => {
-
+    this.setState({
+      showModal: !this.state.showModal,
+    })
   }
   render() {
+    console.log('this props in table roles', this.props);
     return (
       <CardBox styleName="col-12" cardStyle="p-0 overflow-hidden"
         heading={<IntlMessages id="table.Roles" />}
@@ -23,13 +26,6 @@ class BasicTable extends React.Component {
           <Table hover size="sm">
             <thead>
               <tr className="gray-color">
-                {/* {
-                  props.data.headers.map((tableHeader) => {
-                    return (
-                      <th className="border-top-0">{tableHeader}</th>
-                    )
-                  })
-                } */}
                 <th>Actions</th>
                 <th>Roles</th>
                 <th>Permissions</th>
@@ -42,6 +38,15 @@ class BasicTable extends React.Component {
                   this.props.data && this.props.data.map((row) => {
                     return (
                       <React.Fragment>
+                        {
+                          this.state.showModal && <RolesModal
+                            action="Update"
+                            showModal={this.openModal}
+                            allPermissions={this.props.permissions}
+                            roleName={row.displayName}
+                            currentPermissions={this.props.data}
+                          />
+                        }
                         <td><Button
                           className="button-secondary"
                           onClick={this.openModal}

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import Table from '../../../components/Tables/TableRoles';
 import { getAllRoles } from '../../../actions/getAllRoles';
+import { GetAllPermissions } from '../../../actions/getAllPermissions';
 
 class RolesList extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class RolesList extends React.Component {
   }
   componentWillMount() {
     this.props.getAllRoles();
+    this.props.GetAllPermissions();
   }
   componentWillReceiveProps = (nextProps) => {
     this.setState({
@@ -20,12 +22,15 @@ class RolesList extends React.Component {
   }
 
   render() {
-    console.log('data state', this.state.data)
     return (
       <div className="app-wrapper">
         <div className="d-flex justify-content-center">
           {
-            this.state.data.length ? <Table data={this.props.roles} selectedWidth="width-100" /> : <h1>Loading</h1>
+            this.state.data.length ? <Table
+              data={this.props.roles}
+              selectedWidth="width-100"
+              permissions={this.props.permissions}
+            /> : <h1>Loading</h1>
           }
         </div>
 
@@ -35,8 +40,9 @@ class RolesList extends React.Component {
 }
 const mapDispatchToProps = dispatch => ({
   getAllRoles: () => dispatch(getAllRoles()),
+  GetAllPermissions: () => dispatch(GetAllPermissions())
 });
-const mapStateToProps = ({ roles }) => {
-  return { roles }
+const mapStateToProps = ({ roles, permissions }) => {
+  return { roles, permissions }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(RolesList);
