@@ -40,7 +40,7 @@ class ModalComponent extends React.Component {
     return (
       <Modal isOpen={true}>
         <ModalHeader>
-          <div className="header text-right" style={{ minWidth: 300 }}>
+          <div className="header text-right display-contents">
             <div className="subject">
               {this.props.title}
             </div>
@@ -49,7 +49,7 @@ class ModalComponent extends React.Component {
               onClick={this.props.showModal}>X</Button>
           </div>
         </ModalHeader>
-        <div className="add-todo" style={{ minWidth: 300 }}>
+        <div className="add-todo">
           <ModalBody className="body d-flex flex-column" style={{ width: '100%' }}>
             Role Name
             <input type="text" className="form-control" placeholder={this.props.value1}

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import { connect } from 'react-redux'
+import { updateUser } from '../../actions/updateUser';
 
 
 class ModalComponent extends React.Component {
@@ -7,24 +9,46 @@ class ModalComponent extends React.Component {
     super(props);
     if (this.props.userData) {
       this.state = {
-        input1: this.props.userData.authUser.data.result.userName,
-        input2: this.props.userData.authUser.data.result.emailAddress,
-        input3: this.props.userData.authUser.data.result.fullName,
+        userName: this.props.userData.authUser.data.result.userName || '',
+        emailAddress: this.props.userData.authUser.data.result.emailAddress || '',
+        fullName: this.props.userData.authUser.data.result.fullName || '',
+        name: this.props.userData.authUser.data.result.name || '',
+        surname: this.props.userData.authUser.data.result.surname || '',
+        id: this.props.userData.authUser.data.result.id || '',
       };
     }
 
   }
   handleChange = (e, element) => {
-    if (element === "input1") {
+    if (element === "userName") {
       this.setState({
-        input1: e.target.value,
+        userName: e.target.value,
       })
     }
-    else {
+    if (element === "fullName") {
       this.setState({
-        input2: e.target.value,
+        fullName: e.target.value,
       })
     }
+    if (element === "name") {
+      this.setState({
+        name: e.target.value,
+      })
+    }
+    if (element === "surname") {
+      this.setState({
+        surname: e.target.value,
+      })
+    }
+    if (element === "emailAddress") {
+      this.setState({
+        emailAddress: e.target.value,
+      })
+    }
+  }
+  onSubmit = () => {
+    this.props.updateUser(this.state);
+    this.props.showPasswordModal();
   }
   render() {
     return (
@@ -44,34 +68,45 @@ class ModalComponent extends React.Component {
         </ModalHeader>
         <div className="add-todo" style={{ minWidth: 300 }}>
           <ModalBody className="body d-flex flex-column" style={{ width: '100%' }}>
-            Full Name
+            Name
             <input type="text" className="form-control" placeholder={this.props.value1}
-              onChange={(e) => this.handleChange(e, 'input1')}
-              value={this.state.input3}
+              onChange={(e) => this.handleChange(e, 'name')}
+              value={this.state.name}
+            />
+          </ModalBody>
+          <ModalBody className="body d-flex flex-column" style={{ width: '100%' }}>
+            Surname
+            <input type="text" className="form-control" placeholder={this.props.value1}
+              onChange={(e) => this.handleChange(e, 'surname')}
+              value={this.state.surname}
             />
           </ModalBody>
           <ModalBody className="body d-flex flex-column" style={{ width: '100%' }}>
             User Name
             <input type="text" className="form-control" placeholder={this.props.value1}
-              onChange={(e) => this.handleChange(e, 'input1')}
-              value={this.state.input1}
+              onChange={(e) => this.handleChange(e, 'userName')}
+              value={this.state.userName}
             />
           </ModalBody>
           <ModalBody className="body d-flex flex-column" style={{ width: '100%' }}>
             Email
             <input type="text" className="form-control" placeholder={this.props.value2}
-              onChange={(e) => this.handleChange(e, 'input2')}
-              value={this.state.input2}
+              onChange={(e) => this.handleChange(e, 'emailAddress')}
+              value={this.state.emailAddress}
             />
           </ModalBody>
           <ModalFooter className="footer d-flex flex-row">
-            <Button className="button-link" onClick={() => {
-            }}>{this.props.action}</Button>
+            <Button className="button-link" onClick={this.onSubmit}>{this.props.action}</Button>
           </ModalFooter>
         </div>
       </Modal>
     );
   }
 }
-
-export default ModalComponent;
+const mapDispatchToProps = dispatch => ({
+  updateUser: (data) => dispatch(updateUser(data)),
+});
+const mapStateToProps = ({ roles, permissions }) => {
+  return { roles, permissions }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ModalComponent);

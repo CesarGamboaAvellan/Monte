@@ -36,7 +36,7 @@ const getUser = async (loggedUser) => {
         return http.get('/services/app/User/Get', config(authUser.data.result.accessToken,
             loggedUser.data.result.userId)
         ).then(user => {
-            localStorage.setItem('user', user.data.result.emailAddress)
+            localStorage.setItem('user', user.data.result.emailAddress);
             return user;
         })
             .catch(error => console.log(error))
@@ -77,7 +77,7 @@ const signInUserWithEmailPasswordRequest = async (email, password) => {
         rememberClient: true,
     })
         .then(authUser => {
-            console.log('auth user', authUser);
+            localStorage.setItem('token', authUser.data.result.accessToken);
             return getUser(authUser)
         })
         .then(user => user)

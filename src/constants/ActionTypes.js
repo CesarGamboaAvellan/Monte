@@ -145,3 +145,5 @@ export const GET_ALL_USERS = 'get_all_users';
 export const GET_ALL_ROLES = 'get_all_roles';
 
 export const GET_ALL_PERMISSIONS = 'get_all_permissions';
+
+export const UPDATE_USER = 'update_user';

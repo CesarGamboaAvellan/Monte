@@ -36,7 +36,7 @@ class BasicTable extends React.Component {
                           </span>
         </Button>
         <div>
-          <Table hover size="sm">
+          <Table hover size="md">
             <thead>
               <tr className="gray-color">
                 <th>Actions</th>
