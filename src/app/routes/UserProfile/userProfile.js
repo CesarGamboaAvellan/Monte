@@ -33,11 +33,7 @@ class Profile extends React.Component {
                 <div className="d-flex justify-content-center margin-elements">
                     <UserProfileCard userData={this.state.user} addStyle="min-height-boxes" />
                 </div>
-                <div className="d-flex justify-content-center margin-elements">
-                    <ContactCard basicInformation={contactData}
-                        buttonText="Edit basic information"
-                    />
-                </div>
+
 
 
             </div>
