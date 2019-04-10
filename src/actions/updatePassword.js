@@ -19,6 +19,6 @@ export const updatePassword = (formData) => {
 export const changePassword = async (formData) => {
   return http.post('/services/app/User/ChangePassword', {
     currentPassword: formData.current,
-    newPassword: formData.new, s
+    newPassword: formData.new,
   }, config(localStorage.getItem('token')));
 }

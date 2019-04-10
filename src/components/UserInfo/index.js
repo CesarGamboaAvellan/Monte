@@ -20,11 +20,21 @@ class UserInfo extends React.Component {
             console.log('loading');
         } else {
             console.log(this.props.state.authUser);
-            if (this.props.state.authUser.data.result) {
-                name = this.props.state.authUser.data.result.userName;
-                localStorage.setItem('userName', name);
-                image = this.props.state.authUser.data.result.userName;
-                email = this.props.state.authUser.data.result.emailAddress;
+            if (this.props.state.authUser) {
+                if (this.props.state.authUser.data) {
+                    name = this.props.state.authUser.data.result.userName;
+                    localStorage.setItem('userName', name);
+                    image = this.props.state.authUser.data.result.userName;
+                    email = this.props.state.authUser.data.result.emailAddress;
+                }
+                else {
+                    if (this.props.state.authUser.data) {
+                        name = this.props.state.authUser.result.userName;
+                        localStorage.setItem('userName', name);
+                        image = this.props.state.authUser.result.userName;
+                        email = this.props.state.authUser.result.emailAddress;
+                    }
+                }
             }
         }
         return (

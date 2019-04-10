@@ -20,7 +20,7 @@ class Dashboard extends React.Component {
         if (this.props.userLoggedIn) {
             const user = this.props.userLoggedIn;
             this.setState({
-                user: user.authUser.data.result,
+                user: user.authUser.data ? user.authUser.data.result : user.authUser.result,
             })
         }
     }

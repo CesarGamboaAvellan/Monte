@@ -17,8 +17,8 @@ import {
 import CircularProgress from 'components/CircularProgress'
 
 class SignUp extends React.Component {
-    constructor () {
-        super ();
+    constructor() {
+        super();
         this.state = {
             name: '',
             email: '',
@@ -26,18 +26,18 @@ class SignUp extends React.Component {
         }
     }
 
-    componentDidUpdate () {
+    componentDidUpdate() {
         if (this.props.showMessage) {
-            setTimeout (() => {
-                this.props.hideMessage ();
+            setTimeout(() => {
+                this.props.hideMessage();
             }, 3000);
         }
         if (this.props.authUser !== null) {
-            this.props.history.push ('/');
+            this.props.history.push('/');
         }
     }
 
-    render () {
+    render() {
         const {
             name,
             email,
@@ -50,7 +50,7 @@ class SignUp extends React.Component {
                 <div className="app-login-main-content">
                     <div className="app-logo-content d-flex align-items-center justify-content-center">
                         <Link className="logo-lg" to="/" title="Jambo">
-                            <img src="//launchrocket.co/wp-content/uploads/launchrocket-logo.png" className= "login-icon" alt="jambo" title="jambo" />
+                            <img src="//launchrocket.co/wp-content/uploads/launchrocket-logo.png" className="login-icon" alt="jambo" title="jambo" />
                         </Link>
                     </div>
 
@@ -70,7 +70,7 @@ class SignUp extends React.Component {
                                     <input
                                         type="text"
                                         placeholder="Name"
-                                        onChange={(event) => this.setState ({ name: event.target.value })}
+                                        onChange={(event) => this.setState({ name: event.target.value })}
                                         defaultValue={name}
                                         className="form-control form-control-lg"
                                     />
@@ -80,7 +80,7 @@ class SignUp extends React.Component {
                                 <div className="form-group mb-3">
                                     <input
                                         type="email"
-                                        onChange={(event) => this.setState ({ email: event.target.value })}
+                                        onChange={(event) => this.setState({ email: event.target.value })}
                                         placeholder="Email"
                                         defaultValue={email}
                                         className="form-control form-control-lg"
@@ -90,7 +90,7 @@ class SignUp extends React.Component {
                                 <div className="form-group mb-3">
                                     <input
                                         type="password"
-                                        onChange={(event) => this.setState ({ password: event.target.value })}
+                                        onChange={(event) => this.setState({ password: event.target.value })}
                                         placeholder="Password"
                                         defaultValue={password}
                                         className="form-control form-control-lg"
@@ -99,9 +99,10 @@ class SignUp extends React.Component {
 
                                 <div className="mb-3 d-flex align-items-center justify-content-between">
                                     <Button onClick={() => {
-                                        this.props.showAuthLoader ();
-                                        this.props.userSignUp ({ email, password, name });
-                                    }}  className="text-uppercase button-link">
+                                        this.props.showAuthLoader();
+                                        this.props.userSignUp({ email, password, name });
+
+                                    }} className="text-uppercase button-link">
                                         <IntlMessages
                                             id="appModule.regsiter" />
                                     </Button>
@@ -122,7 +123,7 @@ class SignUp extends React.Component {
                         <CircularProgress />
                     </div>
                 }
-                {showMessage && NotificationManager.error (alertMessage)}
+                {showMessage && NotificationManager.error(alertMessage)}
                 <NotificationContainer />
             </div>
         )
@@ -134,7 +135,7 @@ const mapStateToProps = ({ auth }) => {
     return { loader, alertMessage, showMessage, authUser }
 };
 
-export default connect (mapStateToProps, {
+export default connect(mapStateToProps, {
     userSignUp,
     hideMessage,
     showAuthLoader,
@@ -142,4 +143,4 @@ export default connect (mapStateToProps, {
     userGoogleSignIn,
     userGithubSignIn,
     userTwitterSignIn
-}) (SignUp);
+})(SignUp);
