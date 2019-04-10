@@ -45,48 +45,47 @@ class BasicTable extends React.Component {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                {
 
-                  this.props.data && this.props.data.map((row) => {
-                    return (
-                      <React.Fragment>
-                        {
-                          this.state.showModal && <RolesModal
-                            action={this.state.action}
-                            showModal={this.openModal}
-                            allPermissions={this.props.permissions}
-                            roleName={this.state.modalType === 'new' ? '' : row.displayName}
-                            currentPermissions={this.props.data}
-                          />
-                        }
-                        <td><Button
-                          className="button-secondary buttons-with-icons"
-                          onClick={() => this.openModal('created', 'update')}
-                        >
-                          <i className="flaticon-cogwheel-2" />
-                          <span className="actions-span margin-buttons">
-                            Actions
+              {
+
+                this.props.data && this.props.data.map((row) => {
+                  return (
+                    <tr>
+                      {
+                        this.state.showModal && <RolesModal
+                          action={this.state.action}
+                          showModal={this.openModal}
+                          allPermissions={this.props.permissions}
+                          roleName={this.state.modalType === 'new' ? '' : row.displayName}
+                          currentPermissions={this.props.data}
+                        />
+                      }
+                      <td><Button
+                        className="button-secondary buttons-with-icons"
+                        onClick={() => this.openModal('created', 'update')}
+                      >
+                        <i className="flaticon-cogwheel-2" />
+                        <span className="actions-span margin-buttons">
+                          Actions
                           </span>
-                        </Button>
-                        </td>
-                        <td>{row.displayName}</td>
-                        <td>
-                          {
-                            row.permissions.map((permission) => {
-                              return (
-                                <div>
-                                  {permission}
-                                </div>
-                              )
-                            })
-                          }
-                        </td>
-                      </React.Fragment>
-                    )
-                  })
-                }
-              </tr>
+                      </Button>
+                      </td>
+                      <td>{row.displayName}</td>
+                      <td>
+                        {
+                          row.permissions.map((permission) => {
+                            return (
+                              <div>
+                                {permission}
+                              </div>
+                            )
+                          })
+                        }
+                      </td>
+                    </tr>
+                  )
+                })
+              }
             </tbody>
           </Table>
         </div>
