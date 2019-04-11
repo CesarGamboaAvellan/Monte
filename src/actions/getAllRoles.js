@@ -27,7 +27,6 @@ const getData = async () => {
     }
     return http.get('/services/app/Role/GetAll', config
     ).then(roles => {
-      console.log('roles: ', roles);
       return roles;
     })
       .catch(error => console.log(error))

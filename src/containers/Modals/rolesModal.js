@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import Switch from "react-switch";
+import { connect } from 'react-redux'
+import { createRole } from '../../actions/createRole';
 import { Table } from 'reactstrap';
 
 class ModalComponent extends React.Component {
@@ -11,32 +13,40 @@ class ModalComponent extends React.Component {
     }
     if (this.props.userData) {
       this.state = {
-        input1: this.props.userData.authUser.data.result.userName,
-        input2: this.props.userData.authUser.data.result.emailAddress,
-        input3: this.props.userData.authUser.data.result.fullName,
+        roleName: '',
+        permissionPages: false,
+        permissionUser: false,
       };
     }
 
   }
   handleChange = (e, element) => {
-    if (element === "input1") {
+    if (element === "roleName") {
       this.setState({
-        input1: e.target.value,
+        roleName: e.target.value,
+      })
+    }
+  }
+  changeRoles = (permission) => {
+    if (permission === "Pages.Users") {
+      this.setState({
+        permissionUser: !this.state.permissionUser,
       })
     }
     else {
       this.setState({
-        input2: e.target.value,
+        permissionPages: !this.state.permissionPages,
       })
     }
+
   }
-  changeRoles = () => {
-    this.setState({
-      admin: !this.state.admin,
-    })
+  onSubmit = () => {
+    this.props.createRole(this.state);
+    this.props.showModal();
+    this.props.manageUpdate();
   }
   render() {
-    console.log('props in roles Modal', this.props);
+    console.log('this props rolesModal', this.props);
     return (
       <Modal isOpen={true}>
         <ModalHeader>
@@ -52,9 +62,9 @@ class ModalComponent extends React.Component {
         <div className="add-todo">
           <ModalBody className="body d-flex flex-column" style={{ width: '100%' }}>
             Role Name
-            <input type="text" className="form-control" placeholder={this.props.value1}
-              onChange={(e) => this.handleChange(e, 'input1')}
-              value={this.props.roleName}
+            <input type="text" className="form-control" placeholder={this.props.roleName}
+              onChange={(e) => this.handleChange(e, 'roleName')}
+              value={this.state.roleName}
             />
           </ModalBody>
           <ModalBody className="inline-items">
@@ -68,10 +78,10 @@ class ModalComponent extends React.Component {
                         <span>{permission.name}</span>
                       </label></td>
                       <td><Switch
-                        onChange={this.changeRoles}
+                        onChange={() => this.changeRoles(permission.name)}
                         height={20}
                         width={38}
-                        checked={this.state.admin}
+                        checked={permission.name === "Pages.Users" ? this.state.permissionUser : this.state.permissionPages}
                         offHandleColor="#fff"
                       /></td>
                     </tr>
@@ -82,13 +92,18 @@ class ModalComponent extends React.Component {
             </Table>
           </ModalBody>
           <ModalFooter className="footer d-flex flex-row">
-            <Button className="button-link" onClick={() => {
-            }}>{this.props.action}</Button>
+            <Button className="button-link" onClick={
+              this.onSubmit}>{this.props.action}</Button>
           </ModalFooter>
         </div>
       </Modal>
     );
   }
 }
-
-export default ModalComponent;
+const mapDispatchToProps = dispatch => ({
+  createRole: (data) => dispatch(createRole(data)),
+});
+const mapStateToProps = ({ roles, permissions }) => {
+  return { roles, permissions }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ModalComponent);

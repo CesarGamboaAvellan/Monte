@@ -16,3 +16,12 @@ export const config = (token, params) => {
   }
 
 }
+
+export const configChangeTeenant = (token, teenant) => {
+  return {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      "Abp.TenantId": teenant,
+    },
+  }
+}

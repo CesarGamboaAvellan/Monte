@@ -21,6 +21,10 @@ class RolesList extends React.Component {
       data: nextProps.roles,
     });
   }
+  manageReload() {
+    this.props.getAllRoles();
+    this.props.GetAllPermissions();
+  }
 
   render() {
 
@@ -31,6 +35,7 @@ class RolesList extends React.Component {
             data={this.props.roles}
             selectedWidth="width-100"
             permissions={this.props.permissions}
+            manageUpdate={() => this.manageReload()}
           /> : <CircularLoader />
         }
       </div>

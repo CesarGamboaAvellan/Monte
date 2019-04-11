@@ -11,17 +11,18 @@ class BasicTable extends React.Component {
       showModal: false,
       modalType: '',
       action: '',
+      roleId: 0,
     }
   }
-  openModal = (type, actionType) => {
+  openModal = (type, actionType, roleNumber) => {
     this.setState({
       showModal: !this.state.showModal,
       modalType: type,
       action: actionType,
+      roleId: roleNumber,
     })
   }
   render() {
-    console.log('this props in table roles', this.props);
     return (
       <CardBox cardStyle="p-0"
         heading={<IntlMessages id="table.Roles" />}
@@ -55,14 +56,17 @@ class BasicTable extends React.Component {
                         this.state.showModal && <RolesModal
                           action={this.state.action}
                           showModal={this.openModal}
+                          manageUpdate={this.props.manageUpdate}
                           allPermissions={this.props.permissions}
+                          modalType={this.state.modalType}
                           roleName={this.state.modalType === 'new' ? '' : row.displayName}
+                          roleId={this.state.roleId}
                           currentPermissions={this.props.data}
                         />
                       }
                       <td><Button
                         className="button-secondary buttons-with-icons"
-                        onClick={() => this.openModal('created', 'update')}
+                        onClick={() => this.openModal('created', 'update', row.id)}
                       >
                         <i className="flaticon-cogwheel-2" />
                         <span className="actions-span margin-buttons">
