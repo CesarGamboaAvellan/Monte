@@ -92,8 +92,8 @@ class ModalComponent extends React.Component {
             </Table>
           </ModalBody>
           <ModalFooter className="footer d-flex flex-row">
-            <Button className="button-link" onClick={
-              this.onSubmit}>{this.props.action}</Button>
+            <Button className="button-link" onClick={()=>
+              this.onSubmit()}>{this.props.action}</Button>
           </ModalFooter>
         </div>
       </Modal>
