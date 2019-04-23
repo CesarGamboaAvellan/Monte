@@ -1,11 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
-import Typist from 'react-typist';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -101,6 +101,7 @@ class VerticalLinearStepper extends React.Component {
   };
 
   render() {
+    console.log('props from redux', this.props.domainLookUp)
     const { classes } = this.props;
     const steps = getSteps();
     const { activeStep } = this.state;
@@ -234,5 +235,10 @@ class VerticalLinearStepper extends React.Component {
 VerticalLinearStepper.propTypes = {
   classes: PropTypes.object,
 };
-
-export default withStyles(styles)(VerticalLinearStepper);
+const mapDispatchToProps = dispatch => ({
+  lookupDomain: (data) => dispatch(lookupDomain(data)),
+});
+const mapStateToProps = ({ domainLookUp }) => {
+  return { domainLookUp }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(VerticalLinearStepper));
