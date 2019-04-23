@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import ContainerHeader from 'components/ContainerHeader/index';
 import IntlMessages from 'util/IntlMessages';
 import UserProfileCard from '../../../components/dashboard/Common/userProfileCard/UserProfileCard';
+import FadeIn from 'react-fade-in';
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -13,7 +14,9 @@ class Dashboard extends React.Component {
                 roleTitle: '',
                 profileUrl: '',
                 description: '',
-            }
+
+            },
+            text: [],
         }
     }
     componentDidMount = () => {
@@ -24,12 +27,22 @@ class Dashboard extends React.Component {
             })
         }
     }
-
     render() {
+        const text = ['hello ', 'Monte, ', 'is ', 'this ', 'what ', 'you ', 'want ', 'for ', 'the ', 'domains? '];
+
         return (
             <div className="app-wrapper">
                 <ContainerHeader match={this.props.match} title={<IntlMessages id="pages.samplePage" />} />
                 <UserProfileCard userData={this.state.user} addStyle="max-width-small-boxes" />
+                <div className="display-flex">
+                    {
+                        text.map((word, index) => <FadeIn delay={(index * 1000) / 3}>
+                            <span className="margin-test"
+                            >{word}
+                            </span>
+                        </FadeIn>)
+                    }
+                </div>
             </div>
         );
     }

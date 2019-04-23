@@ -147,3 +147,7 @@ export const GET_ALL_ROLES = 'get_all_roles';
 export const GET_ALL_PERMISSIONS = 'get_all_permissions';
 
 export const UPDATE_USER = 'update_user';
+
+// domain lookup
+
+export const DOMAIN_LOOKUP = 'look_up_domain';

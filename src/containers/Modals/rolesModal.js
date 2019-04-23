@@ -14,6 +14,7 @@ class ModalComponent extends React.Component {
     if (this.props.userData) {
       this.state = {
         roleName: '',
+        modalType: this.props.modalType,
         permissionPages: false,
         permissionUser: false,
       };
@@ -41,12 +42,20 @@ class ModalComponent extends React.Component {
 
   }
   onSubmit = () => {
-    this.props.createRole(this.state);
+    console.log('this props modal type on role Modal component', this.props);
+    const rolesProps = this.props;
+    const stateData = this.state;
+
+    const objectToSend = {
+      rolesProps,
+      stateData
+    }
+    this.props.createRole(objectToSend);
     this.props.showModal();
     this.props.manageUpdate();
   }
   render() {
-    console.log('this props rolesModal', this.props);
+    console.log(this.props);
     return (
       <Modal isOpen={true}>
         <ModalHeader>
@@ -92,7 +101,7 @@ class ModalComponent extends React.Component {
             </Table>
           </ModalBody>
           <ModalFooter className="footer d-flex flex-row">
-            <Button className="button-link" onClick={()=>
+            <Button className="button-link" onClick={() =>
               this.onSubmit()}>{this.props.action}</Button>
           </ModalFooter>
         </div>

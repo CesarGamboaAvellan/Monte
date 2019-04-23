@@ -10,7 +10,8 @@ class ModalComponent extends React.Component {
 
     this.state = {
       current: '',
-      new: ''
+      new: '',
+      check: '',
     }
 
   }
@@ -18,6 +19,11 @@ class ModalComponent extends React.Component {
     if (element === "current") {
       this.setState({
         current: e.target.value,
+      })
+    }
+    else if (element === 'check') {
+      this.setState({
+        check: e.target.value,
       })
     }
     else {
@@ -32,7 +38,6 @@ class ModalComponent extends React.Component {
   }
   render() {
     return (
-
       <Modal isOpen={true}>
         <ModalHeader>
           <div className="header" style={{ minWidth: 300 }}>
@@ -48,19 +53,32 @@ class ModalComponent extends React.Component {
         </ModalHeader>
         <div className="add-todo" style={{ minWidth: 300 }}>
           <ModalBody className="body d-flex flex-column" style={{ width: '100%' }}>
-            <input type="text" className="form-control" placeholder={this.props.current}
+            Your current password
+            <input type="password" className="form-control"
               onChange={(e) => this.handleChange(e, 'current')}
               value={this.state.current}
+
+              required
             />
           </ModalBody>
           <ModalBody className="body d-flex flex-column" style={{ width: '100%' }}>
-            <input type="text" className="form-control" placeholder={this.props.new}
+            Your new password
+            <input type="password" className="form-control"
               onChange={(e) => this.handleChange(e, 'new')}
               value={this.state.new}
+              required
+            />
+          </ModalBody>
+          <ModalBody className="body d-flex flex-column" style={{ width: '100%' }}>
+            Verify your new password
+            <input type="password" className="form-control"
+              onChange={(e) => this.handleChange(e, 'check')}
+              value={this.state.check}
+              required
             />
           </ModalBody>
           <ModalFooter className="footer d-flex flex-row">
-            <Button className="button-link" onClick={this.onSubmit}>{this.props.action}</Button>
+            <Button className="button-link" type="submit" onClick={this.onSubmit}>{this.props.action}</Button>
           </ModalFooter>
         </div>
       </Modal>

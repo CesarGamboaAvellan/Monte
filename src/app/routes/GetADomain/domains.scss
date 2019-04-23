@@ -91,10 +91,10 @@
 }
 .fade-in-step1{
   opacity: 0;
-    -moz-animation: fadein 2s ease-in 5s forwards; /* Firefox */
-    -webkit-animation: fadein 2s ease-in 5s forwards; /* Safari and Chrome */
-    -o-animation: fadein 2s ease-in 5s forwards; /* Opera */
-    animation: fadein 2s ease-in 5s forwards;
+    -moz-animation: fadein 2s ease-in 3s forwards; /* Firefox */
+    -webkit-animation: fadein 2s ease-in 3s forwards; /* Safari and Chrome */
+    -o-animation: fadein 2s ease-in 3s forwards; /* Opera */
+    animation: fadein 2s ease-in 3s forwards;
 }
 .domains-back-button{
   color: #5e6383;
@@ -109,10 +109,10 @@
 }
 .fade-in-search{
   opacity: 0;
-    -moz-animation: fadein 2s ease-in 3s forwards; /* Firefox */
-    -webkit-animation: fadein 2s ease-in 3s forwards; /* Safari and Chrome */
-    -o-animation: fadein 2s ease-in 3s forwards; /* Opera */
-    animation: fadein 2s ease-in 3s forwards;
+    -moz-animation: fadein 2s ease-in 1s forwards; /* Firefox */
+    -webkit-animation: fadein 2s ease-in 1s forwards; /* Safari and Chrome */
+    -o-animation: fadein 2s ease-in 1s forwards; /* Opera */
+    animation: fadein 2s ease-in 1s forwards;
 }
 .fade-in-step-labels{
   opacity: 0;
