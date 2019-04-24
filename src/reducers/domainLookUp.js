@@ -13,7 +13,7 @@ const initialState = {
 }
 export default (state = {}, action) => {
   if (action.type === DOMAIN_LOOKUP) {
-    return action.payload;
+    return action.payload || null;
   }
   return initialState;
 }

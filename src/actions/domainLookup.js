@@ -9,6 +9,7 @@ import { config } from '../services/helper';
 export const lookupDomain = (formData) => {
   return (dispatch) => {
     dispatch({ type: DOMAIN_LOOKUP, status: "pending" })
+    console.log("called", formData)
     fetchDomain(formData)
       .then(updated => {
         dispatch({

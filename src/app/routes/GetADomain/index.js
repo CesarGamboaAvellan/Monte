@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import SearchBox from '../../../components/SearchBox/index';
 import { Table } from 'reactstrap';
 import { getStepContent, getSteps, getTakenText } from './helpers';
+import { lookupDomain } from '../../../actions/domainLookup';
 import FadeIn from 'react-fade-in';
 
 const styles = theme => ({
@@ -148,13 +149,13 @@ class VerticalLinearStepper extends React.Component {
                             styleName="d-lg-block margin-bottom"
                             onChange={(e) => this.setDomain(e)}
                             value={this.state.domainRequested}
-                            clickEvent={() => this.fetchDomain(this.state.domainRequested)}
+                            clickEvent={() => this.props.lookupDomain(this.state.domainRequested)}
                           />
                         </div>
                       }
                       {(activeStep === 1 && this.state.fetchResults) && <div className="box-background">
                         <span>{this.state.domainRequested}</span></div>}
-                      {(activeStep === 1 && this.state.fetchedResultTaken && !this.state.foundSearch) &&
+                      {(activeStep === 1 && this.props.record && this.props.domainLookUp.status === "taken") &&
                         <Typography className="nav-text">
                           {getTakenText()}
                         </Typography>
