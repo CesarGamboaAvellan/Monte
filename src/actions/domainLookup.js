@@ -8,8 +8,7 @@ import { config } from '../services/helper';
 
 export const lookupDomain = (formData) => {
   return (dispatch) => {
-    dispatch({ type: DOMAIN_LOOKUP, status: "pending" })
-    console.log("called", formData)
+    // dispatch({ type: DOMAIN_LOOKUP, status: "pending" })
     fetchDomain(formData)
       .then(updated => {
         dispatch({
@@ -19,9 +18,10 @@ export const lookupDomain = (formData) => {
       }).catch(error => error);
   }
 };
-export const fetchDomain = async (formData) => {
+export const fetchDomain = async (domainName) => {
   return http.post('/services/app/Domain/Lookup', {
-    name: "string",
+    name: domainName,
     noCache: true
-  }, config(localStorage.getItem('token')));
+  }, config(localStorage.getItem('token')))
+    .then((result) => result.data);
 }

@@ -8,3 +8,4 @@ export const userList = '/users';
 export const roleList = '/roles';
 export const settings = '/settings';
 export const getDomains = '/getDomain';
+export const formValidation = '/forms';

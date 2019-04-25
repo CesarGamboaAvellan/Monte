@@ -36,7 +36,9 @@ class App extends React.Component {
             { route: routes.profileRoute, component: asyncComponent(() => import('./routes/UserProfile/userProfile')) },
             { route: routes.roleList, component: asyncComponent(() => import('./routes/RolesList/index')) },
             { route: routes.settings, component: asyncComponent(() => import('./routes/AdminSettings/index')) },
-            { route: routes.getDomains, component: asyncComponent(() => import('./routes/GetADomain/index')) }
+            { route: routes.getDomains, component: asyncComponent(() => import('./routes/GetADomain/index')) },
+            { route: routes.formValidation, component: asyncComponent(() => import('./routes/Form/index')) }
+
         ]
         const adminRoutes = [
             ...userRoutes,

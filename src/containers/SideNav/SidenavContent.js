@@ -89,6 +89,10 @@ class SidenavContent extends Component {
                             <i className="flaticon-globe nav-text" />
                             <span className="nav-text">Get a Domain</span>
                         </NavLink>
+                        <NavLink to="/app/forms" className="nav-link">
+                            <i className="flaticon-globe nav-text" />
+                            <span className="nav-text">Form Template</span>
+                        </NavLink>
                         {/* <NavLink to="/app/domains" className="nav-link">
                             <i className="flaticon-globe nav-text" />
                             <span className="nav-text"><IntlMessages id="nav.Domains" /> </span>

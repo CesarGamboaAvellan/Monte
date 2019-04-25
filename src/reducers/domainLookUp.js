@@ -9,11 +9,13 @@ const initialState = {
   price_Status: "",
   responseText: "",
   responseCode: 0,
-  isSucess: true
+  isSucess: true,
 }
 export default (state = {}, action) => {
   if (action.type === DOMAIN_LOOKUP) {
-    return action.payload || null;
+    console.log('called', action.payload)
+    // return action.payload || null;
+    return action.payload
   }
   return initialState;
 }

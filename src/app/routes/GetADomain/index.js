@@ -39,6 +39,7 @@ class VerticalLinearStepper extends React.Component {
       activeStep: 0,
       domainRequested: '',
       mockDomains: [],
+      domainTaken: true,
       fetchResults: false,
       fetchedResultTaken: false,
       foundSearch: false,
@@ -56,10 +57,35 @@ class VerticalLinearStepper extends React.Component {
       mockDomains: [],
     })
   }
-  setDomain = (e) => {
+  static getDerivedStateFromProps = (props, state) => {
+    console.log('get derivate state from props');
+    console.log('get derivated', props, state);
+    if (props.selected !== state.selected) {
+      return {
+        selected: props.selected,
+      };
+    }
+
+    // Return null if the state hasn't changed
+    return null;
+  }
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    console.log('new values', prevProps, this.props)
+    if (this.props.domainLookUp) {
+      if (this.props.domainLookUp.status === "avaliable") {
+        this.setState({
+          domainTaken: false,
+        })
+      }
+    }
+  }
+
+  setDomain = (domainSearch) => {
     this.setState({
-      domainRequested: e.target.value
+      domainRequested: domainSearch
     })
+    this.props.lookupDomain(domainSearch)
   }
   fetchDomain = (domain, status) => {
     if (status === 'success') {
@@ -147,14 +173,14 @@ class VerticalLinearStepper extends React.Component {
                         <div className="fade-in-search" >
                           <SearchBox className="padding-search-bar"
                             styleName="d-lg-block margin-bottom"
-                            onChange={(e) => this.setDomain(e)}
-                            value={this.state.domainRequested}
-                            clickEvent={() => this.props.lookupDomain(this.state.domainRequested)}
+                            clickEvent={(domainRequested) => this.setDomain(domainRequested)}
                           />
                         </div>
                       }
-                      {(activeStep === 1 && this.state.fetchResults) && <div className="box-background">
+                      {(activeStep === 1 && this.state.domainRequested) && <div className="box-background">
                         <span>{this.state.domainRequested}</span></div>}
+                      {(activeStep === 1 && this.state.domainRequested && !this.state.domainTaken) && <h1>This domain is avaliable</h1>}
+
                       {(activeStep === 1 && this.props.record && this.props.domainLookUp.status === "taken") &&
                         <Typography className="nav-text">
                           {getTakenText()}
