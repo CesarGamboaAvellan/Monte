@@ -20,7 +20,7 @@ export const lookupDomain = (formData) => {
 };
 export const fetchDomain = async (domainName) => {
   return http.post('/services/app/Domain/Lookup', {
-    name: domainName,
+    domain: domainName,
     noCache: true
   }, config(localStorage.getItem('token')))
     .then((result) => result.data);

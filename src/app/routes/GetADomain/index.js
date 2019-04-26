@@ -57,23 +57,13 @@ class VerticalLinearStepper extends React.Component {
       mockDomains: [],
     })
   }
-  static getDerivedStateFromProps = (props, state) => {
-    console.log('get derivate state from props');
-    console.log('get derivated', props, state);
-    if (props.selected !== state.selected) {
-      return {
-        selected: props.selected,
-      };
-    }
 
-    // Return null if the state hasn't changed
-    return null;
-  }
   componentDidUpdate(prevProps) {
-    // Typical usage (don't forget to compare props):
     console.log('new values', prevProps, this.props)
     if (this.props.domainLookUp) {
-      if (this.props.domainLookUp.status === "avaliable") {
+      console.log('wtf', this.props.domainLookUp)
+      if (this.props.domainLookUp.status === "available") {
+        console.log('getting here');
         this.setState({
           domainTaken: false,
         })
@@ -181,7 +171,7 @@ class VerticalLinearStepper extends React.Component {
                         <span>{this.state.domainRequested}</span></div>}
                       {(activeStep === 1 && this.state.domainRequested && !this.state.domainTaken) && <h1>This domain is avaliable</h1>}
 
-                      {(activeStep === 1 && this.props.record && this.props.domainLookUp.status === "taken") &&
+                      {(activeStep === 1 && this.state.domainRequested && this.props.domainLookUp.status === "taken") &&
                         <Typography className="nav-text">
                           {getTakenText()}
                         </Typography>
